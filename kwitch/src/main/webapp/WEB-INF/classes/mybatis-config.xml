@@ -3,4 +3,8 @@
 
 <configuration>
 
+	<typeAliases>
+		<typeAlias alias="MemberVO" type="tv.junnikym.kwitch.member.vo.MemberVO" />
+	</typeAliases>
+
 </configuration>
