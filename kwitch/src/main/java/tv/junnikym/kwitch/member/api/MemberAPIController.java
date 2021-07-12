@@ -57,20 +57,11 @@ public class MemberAPIController {
 		
 		try {			
 			int result = memberService.signup(vo);
-			System.out.println(result);
-//			if(result == null) {
-//				System.out.println("not founded user account");
-//				return null;
-//			}
-//			
-//			return objectMapper.convertValue(user, Map.class);
-			return null;
 		} catch(Exception e) {
 			e.printStackTrace();
-			
-			return null;
 		}
 
+		return null;
 	}
 
 }

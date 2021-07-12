@@ -15,13 +15,16 @@
 	<link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro&display=swap" rel="stylesheet">
 
 	<!-- CSS -->
-	<link rel="stylesheet" type="text/css" href="../../resources/css/common.css">
+	<link rel="stylesheet" type="text/css" href="../../resources/css/common.css" />
+	<link rel="stylesheet" type="text/css" href="../../resources/css/header.css" />
 
 	<!-- Vue -->
 	<script src="https://cdn.jsdelivr.net/npm/vue@2.6.0"></script>
 
 </head>
 <body>
+	<%@ include file="header.jsp" %>
+
 	<div id="app">
 	
 		<h1> index </h1>

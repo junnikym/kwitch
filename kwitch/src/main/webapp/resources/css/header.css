@@ -1,0 +1,25 @@
+:root {
+    --header-bg-color: #fcfcfc;
+    --header-height: 75px;
+}
+
+#header {
+    position: fixed;
+    flex-flow:row nowrap;
+    background-color: var(--header-bg-color);
+    width: 100%;
+    height: var(--header-height);
+    z-index: 99999;
+    top:0; left:0;
+}
+
+.index_icon {
+    height: 90%;
+
+    margin-left: 7.5px;
+    margin-right: 7.5px;
+}
+
+.from__search_input {
+    width: 100px;
+}
