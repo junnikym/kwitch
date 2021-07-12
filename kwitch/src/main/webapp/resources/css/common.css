@@ -1,0 +1,103 @@
+*, *:before, *:after {
+    box-sizing: border-box;
+}
+
+html {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    font-feature-settings: "liga", "kern";
+    overflow-y: scroll;
+    overflow-x: hidden;
+    height: 100%;
+    background: linear-gradient(210deg, #9adbbe, #4fc08d);
+}
+
+body {
+    overflow: hidden;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: "Source Sans Pro", sans-serif;
+}
+
+button {
+    background: none;
+    border: none;
+    color: inherit;
+    font-size: inherit;
+    font-family: inherit;
+    font-weight: inherit;
+}
+button:focus {
+    outline: none;
+}
+button:hover {
+    cursor: pointer;
+}
+
+.app {
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    border-radius: 1em;
+    background: #fff;
+    overflow: hidden;
+    box-shadow: 0 0 5px rgba(25, 25, 25, 0.25);
+}
+
+.btn {
+    font-size: 14px;
+    margin: 0 0.5em;
+    border-radius: 2em;
+    padding: 0.75em 1.5em;
+    cursor: pointer;
+    background: none;
+    color: #2d7c58;
+    border: 1px solid;
+    letter-spacing: 1px;
+    font-family: "Source Sans Pro", sans-serif;
+    color: #4fc08d;
+    border: #4fc08d 1px solid;
+    transition: 250ms ease-out;
+}
+.btn:hover, .btn:focus {
+    color: #fff;
+    background: #4fc08d;
+}
+
+.form {
+    width: 100%;
+    padding: 2.5rem 2rem 2.5rem 2rem;
+    display: flex;
+}
+.form__input {
+    width: 100%;
+    font-size: 14px;
+    margin: 0 0.5em;
+    border-radius: 2em;
+    padding: 0.75em 1.5em;
+    background: none;
+    font-family: "Source Sans Pro", sans-serif;
+    border: #e3e3e3 1px solid;
+    transition: border 250ms ease-out;
+}
+.form__input:focus {
+    border: #4fc08d 1px solid;
+    outline: none;
+}
+
+.w_center {
+    text-align: center;
+}
+
+.h_center_wrapper {
+    display: table;
+}
+
+.h_center_content {
+    display: table-cell;
+    vertical-align: middle;
+}

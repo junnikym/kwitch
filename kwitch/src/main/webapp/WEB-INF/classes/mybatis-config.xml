@@ -4,7 +4,11 @@
 <configuration>
 
 	<typeAliases>
+		
 		<typeAlias alias="MemberVO" type="tv.junnikym.kwitch.member.vo.MemberVO" />
+		
+		<typeAlias alias="LoginVO" type="tv.junnikym.kwitch.member.vo.LoginVO" />
+		
 	</typeAliases>
 
 </configuration>

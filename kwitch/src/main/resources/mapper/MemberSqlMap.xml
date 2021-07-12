@@ -6,7 +6,37 @@
 	<select id="getAlias" parameterType="MemberVO" resultType="MemberVO">
         SELECT member_alias AS alias
         FROM member
-        WHERE member_id=#{id};
+        WHERE member_id = #{id}::uuid;
     </select>
+    
+    <select id="login" parameterType="LoginVO" resultType="MemberVO">
+    	SELECT 
+    		member_id AS id,
+    		member_alias AS alias
+    	FROM
+    		member
+    	<trim prefix="WHERE" prefixOverrides="AND">
+    		AND member_email = #{email}
+    		AND member_pw = #{pw}
+    	</trim>
+    </select>
+    
+    <insert id="signup" parameterType="MemberVO">
+    	INSERT INTO member(
+    		member_email,
+    		member_pw,
+    		member_name,
+    		member_alias,
+    		member_phone,
+    		member_birth
+    	) VALUES (
+    		#{email},
+    		#{pw},
+    		#{name},
+    		#{alias},
+    		#{phone},
+    		#{birth}::TIMESTAMP
+    	)
+    </insert>
 
 </mapper>

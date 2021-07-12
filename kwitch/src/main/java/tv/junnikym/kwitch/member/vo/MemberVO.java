@@ -1,17 +1,16 @@
 package tv.junnikym.kwitch.member.vo;
 
 import java.io.Serializable;
+import java.util.Date;
 
-import lombok.AccessLevel;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
+import org.springframework.format.annotation.DateTimeFormat;
+
 import lombok.Data;
-import lombok.NoArgsConstructor;
 
 @Data
 public class MemberVO implements Serializable {
 	
-	String id;
+	private String id;
 	
 	private String email;
 	
@@ -21,6 +20,12 @@ public class MemberVO implements Serializable {
 	
 	private String alias;
 	
+	private String phone;
+	
+	private String birth;
+	
 	private String createdAt;
+	
+	private String updatedAt;
 
 }

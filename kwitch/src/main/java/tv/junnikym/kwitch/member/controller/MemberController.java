@@ -36,7 +36,7 @@ public class MemberController {
 		
 		try {
 			MemberVO vo = new MemberVO();
-			vo.setId("test");
+			vo.setId("58d7c039-129c-4295-8da8-9d89b54e9d05");
 			
 			MemberVO result = memberService.getAlias(vo);
 			System.out.println("PostgreSQL : \n result - " + result.getAlias());
@@ -51,7 +51,16 @@ public class MemberController {
 		
 		model.addAttribute("serverTime", formattedDate );
 		
-		return "home";
+		return "index";
 	}
 	
+	@RequestMapping(value = "/login", method = RequestMethod.GET)
+	public String loginView() {
+		return "login";
+	}
+	
+	@RequestMapping(value = "/signup", method = RequestMethod.GET)
+	public String signinView() {
+		return "signup";
+	}
 }
