@@ -15,16 +15,20 @@
 	<link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro&display=swap" rel="stylesheet">
 
 	<!-- CSS -->
-	<link rel="stylesheet" type="text/css" href="../../resources/css/common.css">
+	<link rel="stylesheet" type="text/css" href="../../resources/css/common.css" />
+	<link rel="stylesheet" type="text/css" href="../../resources/css/header.css" />
 
 	<!-- Vue -->
 	<script src="https://cdn.jsdelivr.net/npm/vue@2.6.0"></script>
-
+	
+	<script type="text/javascript" src="/resources/js/util/HTMLInjection.js"></script>
+	
 </head>
-<body>
-	<div class="app h_center h_center_wrapper">
+<body>	
+	<div class="app h_center h_center_wrapper" >
+	
 		<form class="app form h_center_content"
-			  name="loginForm" id="loginForm"
+			  name="loginForm" id="loginForm" 
 			  v-on:submit="login">
 	
 			<table border="0">
@@ -51,14 +55,24 @@
 				</tr>
 	
 				<tr><td colspan="2" class="w_center">
+					<br/>
+					<button class="btn modal-close modal-exit" type="button"> Back </button>
 					<button class="btn" type="submit"> Login </button>
 				</td></tr>
-	
+
+				<tr><td colspan="2" class="w_center">
+					<br/>
+					<a>sign up</a>
+					<br/>
+					<br/>
+					<div class="warning" v-if="wrongInput!=0" v-cloak>Incorrect username or password.</div>
+				</td></tr>
+				
 			</table>
 	
 		</form>
-	</div>
 	
-	<script type="text/javascript" src="../../resources/js/view/login.js"></script>
+	</div>
+
 </body>
 </html>

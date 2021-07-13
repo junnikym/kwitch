@@ -4,37 +4,44 @@
 //         return re.test(this.userItems.id);
 //     }
 // }
+(function() {
+    const send = XMLHttpRequest.prototype.send
+    XMLHttpRequest.prototype.send = function() { 
+        this.addEventListener('load', function() {
 
-const loginForm = new Vue({
-    el: '#loginForm',
-    data: {
-        emailInput: '',
-        pwInput: ''
-    },
-    methods: {
-        login: function(e) {
-            e.preventDefault();
-            fetch('/api/auth/login', {
-                method: 'POST',
-                headers: {
-                    "Content-Type": "application/json"
-                },
-                body: JSON.stringify({
-                    "email": this.emailInput,
-                    "pw": this.pwInput
-                })
-            })
-            .then(res => {
-            	if(res == null) {
-            		// do login fail
-            	}
-            	
-            	return res.json()
-            })
-            .then(json => {
-            	console.log(json.data);
-            })
-            .catch(err => console.log(err))
-        }
+        	const loginForm = new Vue({
+        	    el: '#loginForm',
+        	    data: {
+        	        emailInput: '',
+        	        pwInput: '',
+					wrongInput: 0,
+
+					privateState: {},
+					sharedState: store.state
+        	    },
+        	    methods: {
+        	        login: function(e) {
+        	            e.preventDefault();
+        	            fetch('/api/auth/login', {
+        	                method: 'POST',
+        	                headers: {
+        	                    "Content-Type": "application/json"
+        	                },
+        	                body: JSON.stringify({
+        	                    "email": this.emailInput,
+        	                    "pw": this.pwInput
+        	                })
+        	            })
+        	            .then(res => {
+        	            	if(res.status != 200)
+								this.wrongInput++;
+        	            })
+        	            .catch(err => console.log(err))
+        	        }
+        	    }
+        	});
+        	
+        })
+        return send.apply(this, arguments)
     }
-});
+})()

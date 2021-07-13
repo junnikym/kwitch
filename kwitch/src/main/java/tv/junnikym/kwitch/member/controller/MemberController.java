@@ -30,37 +30,14 @@ public class MemberController {
 	/**
 	 * Simply selects the home view to render by returning its name.
 	 */
-	@RequestMapping(value = "/hello", method = RequestMethod.GET)
-	public String home(Locale locale, Model model) {
-		logger.info("Welcome home! The client locale is {}.", locale);
-		
-		try {
-			MemberVO vo = new MemberVO();
-			vo.setId("58d7c039-129c-4295-8da8-9d89b54e9d05");
-			
-			MemberVO result = memberService.getAlias(vo);
-			System.out.println("PostgreSQL : \n result - " + result.getAlias());
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		
-		Date date = new Date();
-		DateFormat dateFormat = DateFormat.getDateTimeInstance(DateFormat.LONG, DateFormat.LONG, locale);
-		
-		String formattedDate = dateFormat.format(date);
-		
-		model.addAttribute("serverTime", formattedDate );
-		
-		return "index";
-	}
 	
 	@RequestMapping(value = "/login", method = RequestMethod.GET)
 	public String loginView() {
 		return "login";
 	}
 	
-	@RequestMapping(value = "/signup", method = RequestMethod.GET)
+	@RequestMapping(value = "/registe", method = RequestMethod.GET)
 	public String signinView() {
-		return "signup";
+		return "registe";
 	}
 }

@@ -43,19 +43,6 @@ public class ResultModel {
         	response.sendRedirect(redirection);
 	}
 	
-	public static ModelAndView onlyStatus (
-			@NotNull HttpServletResponse response,
-			@NotNull Integer status,
-			String resultMessage
-	) {
-		ModelAndView mv = new ModelAndView();
-		
-		response.setStatus(status);
-		mv.addObject("resultMessage", resultMessage==null?"":resultMessage);
-		
-		return mv;
-	}
-	
 	public void setStatus(int status) {
         this.response.setStatus(status);
     }

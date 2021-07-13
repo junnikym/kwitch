@@ -1,8 +1,10 @@
 package tv.junnikym.kwitch.member.api;
 
+import java.util.HashMap;
 import java.util.Map;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
@@ -31,32 +33,36 @@ public class MemberAPIController {
 	
 	@ResponseBody
 	@RequestMapping(value = "/auth/login", method = RequestMethod.POST)
-	public Map<String, Object> login(@RequestBody LoginVO vo, HttpServletResponse response, HttpSession session) {
-				
-		try {			
-			MemberVO user = memberService.login(vo);
-			
-			if(user == null) {
-				System.out.println("not founded user account");
-				return null;
-			}
-			
-			return objectMapper.convertValue(user, Map.class);
+	public Map<String, Object> login(
+			@RequestBody LoginVO vo, 
+			HttpServletRequest request, 
+			HttpServletResponse response, 
+			HttpSession session
+	) {
+
+			try {
+				MemberVO user = memberService.login(vo, request, session);
+
+				if(user == null) {
+					response.sendError(403, "Not Exist Account");
+					return new HashMap<String, Object>();
+				}
+
+				return objectMapper.convertValue(user, Map.class);
 			
 		} catch(Exception e) {
 			e.printStackTrace();
-			
 			return null;
 		}
 
 	}
 	
 	@ResponseBody
-	@RequestMapping(value = "/signup", method = RequestMethod.POST)
+	@RequestMapping(value = "/registe", method = RequestMethod.POST)
 	public Map<String, Object> signup(@RequestBody MemberVO vo, HttpServletResponse response, HttpSession session) {
 		
 		try {			
-			int result = memberService.signup(vo);
+			int result = memberService.registe(vo);
 		} catch(Exception e) {
 			e.printStackTrace();
 		}

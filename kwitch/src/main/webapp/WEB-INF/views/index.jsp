@@ -18,17 +18,24 @@
 	<link rel="stylesheet" type="text/css" href="../../resources/css/common.css" />
 	<link rel="stylesheet" type="text/css" href="../../resources/css/header.css" />
 
-	<!-- Vue -->
+	<!-- CDN -->
 	<script src="https://cdn.jsdelivr.net/npm/vue@2.6.0"></script>
 
+	<!-- JS -->
+	<script type="text/javascript" src="/resources/js/util/HTMLInjection.js"></script>
+	
 </head>
 <body>
 	<%@ include file="header.jsp" %>
 
-	<div id="app">
+	<!-- JS -->
+	<script type="text/javascript" src="/resources/js/store.js"></script>
+
+	<script type="text/javascript" src="/resources/js/view/index.js"></script>
+	<script type="text/javascript" src="/resources/js/view/header.js"></script>
+	<script type="text/javascript" src="/resources/js/view/login.js"></script>
 	
-		<h1> index </h1>
-	
-	</div>
+	<script type="text/javascript" src="/resources/js/util/modal.js"></script>
+    
 </body>
 </html>

@@ -15,8 +15,8 @@ public class MemberDAOImpl extends AbstractMapper implements MemberDAO {
 	}
 	
 	@Override
-	public int signup(MemberVO vo) throws Exception {
-		return insert("MemberDAO.signup", vo);
+	public int registe(MemberVO vo) throws Exception {
+		return insert("MemberDAO.registe", vo);
 	}
 
 	@Override

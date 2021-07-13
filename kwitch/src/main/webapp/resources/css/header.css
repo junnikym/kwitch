@@ -1,25 +1,107 @@
 :root {
     --header-bg-color: #fcfcfc;
-    --header-height: 75px;
+    --header-height: 65px;
 }
 
 #header {
+	display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    background: #fff;
+    overflow: hidden;
     position: fixed;
+    align-items: center;
     flex-flow:row nowrap;
-    background-color: var(--header-bg-color);
     width: 100%;
     height: var(--header-height);
     z-index: 99999;
     top:0; left:0;
 }
 
-.index_icon {
+.head_logo_wapper {
+    position: relative;
+    height: 100%;
+}
+.head_logo {
+    position: absolute;
     height: 90%;
+
+    left: 0;
 
     margin-left: 7.5px;
     margin-right: 7.5px;
 }
+.head_logo_main {
+    animation-name: logo_slide_in;
+    animation-duration: 1s;
+    animation-fill-mode:both;
+}
+.head_logo_main:hover {
+    animation-name: logo_slide_out;
+    animation-duration: 1s;
+    animation-fill-mode:both;
+}
+.head_logo_shadow {
+
+}
+
+@keyframes logo_slide_out {
+    from {left: 0;}
+    to {left: 5px;}
+}
+
+@keyframes logo_slide_in {
+    from {left: 5px;}
+    to {left: 0;}
+}
+
+.search_wapper {
+    height: 40px;
+	display: flex;
+}
+
+.btn__search {
+    position: relative;
+    overflow: hidden;
+	border-radius: 0 2em 2em 0;
+	margin-left: 0;
+	float: left;
+}
+
+.btn__search_icon {
+    width: 30px;
+    position: absolute;
+    left: 50%; top: 50%;
+    transform: translate(-50%, -50%);
+    -webkit-transform: translate(-50%, -50%);
+}
+
+.btn__search:hover .btn__search_icon {
+    animation-name: logo_invert_out;
+    animation-duration: 0.25s;
+    animation-fill-mode:both;
+}
+.btn__search .btn__search_icon {
+    animation-name: logo_invert_in;
+    animation-duration: 0.25s;
+    animation-fill-mode:both;
+}
+
+@keyframes logo_invert_out {
+    from {filter: invert(100%)}
+    to {filter: invert(0%)}
+}
+@keyframes logo_invert_in {
+    from {filter: invert(0%)}
+    to {filter: invert(100%)}
+}
 
 .from__search_input {
-    width: 100px;
+	min-width: 250px;
+    max-width: 400px;
+    margin: 0 0.5em;
+    margin-right: 0;
+    border-radius: 2em 0 0 2em;
+    float: left;
 }

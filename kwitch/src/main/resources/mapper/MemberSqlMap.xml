@@ -21,7 +21,7 @@
     	</trim>
     </select>
     
-    <insert id="signup" parameterType="MemberVO">
+    <insert id="registe" parameterType="MemberVO">
     	INSERT INTO member(
     		member_email,
     		member_pw,

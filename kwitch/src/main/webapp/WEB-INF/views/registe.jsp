@@ -142,6 +142,6 @@
 	
 	</div>
 	
-	<script type="text/javascript" src="../../resources/js/view/signup.js"></script>
+	<script type="text/javascript" src="../../resources/js/view/registe.js"></script>
 </body>
 </html>
