@@ -4,10 +4,10 @@
 //         return re.test(this.userItems.id);
 //     }
 // }
-(function() {
-    const send = XMLHttpRequest.prototype.send
-    XMLHttpRequest.prototype.send = function() { 
-        this.addEventListener('load', function() {
+//(function() {
+//    const send = XMLHttpRequest.prototype.send
+//    XMLHttpRequest.prototype.send = function() { 
+//        this.addEventListener('load', function() {
 
         	const loginForm = new Vue({
         	    el: '#loginForm',
@@ -35,13 +35,24 @@
         	            .then(res => {
         	            	if(res.status != 200)
 								this.wrongInput++;
+        	            	else {
+        	            		location.reload();
+        	            	}
         	            })
         	            .catch(err => console.log(err))
-        	        }
+        	        },
+        	        back: function() {
+            	    	if(location.pathname == "/login") 
+            	    		back();
+            	    }
         	    }
         	});
         	
-        })
-        return send.apply(this, arguments)
-    }
-})()
+        	function press(f){ 
+        		if(f.keyCode == 13) loginForm.submit();
+        	}
+        	
+//        })
+//        return send.apply(this, arguments)
+//    }
+//})()

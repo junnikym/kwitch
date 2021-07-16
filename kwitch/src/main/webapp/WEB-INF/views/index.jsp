@@ -7,26 +7,25 @@
 <head>
 
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-	<title>Login</title>
+	<title>Home</title>
 
 	<!-- Font -->
-	<link rel="preconnect" href="https://fonts.googleapis.com">
-	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-	<link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro&display=swap" rel="stylesheet">
-
+	<link rel="stylesheet" href="//cdn.jsdelivr.net/font-nanum/1.0/nanumbarungothic/nanumbarungothic.css"/>
+	
 	<!-- CSS -->
-	<link rel="stylesheet" type="text/css" href="../../resources/css/common.css" />
-	<link rel="stylesheet" type="text/css" href="../../resources/css/header.css" />
+	<link rel="stylesheet" type="text/css" href="/resources/css/common.css" />
+	<link rel="stylesheet" type="text/css" href="/resources/css/header.css" />
+	<link rel="stylesheet" type="text/css" href="/resources/css/nav.css" />
 
 	<!-- CDN -->
 	<script src="https://cdn.jsdelivr.net/npm/vue@2.6.0"></script>
-
-	<!-- JS -->
-	<script type="text/javascript" src="/resources/js/util/HTMLInjection.js"></script>
 	
 </head>
 <body>
 	<%@ include file="header.jsp" %>
+
+	<div id="content">
+	</div>
 
 	<!-- JS -->
 	<script type="text/javascript" src="/resources/js/store.js"></script>
@@ -35,7 +34,7 @@
 	<script type="text/javascript" src="/resources/js/view/header.js"></script>
 	<script type="text/javascript" src="/resources/js/view/login.js"></script>
 	
-	<script type="text/javascript" src="/resources/js/util/modal.js"></script>
+	<script type="text/javascript" src="/resources/js/util/action.js"></script>
     
 </body>
 </html>

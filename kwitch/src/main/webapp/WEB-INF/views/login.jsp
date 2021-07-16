@@ -10,22 +10,19 @@
 	<title>Login</title>
 
 	<!-- Font -->
-	<link rel="preconnect" href="https://fonts.googleapis.com">
-	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-	<link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro&display=swap" rel="stylesheet">
-
+	<link rel="stylesheet" href="//cdn.jsdelivr.net/font-nanum/1.0/nanumbarungothic/nanumbarungothic.css"/>
+	
 	<!-- CSS -->
-	<link rel="stylesheet" type="text/css" href="../../resources/css/common.css" />
-	<link rel="stylesheet" type="text/css" href="../../resources/css/header.css" />
+	<link rel="stylesheet" type="text/css" href="/resources/css/common.css" />
+	<link rel="stylesheet" type="text/css" href="/resources/css/header.css" />
+	<link rel="stylesheet" type="text/css" href="/resources/css/nav.css" />
 
 	<!-- Vue -->
 	<script src="https://cdn.jsdelivr.net/npm/vue@2.6.0"></script>
 	
-	<script type="text/javascript" src="/resources/js/util/HTMLInjection.js"></script>
-	
 </head>
 <body>	
-	<div class="app h_center h_center_wrapper" >
+	<div class="app h_center h_center_wrapper" id="login" >
 	
 		<form class="app form h_center_content"
 			  name="loginForm" id="loginForm" 
@@ -62,7 +59,7 @@
 
 				<tr><td colspan="2" class="w_center">
 					<br/>
-					<a>sign up</a>
+					<a href="/regist">sign up</a>
 					<br/>
 					<br/>
 					<div class="warning" v-if="wrongInput!=0" v-cloak>Incorrect username or password.</div>
@@ -71,6 +68,12 @@
 			</table>
 	
 		</form>
+		
+		<!-- JS -->
+		<script type="text/javascript" src="/resources/js/store.js"></script>
+		
+		<script type="text/javascript" src="/resources/js/view/login.js"></script>
+		<script type="text/javascript" src="/resources/js/util/pageHandler.js"></script>
 	
 	</div>
 

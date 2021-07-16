@@ -14,7 +14,6 @@ public class MainController {
 	public String home(HttpServletRequest request, HttpSession session) {
 		if(request.isRequestedSessionIdValid()) {
 			String member_id = (String) session.getAttribute("member_id");
-			System.out.println("memeber id in session : " + member_id);
 		}
 		
 		return "index";

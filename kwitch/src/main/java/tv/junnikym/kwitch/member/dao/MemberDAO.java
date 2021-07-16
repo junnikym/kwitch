@@ -7,8 +7,9 @@ public interface MemberDAO {
 	
 	MemberVO login(LoginVO vo) throws Exception;
 	
-	int registe(MemberVO vo) throws Exception;
+	int regist(MemberVO vo) throws Exception;
 	
-	MemberVO getAlias(MemberVO vo) throws Exception;
-	
+	MemberVO getDetail(String id) throws Exception;
+
+	int setProfileImage(String memberId, String imageId) throws Exception;
 }

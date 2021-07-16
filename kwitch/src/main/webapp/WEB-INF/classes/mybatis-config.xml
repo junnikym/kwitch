@@ -4,10 +4,16 @@
 <configuration>
 
 	<typeAliases>
+	
+		<typeAlias alias="hashMap" type="java.util.HashMap" />
+	
 		
 		<typeAlias alias="MemberVO" type="tv.junnikym.kwitch.member.vo.MemberVO" />
 		
 		<typeAlias alias="LoginVO" type="tv.junnikym.kwitch.member.vo.LoginVO" />
+		
+		
+		<typeAlias alias="ImageVO" type="tv.junnikym.kwitch.file.vo.ImageVO" />
 		
 	</typeAliases>
 

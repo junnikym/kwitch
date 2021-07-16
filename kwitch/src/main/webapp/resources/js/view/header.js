@@ -7,7 +7,18 @@ const header = new Vue({
         sharedState: store.state
     },
     methods: {
-        test: function() {
+        detail: function(id) {
+        	location.href="/detail/"+id;
+        },
+        logout: function() {
+            fetch('/api/auth/logout', {
+                method: 'GET',
+            })
+            .then(res => {
+            	store.clearLoginUser();
+            	location.href="/";
+            })
+            .catch(err => console.log(err))
         }
     }
 });

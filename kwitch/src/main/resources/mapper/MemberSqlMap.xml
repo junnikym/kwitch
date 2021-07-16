@@ -2,26 +2,24 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="MemberDAO">
-
-	<select id="getAlias" parameterType="MemberVO" resultType="MemberVO">
-        SELECT member_alias AS alias
-        FROM member
-        WHERE member_id = #{id}::uuid;
-    </select>
     
     <select id="login" parameterType="LoginVO" resultType="MemberVO">
     	SELECT 
-    		member_id AS id,
-    		member_alias AS alias
-    	FROM
-    		member
+    		member_id 			 AS id,
+    		member_name 		 AS name,
+    		member_alias 		 AS alias,
+    		
+    		i.image_path		 AS profileImagePath,
+        	i.image_extension	 AS profileImageExt
+    	FROM member AS m
+        LEFT JOIN image AS i ON m.profile_image = i.image_id
     	<trim prefix="WHERE" prefixOverrides="AND">
     		AND member_email = #{email}
     		AND member_pw = #{pw}
     	</trim>
     </select>
     
-    <insert id="registe" parameterType="MemberVO">
+    <insert id="regist" parameterType="MemberVO">
     	INSERT INTO member(
     		member_email,
     		member_pw,
@@ -38,5 +36,32 @@
     		#{birth}::TIMESTAMP
     	)
     </insert>
+    
+    <select id="getDetail" parameterType="String" resultType="MemberVO">
+        SELECT 
+        	member_id			 AS id,
+        	member_email		 AS email,
+        	member_name			 AS name,
+        	member_alias 		 AS alias,
+        	member_message 		 AS message,
+        	member_birth 		 AS birth,
+        	created_at			 AS createAt,
+        	
+        	i.image_path		 AS profileImagePath,
+        	i.image_extension	 AS profileImageExt
+        FROM member AS m
+        LEFT JOIN image AS i ON m.profile_image = i.image_id
+        <where>
+        	<if test='value != null and value != ""'>
+        		AND member_id = #{value}::uuid
+        	</if>
+        </where>
+    </select>
+    
+    <update id="setProfileImage" parameterType="hashMap">
+    	UPDATE member
+    	SET profile_image = #{imageId}::uuid
+        WHERE member_id = #{memberId}::uuid
+    </update>
 
 </mapper>

@@ -1,6 +1,7 @@
 package tv.junnikym.kwitch.util.api;
 
 import java.io.IOException;
+import java.util.AbstractMap;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletResponse;
@@ -18,7 +19,8 @@ public class ResultModel {
 	@Builder
 	protected ResultModel (
 			@NotNull HttpServletResponse response,
-			Map<String, Object> model,
+			Map<String, Object> map,
+			AbstractMap.SimpleEntry<String, Object> object,
 			String view,
 			Integer status,
 			String resultMessage,
@@ -35,12 +37,38 @@ public class ResultModel {
     		this.response.setStatus(status);
     		this.mv.addObject("resultMessage", resultMessage==null?"":resultMessage);
     	}
-        
-        this.mv.addAllObjects(model);
+
+    	if(map != null)
+            this.mv.addAllObjects(map);
+        if(object != null)
+        	this.mv.addObject(object.getKey(), object.getValue());
+
         this.mv.setViewName(view);
         
         if(redirection != null)
         	response.sendRedirect(redirection);
+	}
+	
+	public static ModelAndView PageNotFound(@NotNull HttpServletResponse response) throws IOException {
+		return ResultModel.builder()
+				.response(response)
+				.status(404)
+				.resultMessage("Not Found")
+				// @TODO : insert into here 404 page
+//				.view("detail")
+				.build()
+				.getModelAndView();
+	}
+	
+	public static ModelAndView ServerError(@NotNull HttpServletResponse response) throws IOException {
+		return ResultModel.builder()
+				.response(response)
+				.status(500)
+				.resultMessage("Internal Server Error")
+				// @TODO : insert into here 500 page
+//				.view("detail")
+				.build()
+				.getModelAndView();
 	}
 	
 	public void setStatus(int status) {

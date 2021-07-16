@@ -1,6 +1,5 @@
 :root {
     --header-bg-color: #fcfcfc;
-    --header-height: 65px;
 }
 
 #header {
@@ -14,7 +13,6 @@
     align-items: center;
     flex-flow:row nowrap;
     width: 100%;
-    height: var(--header-height);
     z-index: 99999;
     top:0; left:0;
 }
@@ -22,6 +20,8 @@
 .head_logo_wapper {
     position: relative;
     height: 100%;
+    margin-left: 1em;
+	margin-right: 1em;
 }
 .head_logo {
     position: absolute;
@@ -104,4 +104,98 @@
     margin-right: 0;
     border-radius: 2em 0 0 2em;
     float: left;
+}
+
+.account_btn_wapper {
+	display: flex;
+	border-radius: 2em;
+	overflow: hidden;
+	border: #4fc08d 1px solid;
+	margin-left: 1em;
+	margin-right: 1em;
+}
+.login_btn {
+	margin: 0;
+	border-radius: 0;
+	border: 0;
+}
+.signup_btn {
+	margin: 0;
+	color: #fff;
+    background: #4fc08d;
+    border-radius: 0;
+	border: 0;
+	border-left: 1px solid;
+}
+.signup_btn:hover, .signup_btn:focus {
+	color: #4fc08d;
+	background: none;
+}
+
+.user_profile_img_wapper {
+	position: relative;
+	height:40px; width:40px;
+	border-radius: 20px;
+	background-color:#4fc08d;
+	margin-left: 1em;
+	margin-right: 1em;
+	overflow: hidden;
+}
+
+.default_user_profile_img {
+    position: absolute;
+    left: 50%; top: 50%;
+    transform: translate(-50%, -50%);
+    -webkit-transform: translate(-50%, -50%);
+    height:100%;
+    filter: invert(100%);
+    box-shadow: 0 0 5px rgba(25, 25, 25, 0.25);
+}
+
+.user_profile_img {
+	position: absolute;
+    left: 50%; top: 50%;
+    transform: translate(-50%, -50%);
+    -webkit-transform: translate(-50%, -50%);
+	height:100%;
+    background-color:white:
+    box-shadow: 0 0 5px rgba(25, 25, 25, 0.25);
+}
+
+
+.dropdown{
+    position: relative;
+    display: flex;
+}
+
+#drop-content{
+    position: fixed;
+    z-index: 999999;
+    top: 75px;
+    right: 10px;
+    border-radius: 1em;
+    overflow:hidden;
+    background-color: #4fc08d;
+    border: 1px solid #4fc08d;
+    box-shadow: 0 0 5px rgba(25, 25, 25, 0.25);
+}
+#drop-content a{
+    display:flex;
+    font-size: 20px;
+    background-color: #fff;
+    padding: 10px 30px;
+    color: #373737;
+}
+
+#drop-content a:not(:last-child) {
+	margin-bottom:2px;
+}
+
+#drop-content .logout_btn {
+	background-color: #4fc08d;
+	color: white;
+}
+
+.set_profile_image {
+	display: none;
 }

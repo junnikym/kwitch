@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="ImageDAO">
+
+<!-- 
+
+on select 
+
+image_id 			as id,
+    		image_uploader_id 	as uploaderId,
+    		image_path 			as path,
+    		image_extension 	as extension,
+    		image_usage 		as usage,
+
+ -->
+    
+    <insert id="upload" parameterType="ImageVO" useGeneratedKeys="true" keyProperty="id">
+    
+    	INSERT INTO image (
+    		uploader_id,
+    		image_path,
+    		image_extension,
+    		image_usage
+    	) VALUES (
+    		#{uploaderId}::uuid,
+    		#{path},
+    		#{extension},
+    		#{usage}
+    	)
+    	
+    	
+    </insert>
+    
+</mapper>

@@ -20,6 +20,8 @@ public class MemberVO implements Serializable {
 	
 	private String alias;
 	
+	private String message;
+	
 	private String phone;
 	
 	private String birth;
@@ -27,5 +29,12 @@ public class MemberVO implements Serializable {
 	private String createdAt;
 	
 	private String updatedAt;
+	
+	
+	// JOIN
+	
+	private String profileImagePath;
+	
+	private String profileImageExt;
 
 }
