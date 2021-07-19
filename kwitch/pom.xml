@@ -197,6 +197,13 @@
 			<artifactId>jstl</artifactId>
 			<version>1.2</version>
 		</dependency>
+		
+		<!-- SimpleCaptcha -->
+		<dependency>
+		    <groupId>nl.captcha</groupId>
+		    <artifactId>simplecaptcha</artifactId>
+		    <version>1.2.1</version>
+		</dependency>
 		 
 		<!-- spring-test -->
 		<dependency>

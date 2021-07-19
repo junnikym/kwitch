@@ -147,3 +147,7 @@ button:hover {
 .warning {
     color: red;
 }
+
+.captcha_stage {
+	display:none;
+}

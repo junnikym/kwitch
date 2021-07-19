@@ -21,9 +21,16 @@ public class ImageVO {
 	
 	private String createAt;
 	
+	private SysetmAuthority sysetmAuthority;
+	
 	public static enum Usage {
 		PROFILE_IMAGE,
 		PROFILE_BACKGROUND_IMAGE
+	}
+	
+	public static enum SysetmAuthority {
+		ADMIN,
+		CLIENT
 	}
 	
 }

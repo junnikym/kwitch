@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="ChanneDAO">
+    
+    <insert id="regist" parameterType="ChannelVO" useGeneratedKeys="true" keyProperty="id">
+    	INSERT INTO channel (
+		    channel_owner_id, 
+		    channel_title, 
+		    channel_message
+		) VALUES (
+			#{ownerId}::uuid, 
+			#{channelTitle}, 
+			#{channelMessage}
+		);
+    </insert>
+
+</mapper>

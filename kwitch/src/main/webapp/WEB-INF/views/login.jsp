@@ -24,11 +24,9 @@
 <body>	
 	<div class="app h_center h_center_wrapper" id="login" >
 	
-		<form class="app form h_center_content"
-			  name="loginForm" id="loginForm" 
-			  v-on:submit="login">
+		<div class="app form h_center_content" id="loginForm">
 	
-			<table border="0">
+			<table border="0" class="login_stage">
 				<tr><td colspan="2" class="w_center">
 					<h2> Login </h2>
 				</td></tr>
@@ -54,7 +52,7 @@
 				<tr><td colspan="2" class="w_center">
 					<br/>
 					<button class="btn modal-close modal-exit" type="button"> Back </button>
-					<button class="btn" type="submit"> Login </button>
+					<button class="btn" v-on:click="stageSwitch"> Login </button>
 				</td></tr>
 
 				<tr><td colspan="2" class="w_center">
@@ -67,8 +65,27 @@
 				
 			</table>
 	
-		</form>
-		
+			<table class="captcha_stage">
+				<tr>
+					<td> <img src="/captcha/image" class="captcha_image" /> </td>
+					<td>
+						<button class="btn" type="button" v-on:click="resetCaptcha"> Reset </button>
+					</td>
+				</tr>
+				<tr><td colspan="2" class="w_center">
+					<input class="input form__input" type="text" onkeypress="inNumber();" v-model="captchaInput" maxlength="6"/>
+				</td></tr>
+				<tr><td colspan="2" class="w_center">
+					<button class="btn" type="button" v-on:click="stageSwitch"> back </button>
+					<button class="btn" type="button" v-on:click="checkAndLogin"> Check </button>
+				</td></tr>
+				<tr><td colspan="2" class="w_center">
+					<div class="warning" v-if="wrongCaptcha!=0" v-cloak>Incorrect Character</div>
+				</td></tr>				
+			</table>
+	
+		</div>
+
 		<!-- JS -->
 		<script type="text/javascript" src="/resources/js/store.js"></script>
 		

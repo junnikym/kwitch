@@ -13,6 +13,9 @@
 		<typeAlias alias="LoginVO" type="tv.junnikym.kwitch.member.vo.LoginVO" />
 		
 		
+		<typeAlias alias="ChannelVO" type="tv.junnikym.kwitch.channel.vo.ChannelVO" />
+		
+		
 		<typeAlias alias="ImageVO" type="tv.junnikym.kwitch.file.vo.ImageVO" />
 		
 	</typeAliases>

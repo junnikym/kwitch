@@ -10,9 +10,16 @@
     		member_alias 		 AS alias,
     		
     		i.image_path		 AS profileImagePath,
-        	i.image_extension	 AS profileImageExt
+        	i.image_extension	 AS profileImageExt,
+        	
+        	s.authority			 AS systemAuthority
+        	
     	FROM member AS m
-        LEFT JOIN image AS i ON m.profile_image = i.image_id
+        
+        LEFT JOIN image AS i 				ON m.profile_image 	= i.image_id
+		LEFT JOIN member_system_role AS ms 	ON m.member_id 		= ms.memeber_id 
+		LEFT JOIN system_role AS s 			ON s.role_id 		= ms.role_id 
+        
     	<trim prefix="WHERE" prefixOverrides="AND">
     		AND member_email = #{email}
     		AND member_pw = #{pw}
