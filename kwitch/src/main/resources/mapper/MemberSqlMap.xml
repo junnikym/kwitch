@@ -52,12 +52,21 @@
         	member_alias 		 AS alias,
         	member_message 		 AS message,
         	member_birth 		 AS birth,
-        	created_at			 AS createAt,
+        	m.created_at		 AS createAt,
         	
         	i.image_path		 AS profileImagePath,
-        	i.image_extension	 AS profileImageExt
+        	i.image_extension	 AS profileImageExt,
+        	
+        	ch.channel_id		 AS channelId,
+        	
+        	co.community_id		 AS communityId 
+        	
         FROM member AS m
-        LEFT JOIN image AS i ON m.profile_image = i.image_id
+        
+        LEFT JOIN image 	AS i 	ON m.profile_image 	= i.image_id
+       	LEFT JOIN channel 	AS ch 	ON m.member_id 		= ch.owner_id 
+       	LEFT JOIN community AS co	ON ch.channel_id	= co.channel_id
+        
         <where>
         	<if test='value != null and value != ""'>
         		AND member_id = #{value}::uuid

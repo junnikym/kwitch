@@ -1,18 +1,47 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="ChanneDAO">
+<mapper namespace="ChannelDAO">
     
     <insert id="regist" parameterType="ChannelVO" useGeneratedKeys="true" keyProperty="id">
     	INSERT INTO channel (
-		    channel_owner_id, 
+		    owner_id, 
 		    channel_title, 
 		    channel_message
 		) VALUES (
 			#{ownerId}::uuid, 
-			#{channelTitle}, 
-			#{channelMessage}
+			#{title}, 
+			#{message}
 		);
+    </insert>
+    
+    <insert id="setDefaultRole" parameterType="String">
+    	INSERT INTO channel_role (
+		    channel_id, 
+		    authority,
+		    role_flag
+		) VALUES 
+		<if test='value != null and value != ""'>
+			( #{value}::UUID,     'ADMIN',     B'1111111111111111' ), 
+		    ( #{value}::UUID,     'USER',      B'0000000000111111' ), 
+		    ( #{value}::UUID,     'GUEST',     B'0000000000000001' );
+        </if>
+        
+        <selectKey keyProperty="value" resultType="String" order="AFTER">
+            SELECT 
+            	role_id FROM channel_role 
+            WHERE 
+            	channel_id = #{value}::UUID
+            	AND authority = 'ADMIN'  
+        </selectKey>
+        
+    </insert>
+    
+    <insert id="giveRole" parameterType="ChannelRoleVO">
+    	INSERT INTO member_channel_role 
+    		( member_id, channel_id, role_id ) 
+    	VALUES 
+    		( #{memberId}::UUID, #{channelId}::UUID, #{roleId}::UUID )
     </insert>
 
 </mapper>

@@ -36,5 +36,9 @@ public class MemberVO implements Serializable {
 	private String profileImagePath;
 	
 	private String profileImageExt;
+	
+	private String channelId;
+	
+	private String communityId;
 
 }

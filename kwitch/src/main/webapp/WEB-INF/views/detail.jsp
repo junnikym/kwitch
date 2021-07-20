@@ -69,7 +69,7 @@
 					</c:if>
 					
 				</td>
-				<td class="detail_header__letter"><h1>
+				<td class="detail_header__letter" colspan="2"><h1>
 					<c:choose>
 						<c:when test="${empty member.alias}">
 							${member.name}
@@ -80,7 +80,15 @@
 					</c:choose>
 				</h1></td>
 			</tr>
-			<tr><td class="detail_header__letter"> follow </td></tr>
+			<tr><c:choose>
+				<c:when test="${member.id eq member_id and empty member.channelId}">
+					<td class="detail_header__letter"> subscriber </td> 
+					<td><button class="btn" type="button" v-on:click="createChannel">Create Channel</button></td>
+				</c:when>
+				<c:otherwise>
+					<td colspan="2" class="detail_header__letter"> subscriber </td> 
+				</c:otherwise>
+			</c:choose></tr>
 		</table>
 	
 		<div class="detail_info_content_wapper">
@@ -90,18 +98,36 @@
 					<div class="m-active"></div>
 
 					<!-- menu links -->
-					<!--
-					<li><a v-on:click="changeNav('home')" >Home</a></li> 
-					<li><a v-on:click="changeNav('video')" >Video</a></li>
-					-->
+					<c:if test="${not empty member.channelId}">
+					
+						<li><a v-on:click="changeNav('home')" id="home_btn">Home</a></li> 
+						<li><a v-on:click="changeNav('video')" id="video_btn">Video</a></li>
+						
+					</c:if>
+					<c:if test="${not empty member.communityId}">
+					
+						<li><a v-on:click="changeNav('community')" id="community_btn">Community</a></li>
+					
+					</c:if>
+					
 					<li><a v-on:click="changeNav('about')" id="about_btn">About</a></li>
-					<li><a v-on:click="changeNav('contact')" >Contact</a></li>
+					<li><a v-on:click="changeNav('contact')" id="contact_btn" >Contact</a></li>
 				</ul>
 			</nav>
 
 			<div class="detail_info_content">
 				<div class="detail_home">
 					<h1> Home </h1>
+				</div>
+				
+				<div class="detail_video">
+					<h1> Video </h1>
+				</div>
+				
+				<div class="detail_community">
+					<h1> Community </h1>
+					
+					
 				</div>
 
 				<div class="detail_about">
@@ -120,10 +146,6 @@
 					</c:if>
 					
 					<p class="detail_message">${member.message}</p>
-				</div>
-
-				<div class="detail_video">
-					<h1> Video </h1>
 				</div>
 
 				<div class="detail_contact">

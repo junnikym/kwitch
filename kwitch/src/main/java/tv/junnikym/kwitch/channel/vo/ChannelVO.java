@@ -6,12 +6,12 @@ import tv.junnikym.kwitch.member.vo.MemberVO;
 @Data
 public class ChannelVO {
 	
-	private String Id;
+	private String id;
 	
-	private String Owner;
+	private String ownerId;
 	
-	private String Title;
+	private String title;
 	
-	private String Message;
+	private String message;
 	
 }

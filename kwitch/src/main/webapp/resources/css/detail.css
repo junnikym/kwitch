@@ -89,6 +89,25 @@ body {
 	-webkit-transform: translate(-50%, -50%);
 	height:50%;
 }
+.detail_header .btn:hover, .detail_header .btn:focus {
+	color: #4fc08d;
+    background: #fff;
+}
+.detail_header .btn {
+	font-size: 14px;
+    margin: 0 0.5em;
+    border-radius: 2em;
+    padding: 0.75em 1.5em;
+    cursor: pointer;
+    background: none;
+    border: 1px solid;
+    letter-spacing: 1px;
+    font-family: "Source Sans Pro", sans-serif;
+    color: #fff;
+    border: #fff 1px solid;
+    transition: 250ms ease-out;
+}
+
 
 .detail_info_content {
 	display: flex;

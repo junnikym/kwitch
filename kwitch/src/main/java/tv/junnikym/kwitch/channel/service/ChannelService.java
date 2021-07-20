@@ -4,6 +4,6 @@ import tv.junnikym.kwitch.channel.vo.ChannelVO;
 
 public interface ChannelService {
 
-	int regist(ChannelVO vo) throws Exception;
+	void regist(ChannelVO vo) throws Exception;
 	
 }

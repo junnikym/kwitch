@@ -8,13 +8,18 @@ const detail = new Vue({
         sharedState: store.state
     },
     methods: {
+    	
+    	
         changeNav: function(cursor) {
+        	console.log(cursor)
+        	
             if(this.navCursor == cursor) return;
 
             document.getElementsByClassName("detail_"+this.navCursor)[0].style.display = "none";
             this.navCursor=cursor;
             document.getElementsByClassName("detail_"+this.navCursor)[0].style.display = "flex";
         },
+        
         
         toggleProfileImageSetter: function() {
         	if(this.profileImageSetter) 
@@ -24,6 +29,7 @@ const detail = new Vue({
         	
         	this.profileImageSetter = !this.profileImageSetter;
         },
+        
         
         setProfileImageThumb: function(e) {
         	const reader = new FileReader(); 
@@ -36,6 +42,7 @@ const detail = new Vue({
         	reader.readAsDataURL(event.target.files[0]);
 
         },
+        
         
         uploadProfileImage: function(id) {
         	const formData = new FormData();
@@ -52,11 +59,32 @@ const detail = new Vue({
             		location.reload();
             })
             .catch(err => console.log(err))
-        }
+        },
+        
+        
+        createChannel: function() {
+        	
+        	fetch('/api/channel/regist/', {
+      		  	method: 'POST',
+      		  	headers: {
+      		  		"Content-Type": "application/json"
+      		  	},
+      		  	body: JSON.stringify({
+      		  		"title": "title"
+      		  	})
+	  		})
+	  		.then( res => {
+				if(res.status == 200) {
+					//@TODO success logic
+				}
+			})
+			.catch(err => console.log(err))
+		}
     },
 
     mounted() {
         document.getElementsByClassName("detail_"+this.navCursor)[0].style.display = "flex";
         document.getElementById(this.navCursor+'_btn').className += ' active';
     }
+    
 });

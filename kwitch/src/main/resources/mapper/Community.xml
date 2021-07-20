@@ -5,7 +5,7 @@
     
     <insert id="regist" parameterType="String">
     	INSERT INTO community (
-		    chennel_id
+		    channel_id
 		) VALUES (
 			<if test='value != null and value != ""'>
             	#{value}::uuid
