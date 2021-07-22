@@ -2,8 +2,13 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="ChannelDAO">
+
+
+
+
     
     <insert id="regist" parameterType="ChannelVO" useGeneratedKeys="true" keyProperty="id">
+    
     	INSERT INTO channel (
 		    owner_id, 
 		    channel_title, 
@@ -13,9 +18,15 @@
 			#{title}, 
 			#{message}
 		);
+		
     </insert>
     
+    
+    
+    
+    
     <insert id="setDefaultRole" parameterType="String">
+    
     	INSERT INTO channel_role (
 		    channel_id, 
 		    authority,
@@ -29,7 +40,9 @@
         
         <selectKey keyProperty="value" resultType="String" order="AFTER">
             SELECT 
-            	role_id FROM channel_role 
+            	role_id 
+            FROM 
+            	channel_role 
             WHERE 
             	channel_id = #{value}::UUID
             	AND authority = 'ADMIN'  
@@ -37,11 +50,21 @@
         
     </insert>
     
+    
+    
+    
+    
     <insert id="giveRole" parameterType="ChannelRoleVO">
+    
     	INSERT INTO member_channel_role 
     		( member_id, channel_id, role_id ) 
     	VALUES 
     		( #{memberId}::UUID, #{channelId}::UUID, #{roleId}::UUID )
+    		
     </insert>
+    
+    
+    
+    
 
 </mapper>

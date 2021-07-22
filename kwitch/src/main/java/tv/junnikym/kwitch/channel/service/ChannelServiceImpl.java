@@ -8,6 +8,7 @@ import tv.junnikym.kwitch.channel.dao.ChannelDAO;
 import tv.junnikym.kwitch.channel.vo.ChannelRoleVO;
 import tv.junnikym.kwitch.channel.vo.ChannelVO;
 import tv.junnikym.kwitch.community.dao.CommunityDAO;
+import tv.junnikym.kwitch.community.vo.CommunityVO;
 
 @Service("ChannelService")
 public class ChannelServiceImpl implements ChannelService {
@@ -20,14 +21,12 @@ public class ChannelServiceImpl implements ChannelService {
 	
 	@Override
 	public void regist(ChannelVO vo) throws Exception {
-		String channelId = channelDAO.regist(vo);
+		String channelId 	= channelDAO.regist(vo);
 		
-		System.out.println("ID ---- " + channelId);
+		String communityId 	= communityDAO.regist(channelId);
+		communityDAO.setDefaultMenu(communityId);
 		
-		communityDAO.regist(channelId);
-		
-		String roleId = channelDAO.setDefaultRole(channelId);
-		
+		String roleId 		= channelDAO.setDefaultRole(channelId);
 		channelDAO.giveRole (
 				ChannelRoleVO.builder()
 						.memberId(vo.getOwnerId())
@@ -35,6 +34,7 @@ public class ChannelServiceImpl implements ChannelService {
 						.roleId(roleId)
 						.build()
 		);
+		
 	}
 
 }

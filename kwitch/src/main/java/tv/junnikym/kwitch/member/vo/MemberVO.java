@@ -30,15 +30,17 @@ public class MemberVO implements Serializable {
 	
 	private String updatedAt;
 	
-	
-	// JOIN
+
 	
 	private String profileImagePath;
 	
 	private String profileImageExt;
 	
-	private String channelId;
+	private String ownChannelId;
 	
-	private String communityId;
+	private String onwCommunityId;
 
+	
+	
+	
 }

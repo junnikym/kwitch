@@ -5,18 +5,19 @@
 
 	<typeAliases>
 	
-		<typeAlias alias="hashMap" type="java.util.HashMap" />
-	
+		<typeAlias alias="HashMap" type="java.util.HashMap" />
+		<typeAlias alias="List" type="java.util.List" />
 		
 		<typeAlias alias="MemberVO" type="tv.junnikym.kwitch.member.vo.MemberVO" />
-		
 		<typeAlias alias="LoginVO" type="tv.junnikym.kwitch.member.vo.LoginVO" />
 		
-		
 		<typeAlias alias="ChannelVO" type="tv.junnikym.kwitch.channel.vo.ChannelVO" />
-		
 		<typeAlias alias="ChannelRoleVO" type="tv.junnikym.kwitch.channel.vo.ChannelRoleVO" />
 		
+		<typeAlias alias="CommunityVO" type="tv.junnikym.kwitch.community.vo.CommunityVO" />
+		<typeAlias alias="CommunityMenuVO" type="tv.junnikym.kwitch.community.vo.CommunityMenuVO" />
+		<typeAlias alias="CommunityPostVO" type="tv.junnikym.kwitch.community.vo.CommunityPostVO" />
+		<typeAlias alias="CommunityPostHistoryVO" type="tv.junnikym.kwitch.community.vo.CommunityPostHistoryVO" />
 		
 		<typeAlias alias="ImageVO" type="tv.junnikym.kwitch.file.vo.ImageVO" />
 		

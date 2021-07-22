@@ -3,7 +3,12 @@
 
 <mapper namespace="MemberDAO">
     
+    
+    
+    
+    
     <select id="login" parameterType="LoginVO" resultType="MemberVO">
+    
     	SELECT 
     		member_id 			 AS id,
     		member_name 		 AS name,
@@ -12,21 +17,28 @@
     		i.image_path		 AS profileImagePath,
         	i.image_extension	 AS profileImageExt,
         	
-        	s.authority			 AS systemAuthority
-        	
+        	sr.authority		 AS systemAuthority
+        
     	FROM member AS m
         
-        LEFT JOIN image AS i 				ON m.profile_image 	= i.image_id
-		LEFT JOIN member_system_role AS ms 	ON m.member_id 		= ms.memeber_id 
-		LEFT JOIN system_role AS s 			ON s.role_id 		= ms.role_id 
+        LEFT JOIN image 			  AS i 	ON m.profile_image 	= i.image_id
+        
+		LEFT JOIN member_system_role  AS ms ON m.member_id 		= ms.memeber_id
+		LEFT JOIN system_role 		  AS sr ON sr.role_id 		= ms.role_id 
         
     	<trim prefix="WHERE" prefixOverrides="AND">
     		AND member_email = #{email}
     		AND member_pw = #{pw}
     	</trim>
+    	
     </select>
     
+    
+    
+    
+    
     <insert id="regist" parameterType="MemberVO">
+    
     	INSERT INTO member(
     		member_email,
     		member_pw,
@@ -42,9 +54,15 @@
     		#{phone},
     		#{birth}::TIMESTAMP
     	)
+    	
     </insert>
     
+    
+    
+    
+    
     <select id="getDetail" parameterType="String" resultType="MemberVO">
+    
         SELECT 
         	member_id			 AS id,
         	member_email		 AS email,
@@ -72,12 +90,23 @@
         		AND member_id = #{value}::uuid
         	</if>
         </where>
+        
     </select>
     
-    <update id="setProfileImage" parameterType="hashMap">
+    
+    
+    
+    
+    <update id="setProfileImage" parameterType="HashMap">
+    	
     	UPDATE member
     	SET profile_image = #{imageId}::uuid
         WHERE member_id = #{memberId}::uuid
+    
     </update>
+
+
+
+
 
 </mapper>

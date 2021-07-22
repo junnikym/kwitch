@@ -1,0 +1,264 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="CommunityDAO">
+    
+    
+    
+    
+    
+    <insert id="regist" parameterType="String">
+    
+    	INSERT INTO community (
+		    channel_id
+		) VALUES (
+			<if test='value != null and value != ""'>
+            	#{value}::uuid
+        	</if>
+		);
+		
+		<selectKey keyProperty="value" resultType="String" order="AFTER">
+            SELECT 
+            	community_id 
+            FROM 
+            	community 
+            WHERE 
+            	channel_id = #{value}::UUID
+        </selectKey>
+		
+    </insert>
+    
+    
+    
+    
+    
+    
+    <insert id="registMenu" parameterType="CommunityMenuVO">
+    
+    	INSERT INTO community (
+		    community_id,
+		    channel_id
+		) VALUES (
+			<if test='title != null and title != ""'>
+            	#{commnuityId},
+            	#{menuTitle}
+        	</if>
+		);
+		
+    </insert>
+    
+    
+    
+    
+    
+    <insert id="setDefaultMenu" parameterType="String">
+    
+    	INSERT INTO community_menu (
+		    community_id, 
+		    menu_title
+		) VALUES 
+		<if test='value != null and value != ""'>
+			( #{value}::UUID,     '자유게시판'), 
+		    ( #{value}::UUID,     '공지사항'), 
+		    ( #{value}::UUID,     '기타')
+        </if>
+        
+    </insert>
+    
+    
+    
+    
+    
+    <insert id="registPost" parameterType="CommunityPostVO">
+    
+    	INSERT INTO community_post(
+		    community_id,
+		    menu_id,
+		    writer_id,
+		    post_title,
+		    post_content,
+		    post_comment_block
+		) VALUES (
+		    #{community_id}::UUID,
+		    #{menuId}::UUID,
+		    #{writerId}::UUID,
+		    #{title},
+		    #{content},
+		    #{isCommentBlock}
+		);
+    
+    </insert>
+    
+    
+    
+    
+    
+    <select id="getMenuList" parameterType="String" resultType="CommunityMenuVO">
+    
+    	SELECT 
+    		menu_id 	AS id,
+    		menu_title 	AS title
+    	FROM 
+    		community_member
+    	WHERE
+		   	<if test='value != null and value != ""'>
+		   		community_id = #{value}::UUID
+		   	</if>
+    
+    </select>
+    
+    
+    
+    
+    
+    <select id="getPostList" parameterType="String" resultType="CommunityPostVO">
+    
+    	SELECT
+		    cp.writer_id 		AS writerId,
+		    cp.post_title 		AS title,
+		
+		    CASE WHEN m.member_alias IS NULL OR m.member_alias = ''
+		        THEN m.member_name
+		        ELSE m.member_alias
+		    END AS writerAlias,
+		    
+		    m.profile_image 	AS writerProfileImage
+		
+		FROM 
+		    community_menu AS cm
+		
+		LEFT JOIN community_post AS cp 	ON cm.menu_id 	= cp.menu_id
+		LEFT JOIN member AS m 			ON cp.writer_id = m.member_id
+
+		WHERE
+    	   	<if test='value != null and value != ""'>
+		   		cm.menu_id = #{value}::UUID
+		   	</if>
+		   	
+		ORDER BY cp.created_at DESC;
+    
+    </select>
+    
+    
+    
+    
+    
+	<select id="getPost" parameterType="String" resultType="CommunityPostVO">
+    
+    	SELECT 
+		    cp.writer_id 			AS writerId,
+		    cp.post_title 			AS title,
+		    cp.post_content 		AS content,
+		    cp.post_comment_block 	AS isCommentBlock,
+		    cp.created_at 			AS createdAt,
+		    cp.updated_at 			AS updatedAt,
+		
+		    CASE WHEN m.member_alias IS NULL OR m.member_alias = ''
+		        THEN m.member_name
+		        ELSE m.member_alias
+		    END AS writerAlias,
+		    
+		    m.profile_image 		AS writerProfileImage
+		
+		FROM 
+		    community_post AS cp
+		
+		LEFT JOIN member AS m ON cp.writer_id = m.member_id
+		
+		WHERE
+		   	<if test='value != null and value != ""'>
+		   		cp.post_id = #{value}::UUID
+		   	</if>
+			
+    
+    </select>
+    
+    
+    
+    
+    
+    <select id="getHome" parameterType="String" resultType="CommunityPostVO">
+    	
+    	SELECT
+		    ch.menu_id 						AS menuId,
+		    cp.writer_id 					AS writerId,
+		
+		    cp.post_id 						AS id,
+		    cp.post_title 					AS title,
+		    SUBSTR(cp.post_content, 0, 20) 	AS content,
+			
+			CASE WHEN m.member_alias IS NULL OR m.member_alias = ''
+		        THEN m.member_name
+		        ELSE m.member_alias
+		    END AS writerAlias,
+		
+		    m.profile_image 				AS writerProfileImage
+		
+		FROM
+		    community_home AS ch
+		
+		LEFT JOIN community_post 	AS cp 	ON ch.menu_id 	= cp.menu_id
+		LEFT JOIN member 			AS m 	ON cp.writer_id	= m.member_id
+		
+		WHERE
+    		<if test='value != null and value != ""'>
+		   		ch.community_id = #{value}::UUID
+		   	</if>
+    	
+    </select>
+    
+    
+    
+    
+    
+    <update id="setPost" parameterType="CommunityPostVO">
+    
+    	UPDATE 
+    		community_post
+    	SET 
+    		post_title 			= #{title},
+		    post_content 		= #{content},
+		    post_comment_block 	= #{isCommentBlock},
+		    updated_at			= now()
+		WHERE
+			post_id = #{id}::UUID
+    
+    </update>
+    
+    
+    
+    
+    
+    <delete id="deletePost" parameterType="String">
+    
+    	DELETE FROM 
+    		community_post 
+    	WHERE 
+    		<if test='value != null and value != ""'>
+		   		post_id = #{value}::UUID
+		   	</if>
+    
+    </delete>
+    
+    
+    
+    
+    
+<!--	<insert id="registHistory" paramterType="CommunityPostHistoryVO">
+    	
+    	IF
+	    	INSERT INTO community_post_history(
+	    		post_id,
+	    		member_id
+	    	) VALUES (
+	    		#{postId}::UUID,
+	    		#{memberId}::UUID
+	    	)
+    	
+    </insert>  -->
+    
+
+
+
+
+</mapper>

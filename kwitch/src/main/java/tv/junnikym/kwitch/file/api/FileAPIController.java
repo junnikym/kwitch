@@ -53,4 +53,15 @@ public class FileAPIController {
 		
 		this.imageService.upload(uploaderId, file.getFile("profileImage"), ImageVO.Usage.PROFILE_IMAGE);
 	}
+	
+	@ResponseBody
+	@RequestMapping(value = "/post/image/{uploaderId}", method = RequestMethod.POST)
+	public void setPostImage (
+			@PathVariable("uploaderId") String uploaderId,
+			MultipartHttpServletRequest file
+	) throws Exception {
+		System.out.println(file.getFile("profileImage"));
+		
+		this.imageService.upload(uploaderId, file.getFile("profileImage"), ImageVO.Usage.PROFILE_IMAGE);
+	}
 }

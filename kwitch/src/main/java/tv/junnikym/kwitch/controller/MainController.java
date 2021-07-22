@@ -19,4 +19,13 @@ public class MainController {
 		return "index";
 	}
 	
+	@RequestMapping(value = "/test", method = RequestMethod.GET)
+	public String test(HttpServletRequest request, HttpSession session) {
+		if(request.isRequestedSessionIdValid()) {
+			String member_id = (String) session.getAttribute("member_id");
+		}
+		
+		return "communityThumb";
+	}
+	
 }
