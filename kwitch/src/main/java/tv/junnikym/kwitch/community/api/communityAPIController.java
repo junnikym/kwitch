@@ -24,7 +24,7 @@ import tv.junnikym.kwitch.member.vo.LoginVO;
 @RequestMapping(value = "/api")
 public class communityAPIController {
 
-	@Resource(name="CommnunityService")
+	@Resource(name="CommunityService")
 	private CommunityService communityService;
 	
 	@ResponseBody
@@ -38,7 +38,7 @@ public class communityAPIController {
 		System.out.println(id);
 		
 		Map<String, Object> map = new HashMap<String, Object>();
-		List<CommunityPostVO> result = communityService.getHome(id);
+		List<CommunityPostVO> result = communityService.getHomeContent(id);
 		System.out.println("is exception here");
 		
 		map.put("data", result);

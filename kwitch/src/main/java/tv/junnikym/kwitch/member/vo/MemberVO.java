@@ -38,7 +38,7 @@ public class MemberVO implements Serializable {
 	
 	private String ownChannelId;
 	
-	private String onwCommunityId;
+	private String ownCommunityId;
 
 	
 	

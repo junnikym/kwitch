@@ -75,9 +75,9 @@
         	i.image_path		 AS profileImagePath,
         	i.image_extension	 AS profileImageExt,
         	
-        	ch.channel_id		 AS channelId,
+        	ch.channel_id		 AS ownChannelId,
         	
-        	co.community_id		 AS communityId 
+        	co.community_id		 AS ownCommunityId 
         	
         FROM member AS m
         

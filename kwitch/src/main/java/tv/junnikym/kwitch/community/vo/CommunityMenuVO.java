@@ -15,4 +15,21 @@ public class CommunityMenuVO {
 	
 	private String title;
 	
+	private String communityId;
+
+	private boolean isAllowToRead;
+
+	private boolean isAllowToWrite;
+	
+	private Integer homeSettingFlag;
+	
+	private Integer homePriority;
+	
+	private Integer nHomeThumb;
+	
+	public static final class CommunityHomeStyle {
+		public static final int HOME_STYLE_BIG 				= 1 << 0;
+		public static final int HOME_STYLE_IS_LEFT			= 1 << 1;
+	}
+	
 }

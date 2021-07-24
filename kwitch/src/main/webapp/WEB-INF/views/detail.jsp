@@ -81,7 +81,7 @@
 				</h1></td>
 			</tr>
 			<tr><c:choose>
-				<c:when test="${member.id eq member_id and empty member.channelId}">
+				<c:when test="${member.id eq member_id and empty member.ownChannelId}">
 					<td class="detail_header__letter"> subscriber </td> 
 					<td><button class="btn" type="button" v-on:click="createChannel">Create Channel</button></td>
 				</c:when>
@@ -98,13 +98,13 @@
 					<div class="m-active"></div>
 
 					<!-- menu links -->
-					<c:if test="${not empty member.channelId}">
+					<c:if test="${not empty member.ownChannelId}">
 					
 						<li><a v-on:click="changeNav('home')" id="home_btn">Home</a></li> 
 						<li><a v-on:click="changeNav('video')" id="video_btn">Video</a></li>
 						
 					</c:if>
-					<c:if test="${not empty member.communityId}">
+					<c:if test="${not empty member.ownCommunityId}">
 					
 						<li><a v-on:click="changeNav('community')" id="community_btn">Community</a></li>
 					

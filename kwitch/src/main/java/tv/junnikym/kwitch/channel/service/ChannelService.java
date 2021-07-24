@@ -1,6 +1,9 @@
 package tv.junnikym.kwitch.channel.service;
 
+import java.util.List;
+
 import tv.junnikym.kwitch.channel.vo.ChannelVO;
+import tv.junnikym.kwitch.community.vo.CommunityMenuVO;
 
 public interface ChannelService {
 

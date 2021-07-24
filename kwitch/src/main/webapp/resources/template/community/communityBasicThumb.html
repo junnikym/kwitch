@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+
+<script src="https://cdn.jsdelivr.net/npm/vue@2.6.0"></script>
+
+<link rel="stylesheet" type="text/css" href="/resources/css/header.css" />
+<link rel="stylesheet" type="text/css" href="/resources/css/community.css" />
+
+</head>
+<body>
+
+	<ul id="communityBasicThumb">
+	    
+	    <li v-for="postItem in postList">
+		    <div class="community_basic_thumb" border="0">
+				<div class="user_profile_img_wapper">
+					<img src="/resources/image/user_icon.png" class="default_user_profile_img" />
+				</div>
+				
+				<div class="community_basic_thumb__content_wapper">				
+					<div class="community_basic_thumb__title"> <h3>{{postItem.title}}</h3> </div>
+					
+					<div class="community_basic_thumb__content"> <p>{{postItem.content}}</p> </div>
+				</div>
+				
+				<div rowspan="2"
+					class="commnutiy_basic_thumb__image">
+					<img src="/resources/image/kwitch_background_icon.png" class="community_basic_thumb__background_image" />
+				</div>
+				
+			</div>
+		<li>
+		
+	</ul>
+	
+	<script>
+    
+    window.onload = function() {
+        const detail = new Vue({ <!-- Vue 객체 생성 -->
+	        el: '#communityBasicThumb',
+	        data: {
+	            postList: [],
+	        },
+	        methods: {
+	        	
+	            uploadProfileImage: function(id) {
+	            	const formData = new FormData();
+	            	const profileImage = document.getElementById('upload_profile_image');
+	            	
+	            	formData.append('profileImage', profileImage.files[0]);
+	            	
+	            	
+	            },
+	            
+	        },
+	
+	        mounted() {
+	        	const id = window.parent.location.pathname.replace(window.location.search,'').replace('community','').replaceAll('/','');
+	        	
+	        	fetch('/api/community/' + id, {
+          		  	method: 'GET',
+	          		headers: {
+	        			"Content-Type": "application/json"
+	        		}
+      			})
+              	.then(res=>res.json())
+              	.then(json => {
+              		this.postList = json;
+              	})
+              	.catch(err => console.log(err))
+	        }
+        })
+    }
+    
+</script>
+ 
+</body>
+</html>

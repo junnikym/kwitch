@@ -16,38 +16,34 @@
 	<link rel="stylesheet" type="text/css" href="/resources/css/common.css" />
 	<link rel="stylesheet" type="text/css" href="/resources/css/header.css" />
 	<link rel="stylesheet" type="text/css" href="/resources/css/nav.css" />
-	<link rel="stylesheet" type="text/css" href="/resources/css/community.css" />
 
 	<!-- CDN -->
 	<script src="https://cdn.jsdelivr.net/npm/vue@2.6.0"></script>
+	<script src="https://unpkg.com/vue-router@2.6.0/dist/vue-router.js"></script>
+	
+	<style>
+      .iframe_00 {
+         /*
+         높이 넓이를 자식창에 맞도록 변경
+         height 값의 경우 100vh가 맞지만 top: -150px 을 해주었기 때문에 비율 만큼 더했다!
+         */
+         position: absolute;
+         display: block;
+         border: none;
+         top: 65px;
+         height: calc(100vw - 65px);
+         width: 100vw;
+         /*상단 숨김 코드*/
+         position: relative;
+      }
+      </style>
 	
 </head>
-<body>
+<body style="position: relative; margin : 0;overflow-x : hidden;overflow-y : hidden;">
 	<%@ include file="header.jsp" %>
-
-	<table class="community_basic_thumb" border="0">
-		<tbody>
-			<tr>
-				<td rowspan="2"
-					class="commnutiy_basic_thumb__profile">
-					<div class="user_profile_img_wapper">
-						<img src="/resources/image/user_icon.png" class="default_user_profile_img" />
-					</div>
-				</td>
-				
-				<td class="community_basic_thumb__title"> post header </td>
-				
-				<td rowspan="2"
-					class="commnutiy_basic_thumb__image">
-					image
-				</td>
-			</tr>
-			
-			<tr>
-				<td class="community_basic_thumb__content"> post content</td>
-			</tr>
-		</tbody>
-	</table>
+	
+	<iframe src="/resources/template/community/communityBasicThumb.html" name="thumb" class="iframe_00"></iframe>
+	
 	<!-- JS -->
 	<script type="text/javascript" src="/resources/js/store.js"></script>
 

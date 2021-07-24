@@ -28,8 +28,7 @@ image_id 			as id,
     		#{extension},
     		#{usage}
     	)
-    	
-    	
+
     </insert>
     
 </mapper>
