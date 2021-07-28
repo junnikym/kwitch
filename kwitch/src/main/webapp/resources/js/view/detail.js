@@ -3,9 +3,8 @@ const detail = new Vue({
     data: {
         navCursor: 'about',
         profileImageSetter: false,
-        
-        privateState: {},
-        sharedState: store.state
+	    profileImageURL: '/resources/image/user_icon.png',
+	    member: {},
     },
     methods: {
     	
@@ -79,12 +78,49 @@ const detail = new Vue({
 				}
 			})
 			.catch(err => console.log(err))
+		},
+		
+		
+		goToCommunity: function() {
+			parent.document.location.href = "/community/"+this.member.ownCommunityId
 		}
     },
 
     mounted() {
         document.getElementsByClassName("detail_"+this.navCursor)[0].style.display = "flex";
         document.getElementById(this.navCursor+'_btn').className += ' active';
+
+	    fetch('/api/user/' + parent.document.all["memberId"].value, {
+		    method: 'GET',
+		    headers: {
+			    "Content-Type": "application/json"
+		    }
+	    })
+	    .then(res=>res.json())
+	    .then(json => {
+		    this.member = json;
+
+		    if(this.member?.profileImagePath != null && this.member?.profileImageExt)
+		        this.profileImageURL = '/api/profile/image/'+this.member.profileImagePath+'/'+this.ember.profileImageExt;
+		    
+		    const navMenu = document.querySelector('#myMenu > ul')[0];
+		    if(this.member?.ownCommunityId == null) {
+		    	
+	        }
+		    
+		    if(this.member?.ownChannelId == null) {
+		    	let target = document.querySelector(".channel_menu_li");
+		    	target.parentNode.removeChild(target);
+		    	
+		    	target = document.querySelector(".channel_menu_li");
+		    	target.parentNode.removeChild(target);
+	        }
+		    
+		    initMenu("#myMenu");
+	    })
+	    .catch(err => console.log(err));
+	    
+	    
     }
     
 });

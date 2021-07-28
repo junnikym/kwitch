@@ -1,6 +1,7 @@
 package tv.junnikym.kwitch.member.api;
 
 import java.io.IOException;
+import java.util.AbstractMap;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -22,6 +23,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import tv.junnikym.kwitch.member.service.MemberService;
 import tv.junnikym.kwitch.member.vo.LoginVO;
 import tv.junnikym.kwitch.member.vo.MemberVO;
+import tv.junnikym.kwitch.util.api.ResultModel;
 
 @Controller
 @RequestMapping(value = "/api")
@@ -44,14 +46,14 @@ public class MemberAPIController {
 	) {
 
 		try {
-			MemberVO user = memberService.login(vo, request, session);
+			MemberVO member = memberService.login(vo, request, session);
 
-			if(user == null) {
+			if(member == null) {
 				response.sendError(403, "Not Exist Account");
 				return new HashMap<String, Object>();
 			}
 
-			return objectMapper.convertValue(user, Map.class);
+			return objectMapper.convertValue(member, Map.class);
 			
 		} catch(Exception e) {
 			e.printStackTrace();
@@ -75,15 +77,31 @@ public class MemberAPIController {
 	
 	@ResponseBody
 	@RequestMapping(value = "/regist", method = RequestMethod.POST)
-	public Map<String, Object> signup(@RequestBody MemberVO vo, HttpServletResponse response, HttpSession session) {
-		
-		try {			
-			int result = memberService.regist(vo);
-		} catch(Exception e) {
-			e.printStackTrace();
+	public void signup(
+			@RequestBody MemberVO vo,
+			HttpServletResponse response,
+			HttpSession session
+	) throws Exception {
+		memberService.regist(vo);
+	}
+
+	@ResponseBody
+	@RequestMapping(value = "/user/{memberId}", method = RequestMethod.GET)
+	public Map<String, Object> detail(
+			@PathVariable("memberId") String id,
+			HttpServletResponse response,
+			HttpSession session
+	) throws Exception {
+
+		MemberVO member = this.memberService.getDetail(id);
+
+		if(member==null) {
+			response.sendError(404);
 		}
 
-		return null;
+		return objectMapper.convertValue(member, Map.class);
 	}
+
+
 
 }

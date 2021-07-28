@@ -25,7 +25,7 @@ public class MainController {
 			String member_id = (String) session.getAttribute("member_id");
 		}
 		
-		return "communityThumb";
+		return "edit";
 	}
 	
 }

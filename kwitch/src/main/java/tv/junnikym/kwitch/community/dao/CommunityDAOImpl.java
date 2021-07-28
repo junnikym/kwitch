@@ -1,13 +1,11 @@
 package tv.junnikym.kwitch.community.dao;
 
-import java.util.HashMap;
 import java.util.List;
 
 import org.springframework.stereotype.Repository;
 
-import com.sun.javafx.collections.MappingChange.Map;
-
 import tv.junnikym.kwitch.community.vo.CommunityMenuVO;
+import tv.junnikym.kwitch.community.vo.CommunityPostHistoryVO;
 import tv.junnikym.kwitch.community.vo.CommunityPostVO;
 import tv.junnikym.kwitch.util.AbstractMapper;
 
@@ -15,7 +13,7 @@ import tv.junnikym.kwitch.util.AbstractMapper;
 public class CommunityDAOImpl extends AbstractMapper implements CommunityDAO {
 
 	/**
-	 *	Community Menu 연관 메소드
+	 *	Community Menu �뿰愿� 硫붿냼�뱶
 	 * --------------------------------------------------
 	 */
 
@@ -36,6 +34,10 @@ public class CommunityDAOImpl extends AbstractMapper implements CommunityDAO {
 	public void registMenuList(List<CommunityMenuVO> vo) throws Exception {
 		insert("CommunityDAO.registMenuList", vo);
 	}
+	
+	public CommunityMenuVO getMenu(String id) throws Exception {
+		return selectOne("CommunityDAO.getMenu", id);
+	}
 
 	@Override
 	public List<CommunityMenuVO> getMenuList(String communityId) throws Exception {
@@ -43,23 +45,40 @@ public class CommunityDAOImpl extends AbstractMapper implements CommunityDAO {
 	}
 
 	/**
-	 *	Community Post 연관 메소드
+	 *	Community Post �뿰愿� 硫붿냼�뱶
 	 * --------------------------------------------------
 	 */
 
 	@Override
-	public void registPost(CommunityPostVO vo) throws Exception {
+	public String registPost(CommunityPostVO vo) throws Exception {
 		insert("CommunityDAO.registPost", vo);
+		
+		return vo.getId();
+	}
+	
+	@Override
+	public void registPostHistory(CommunityPostHistoryVO vo) throws Exception {
+		insert("CommunityDAO.registPostHistory", vo);
 	}
 
 	@Override
 	public List<CommunityPostVO> getPostList(String menuId) throws Exception {
 		return selectList("CommunityDAO.getPostList", menuId);
 	}
+	
+	@Override
+	public List<CommunityPostVO> getPostListBySearch(CommunityPostVO vo) throws Exception {
+		return selectList("CommunityDAO.getPostListBySearch", vo);
+	}
 
 	@Override
 	public CommunityPostVO getPost(String postId) throws Exception {
 		return selectOne("CommunityDAO.getPost", postId);
+	}
+	
+	@Override
+	public void setPostView(String PostId) throws Exception {
+		update("CommunityDAO.setPostView", PostId);
 	}
 
 	@Override
@@ -73,7 +92,7 @@ public class CommunityDAOImpl extends AbstractMapper implements CommunityDAO {
 	}
 
 	/**
-	 *	Community Home 연관 메소드
+	 *	Community Home �뿰愿� 硫붿냼�뱶
 	 * --------------------------------------------------
 	 */
 
@@ -87,8 +106,14 @@ public class CommunityDAOImpl extends AbstractMapper implements CommunityDAO {
 		insert("CommunityDAO.registHomeList", vo);
 	}
 
+	@Override
 	public List<CommunityPostVO> getHomeContent(String communityId) throws Exception {
 		return selectList("CommunityDAO.getHomeContent", communityId);
+	}
+
+	@Override
+	public List<CommunityMenuVO> getHomeMenu (String communityId) throws Exception {
+		return selectList("CommunityDAO.getHomeMenu", communityId);
 	}
 	
 }

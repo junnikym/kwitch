@@ -175,3 +175,8 @@ body {
 	diaplay:flex;
 	flex-direction: column;
 }
+
+.detail_community_iframe {
+	width: 100%;
+	height: 100%;
+}

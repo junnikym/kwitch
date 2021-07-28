@@ -13,12 +13,24 @@ html {
 }
 
 body {
+    position: relative; margin : 0;
+    overflow-x : hidden; overflow-y : hidden;
     height: 100%;
     display: flex;
     align-items: center;
     justify-content: center;
     font-family: "Source Sans Pro", sans-serif;
 }
+
+.mainFrame {
+    position: absolute;
+    display: block;
+    border: none;
+    top: 65px; left: 0;
+    height: calc(100vh - 65px);
+    width: 100vw;
+}
+
 
 #header {
 	height: 65px;
@@ -127,7 +139,7 @@ button:hover {
 	 visibility: visible;
 	 opacity: 1;
 	 transition-delay: 0s;
-	 z-index: 999999;
+	 z-index: 999;
 }
  .modal-bg {
 	 position: absolute;

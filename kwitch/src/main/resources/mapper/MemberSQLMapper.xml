@@ -21,10 +21,10 @@
         
     	FROM member AS m
         
-        LEFT JOIN image 			  AS i 	ON m.profile_image 	= i.image_id
+        LEFT JOIN image 			  AS i 	ON m.member_profile_image 	= i.image_id
         
-		LEFT JOIN member_system_role  AS ms ON m.member_id 		= ms.memeber_id
-		LEFT JOIN system_role 		  AS sr ON sr.role_id 		= ms.role_id 
+		LEFT JOIN member_system_role  AS ms ON m.member_id 				= ms.memeber_id
+		LEFT JOIN system_role 		  AS sr ON sr.role_id 				= ms.role_id 
         
     	<trim prefix="WHERE" prefixOverrides="AND">
     		AND member_email = #{email}
@@ -81,9 +81,9 @@
         	
         FROM member AS m
         
-        LEFT JOIN image 	AS i 	ON m.profile_image 	= i.image_id
-       	LEFT JOIN channel 	AS ch 	ON m.member_id 		= ch.owner_id 
-       	LEFT JOIN community AS co	ON ch.channel_id	= co.channel_id
+        LEFT JOIN image 	AS i 	ON m.member_profile_image 	= i.image_id
+       	LEFT JOIN channel 	AS ch 	ON m.member_id 				= ch.owner_id 
+       	LEFT JOIN community AS co	ON ch.channel_id			= co.channel_id
         
         <where>
         	<if test='value != null and value != ""'>
@@ -100,8 +100,8 @@
     <update id="setProfileImage" parameterType="HashMap">
     	
     	UPDATE member
-    	SET profile_image = #{imageId}::uuid
-        WHERE member_id = #{memberId}::uuid
+    	SET member_profile_image 	= #{imageId}::uuid
+        WHERE member_id 			= #{memberId}::uuid
     
     </update>
 

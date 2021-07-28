@@ -17,33 +17,50 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import tv.junnikym.kwitch.community.service.CommunityService;
+import tv.junnikym.kwitch.community.vo.CommunityMenuVO;
 import tv.junnikym.kwitch.community.vo.CommunityPostVO;
-import tv.junnikym.kwitch.member.vo.LoginVO;
 
 @Controller
 @RequestMapping(value = "/api")
-public class communityAPIController {
+public class CommunityAPIController {
 
 	@Resource(name="CommunityService")
 	private CommunityService communityService;
 	
 	@ResponseBody
 	@RequestMapping(value = "/community/{communityId}", method = RequestMethod.GET)
-	public List<CommunityPostVO> getCommunity (
+	public Map<String, Object> getCommunity (
 			@PathVariable("communityId") String id,
 			HttpServletRequest request, 
 			HttpServletResponse response, 
 			HttpSession session
 	) throws Exception {
-		System.out.println(id);
 		
 		Map<String, Object> map = new HashMap<String, Object>();
-		List<CommunityPostVO> result = communityService.getHomeContent(id);
-		System.out.println("is exception here");
+
+		map.put("post", communityService.getHomeContent(id));
+		map.put("menu", communityService.getHomeMenu(id));
 		
-		map.put("data", result);
+		return map;
+	}
+	
+	/**
+	 * Post Related
+	 * --------------------------------------------------
+	 */
+	
+	@ResponseBody
+	@RequestMapping(value = "/community/post", method = RequestMethod.POST)
+	public String registPost (
+			@RequestBody() CommunityPostVO vo,
+			HttpServletRequest request, 
+			HttpServletResponse response, 
+			HttpSession session
+	) throws Exception {
 		
-		return result;
+		vo.setWriterId((String)session.getAttribute("member_id"));
+		
+		return communityService.registPost(vo);
 	}
 	
 	
@@ -63,20 +80,6 @@ public class communityAPIController {
 	
 	
 	@ResponseBody
-	@RequestMapping(value = "/community/post", method = RequestMethod.POST)
-	public void registPost (
-			@RequestBody() CommunityPostVO vo,
-			HttpServletRequest request, 
-			HttpServletResponse response, 
-			HttpSession session
-	) throws Exception {
-		
-		communityService.registPost(vo);
-	}
-	
-	
-	
-	@ResponseBody
 	@RequestMapping(value = "/community/post/{postId}", method = RequestMethod.PUT)
 	public void setPost (
 			@PathVariable("postId") String id,
@@ -85,6 +88,7 @@ public class communityAPIController {
 			HttpServletResponse response, 
 			HttpSession session
 	) throws Exception {
+		
 		vo.setId(id);
 
 		communityService.setPost(vo);
@@ -104,7 +108,10 @@ public class communityAPIController {
 		communityService.deletePost(id);
 	}
 	
-	
+	/**
+	 * Menu Related
+	 * --------------------------------------------------
+	 */
 	
 	@ResponseBody
 	@RequestMapping(value = "/community/menu/{menuId}", method = RequestMethod.GET)
@@ -116,6 +123,30 @@ public class communityAPIController {
 	) throws Exception {
 		
 		return communityService.getPostList(id);
+	}
+	
+	@ResponseBody
+	@RequestMapping(value = "/community/{communityId}/menu", method = RequestMethod.GET)
+	public List<CommunityMenuVO> getMenuList (
+			@PathVariable("communityId") String id,
+			HttpServletRequest request, 
+			HttpServletResponse response, 
+			HttpSession session
+	) throws Exception {
+		
+		return communityService.getMenuList(id);
+	}
+	
+	@ResponseBody
+	@RequestMapping(value = "/community/menu/{menuId}/info", method = RequestMethod.GET)
+	public CommunityMenuVO getMenuInfo (
+			@PathVariable("menuId") String id,
+			HttpServletRequest request, 
+			HttpServletResponse response, 
+			HttpSession session
+	) throws Exception {
+		
+		return communityService.getMenu(id);
 	}
 	
 }
