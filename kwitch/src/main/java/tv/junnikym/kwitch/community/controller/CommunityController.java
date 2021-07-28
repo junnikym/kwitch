@@ -6,52 +6,71 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import tv.junnikym.kwitch.channel.vo.ChannelRoleVO.ChannelRoleFlag;
 import tv.junnikym.kwitch.community.service.CommunityService;
-import tv.junnikym.kwitch.util.auth.ChannelRoleValidation;
-import tv.junnikym.kwitch.util.auth.ChannelRoleValidation.ChannelIdType;
+import tv.junnikym.kwitch.util.auth.ChannelRoleValid;
+import tv.junnikym.kwitch.util.auth.ChannelRoleValidInterceptor.ChannelIdType;
 
 @Controller
 public class CommunityController {
 	
-//	@Resource(name="ChannelRoleValidation")
-//	private ChannelRoleValidation roleValication;
-//	
-//	@Resource(name="CommunityService")
-//	private CommunityService communityService;
-//	
-//	
-//	@RequestMapping(value = {
-//			"/community/{id}", 
-//			"/community/post/{id}", 
-//			"/community/menu/{id}"
-//	}, method = RequestMethod.GET)
-//	public String communityRead(
-//			@PathVariable("id") String id,
-//			HttpServletRequest request, 
-//			HttpServletResponse response, 
-//			HttpSession session
-//	) throws Exception {
-//		if(request.isRequestedSessionIdValid()) {
-//			String member_id = (String) session.getAttribute("member_id");
-//		}
-//		
-//		boolean isValid = roleValication.validation(
-//				id, 
-//				ChannelIdType.CHANNEL_ID_TYPE_COMMUNITY_ID, 
-//				ChannelRoleFlag.CH_ROLE_READ, 
-//				session
-//		);
-//		if(!isValid) {
-//			response.sendError(401, "Unauthorized");
-//			return null;
-//		}
-//		
-//		return "index";
-//	}
-//	
+	@Resource(name="CommunityService")
+	private CommunityService communityService;
+	
+	
+	
+	/**
+	 * [ CREATE ]
+	 */
+	
+	@RequestMapping(value = "/community/post/upload/{id}", method = RequestMethod.GET)
+	@ChannelRoleValid(
+			role 	= ChannelRoleFlag.CH_ROLE_WRITE,
+			idType 	= ChannelIdType.CHANNEL_ID_TYPE_CHANNEL_ID
+	)
+	public String communityCreate(
+			HttpServletRequest request, 
+			HttpServletResponse response
+	) throws Exception {
+		
+		return "index";
+	}
+	
+	/**
+	 * [ READ ]
+	 */
+	
+	@RequestMapping(value = {
+			"/community/{id}", 
+			"/community/post/{id}", 
+			"/community/menu/{id}"
+	}, method = RequestMethod.GET)	
+	public String communityRead(
+			HttpServletRequest request, 
+			HttpServletResponse response
+	) throws Exception {
+		
+		return "index";
+	}
+	
+	/**
+	 * [ UPDATE ]
+	 */
+	
+	@RequestMapping(value = "/community/post/{id}/edit", method = RequestMethod.GET)	
+	@ChannelRoleValid(
+			role 	= ChannelRoleFlag.CH_ROLE_UPDATE,
+			idType 	= ChannelIdType.CHANNEL_ID_TYPE_CHANNEL_ID
+	)
+	public String communityUpload(
+			HttpServletRequest request, 
+			HttpServletResponse response
+	) throws Exception {
+		
+		return "index";
+	}
+	
 }

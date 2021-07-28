@@ -20,15 +20,10 @@ import tv.junnikym.kwitch.channel.vo.ChannelRoleVO.ChannelRoleFlag;
 import tv.junnikym.kwitch.community.service.CommunityService;
 import tv.junnikym.kwitch.community.vo.CommunityMenuVO;
 import tv.junnikym.kwitch.community.vo.CommunityPostVO;
-import tv.junnikym.kwitch.util.auth.ChannelRoleValidation;
-import tv.junnikym.kwitch.util.auth.ChannelRoleValidation.ChannelIdType;
 
 @Controller
 @RequestMapping(value = "/api")
-public class communityAPIController {
-	
-	@Resource(name="ChannelRoleValidation")
-	private ChannelRoleValidation roleValication;
+public class CommunityAPIController {
 
 	@Resource(name="CommunityService")
 	private CommunityService communityService;
@@ -42,23 +37,31 @@ public class communityAPIController {
 			HttpSession session
 	) throws Exception {
 		
-		boolean isValid = roleValication.validation(
-				id, 
-				ChannelIdType.CHANNEL_ID_TYPE_COMMUNITY_ID, 
-				ChannelRoleFlag.CH_ROLE_READ, 
-				session
-		);
-		if(!isValid) {
-			response.sendError(401, "Unauthorized");
-			return null;
-		}
-		
 		Map<String, Object> map = new HashMap<String, Object>();
 
 		map.put("post", communityService.getHomeContent(id));
 		map.put("menu", communityService.getHomeMenu(id));
 		
 		return map;
+	}
+	
+	/**
+	 * Post Related
+	 * --------------------------------------------------
+	 */
+	
+	@ResponseBody
+	@RequestMapping(value = "/community/post", method = RequestMethod.POST)
+	public String registPost (
+			@RequestBody() CommunityPostVO vo,
+			HttpServletRequest request, 
+			HttpServletResponse response, 
+			HttpSession session
+	) throws Exception {
+		
+		vo.setWriterId((String)session.getAttribute("member_id"));
+		
+		return communityService.registPost(vo);
 	}
 	
 	
@@ -72,45 +75,7 @@ public class communityAPIController {
 			HttpSession session
 	) throws Exception {
 		
-		boolean isValid = roleValication.validation(
-				id, 
-				ChannelIdType.CHANNEL_ID_TYPE_POST_ID, 
-				ChannelRoleFlag.CH_ROLE_READ, 
-				session
-		);
-		if(!isValid) {
-			response.sendError(401, "Unauthorized");
-			return null;
-		}
-		
 		return communityService.getPost(id);
-	}
-	
-	
-	
-	@ResponseBody
-	@RequestMapping(value = "/community/post", method = RequestMethod.POST)
-	public String registPost (
-			@RequestBody() CommunityPostVO vo,
-			HttpServletRequest request, 
-			HttpServletResponse response, 
-			HttpSession session
-	) throws Exception {
-		
-		boolean isValid = roleValication.validation(
-				vo.getCommunityId(), 
-				ChannelIdType.CHANNEL_ID_TYPE_COMMUNITY_ID, 
-				ChannelRoleFlag.CH_ROLE_WRITE, 
-				session
-		);
-		if(!isValid) {
-			response.sendError(401, "Unauthorized");
-			return null;
-		}
-		
-		vo.setWriterId((String)session.getAttribute("member_id"));
-		
-		return communityService.registPost(vo);
 	}
 	
 	
@@ -124,17 +89,6 @@ public class communityAPIController {
 			HttpServletResponse response, 
 			HttpSession session
 	) throws Exception {
-		
-		boolean isValid = roleValication.validation(
-				id, 
-				ChannelIdType.CHANNEL_ID_TYPE_POST_ID, 
-				ChannelRoleFlag.CH_ROLE_UPDATE, 
-				session
-		);
-		if(!isValid) {
-			response.sendError(401, "Unauthorized");
-			return;
-		}
 		
 		vo.setId(id);
 
@@ -166,7 +120,10 @@ public class communityAPIController {
 		communityService.deletePost(id);
 	}
 	
-	
+	/**
+	 * Menu Related
+	 * --------------------------------------------------
+	 */
 	
 	@ResponseBody
 	@RequestMapping(value = "/community/menu/{menuId}", method = RequestMethod.GET)
@@ -200,17 +157,6 @@ public class communityAPIController {
 			HttpSession session
 	) throws Exception {
 		
-		boolean isValid = roleValication.validation(
-				id, 
-				ChannelIdType.CHANNEL_ID_TYPE_MENU_ID, 
-				ChannelRoleFlag.CH_ROLE_READ, 
-				session
-		);
-		if(!isValid) {
-			response.sendError(401, "Unauthorized");
-			return null;
-		}
-		
 		return communityService.getMenuList(id);
 	}
 	
@@ -222,17 +168,6 @@ public class communityAPIController {
 			HttpServletResponse response, 
 			HttpSession session
 	) throws Exception {
-		
-		boolean isValid = roleValication.validation(
-				id, 
-				ChannelIdType.CHANNEL_ID_TYPE_MENU_ID, 
-				ChannelRoleFlag.CH_ROLE_READ, 
-				session
-		);
-		if(!isValid) {
-			response.sendError(401, "Unauthorized");
-			return null;
-		}
 		
 		return communityService.getMenu(id);
 	}

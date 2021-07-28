@@ -1,13 +1,11 @@
 package tv.junnikym.kwitch.community.dao;
 
-import java.util.HashMap;
 import java.util.List;
 
 import org.springframework.stereotype.Repository;
 
-import com.sun.javafx.collections.MappingChange.Map;
-
 import tv.junnikym.kwitch.community.vo.CommunityMenuVO;
+import tv.junnikym.kwitch.community.vo.CommunityPostHistoryVO;
 import tv.junnikym.kwitch.community.vo.CommunityPostVO;
 import tv.junnikym.kwitch.util.AbstractMapper;
 
@@ -57,15 +55,30 @@ public class CommunityDAOImpl extends AbstractMapper implements CommunityDAO {
 		
 		return vo.getId();
 	}
+	
+	@Override
+	public void registPostHistory(CommunityPostHistoryVO vo) throws Exception {
+		insert("CommunityDAO.registPostHistory", vo);
+	}
 
 	@Override
 	public List<CommunityPostVO> getPostList(String menuId) throws Exception {
 		return selectList("CommunityDAO.getPostList", menuId);
 	}
+	
+	@Override
+	public List<CommunityPostVO> getPostListBySearch(CommunityPostVO vo) throws Exception {
+		return selectList("CommunityDAO.getPostListBySearch", vo);
+	}
 
 	@Override
 	public CommunityPostVO getPost(String postId) throws Exception {
 		return selectOne("CommunityDAO.getPost", postId);
+	}
+	
+	@Override
+	public void setPostView(String PostId) throws Exception {
+		update("CommunityDAO.setPostView", PostId);
 	}
 
 	@Override

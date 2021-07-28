@@ -17,6 +17,8 @@ public interface ChannelDAO {
 	
 	String getChannelIdByCommunityId(String id) throws Exception;
 	
+	String getChannelIdByOwnerId(String id) throws Exception;
+	
 	String getChannelIdByMenuId(String id) throws Exception;
 	
 	String getChannelIdByPostId(String id) throws Exception;

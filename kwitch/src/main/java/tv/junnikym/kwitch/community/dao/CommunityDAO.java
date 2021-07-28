@@ -3,6 +3,7 @@ package tv.junnikym.kwitch.community.dao;
 import java.util.List;
 
 import tv.junnikym.kwitch.community.vo.CommunityMenuVO;
+import tv.junnikym.kwitch.community.vo.CommunityPostHistoryVO;
 import tv.junnikym.kwitch.community.vo.CommunityPostVO;
 
 public interface CommunityDAO {
@@ -25,14 +26,20 @@ public interface CommunityDAO {
 
 	String registPost(CommunityPostVO vo) throws Exception;
 	
+	void registPostHistory(CommunityPostHistoryVO vo) throws Exception;
+	
 	List<CommunityPostVO> getPostList(String menuId) throws Exception;
+	
+	List<CommunityPostVO> getPostListBySearch(CommunityPostVO vo) throws Exception;
 	
 	CommunityPostVO getPost(String postId) throws Exception;
 
+	void setPostView(String PostId) throws Exception;
+	
 	void setPost(CommunityPostVO vo) throws Exception;
 
 	void deletePost(String PostId) throws Exception;
-
+	
 
 	// < Community Home >
 

@@ -42,6 +42,10 @@ public class ChannelDAOImpl extends AbstractMapper implements ChannelDAO {
 		return selectOne("ChannelDAO.getChannelIdByCommunityId", id);
 	}
 	
+	public String getChannelIdByOwnerId(String id) throws Exception {
+		return selectOne("ChannelDAO.getChannelIdByOwnerId", id);
+	}
+	
 	public String getChannelIdByMenuId(String id) throws Exception {
 		return selectOne("ChannelDAO.getChannelIdByMenuId", id);
 	}
