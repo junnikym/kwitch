@@ -41,15 +41,13 @@
 </head>
 <body style="position: relative; margin : 0;overflow-x : hidden;overflow-y : hidden;">
 	<%@ include file="header.jsp" %>
-	
-	<iframe src="/resources/template/community/communityBasicThumb.html" name="thumb" class="iframe_00"></iframe>
-	
+	<iframe src="/resources/template/community/communityPost.jsp" name="thumb" class="iframe_00"></iframe>
+
 	<!-- JS -->
 	<script type="text/javascript" src="/resources/js/store.js"></script>
 
-	<script type="text/javascript" src="/resources/js/view/index.js"></script>
+	<script type="text/javascript" src="/resources/js/index.js"></script>
 	<script type="text/javascript" src="/resources/js/view/header.js"></script>
-	<script type="text/javascript" src="/resources/js/view/login.js"></script>
 	
 	<script type="text/javascript" src="/resources/js/util/action.js"></script>
     

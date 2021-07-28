@@ -37,7 +37,9 @@ public class CommunityPostVO implements Serializable {
 	
 	private String menuId;
 	
+	private String menuTitle;
 	
-	private String community_id;
+	
+	private String communityId;
 	
 }

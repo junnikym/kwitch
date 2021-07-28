@@ -10,7 +10,16 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @Controller
 public class MainController {
 	
-	@RequestMapping(value = "/", method = RequestMethod.GET)
+	@RequestMapping(value = {
+			"/", "/detail/*", 
+			"/community/*",
+			"/channel/*",
+			"/community/*/menu",
+			"/community/post/*", 
+			"/community/post/*/edit",
+			"/community/menu/*",
+			"/community/post/upload/*"
+	}, method = RequestMethod.GET)
 	public String home(HttpServletRequest request, HttpSession session) {
 		if(request.isRequestedSessionIdValid()) {
 			String member_id = (String) session.getAttribute("member_id");
@@ -25,7 +34,7 @@ public class MainController {
 			String member_id = (String) session.getAttribute("member_id");
 		}
 		
-		return "communityThumb";
+		return "edit";
 	}
 	
 }

@@ -12,7 +12,7 @@ body {
 	 justify-content: start;
 }
 
-.detail_header {
+.channel_header {
 	min-width : var(--detail-header-min);
 	max-width : var(--detail-header-max);
 }
@@ -51,7 +51,7 @@ body {
 	width: var(--detail-header-profile-img-size);
 	border-radius: 60px;
 }
-.user_profile_img_wapper__detail__custom {
+.user_profile_img_wapper__channel__custom {
 	background-color:white;
 }
 
@@ -66,15 +66,15 @@ body {
 	box-shadow: 0 0 5px rgba(25, 25, 25, 0.25);
 }
 
-.detail_header__letter {
+.channel_header__letter {
 	min-width : calc(var(--detail-header-min) - var(--detail-header-profile-img-size));
 	max-width : calc(var(--detail-header-max) - var(--detail-header-profile-img-size));
 	float: left;
 }
-.detail_header__profile_image {
+.channel_header__profile_image {
 	position: relative;
 }
-.detail_header__modify {
+.channel_header__modify {
 	position: absolute;
 	height: 26px; width: 26px;
 	border-radius: 13px;
@@ -82,18 +82,18 @@ body {
 	background: #04a55c;
 }
 
-.detail_header_setting_img {
+.channel_header_setting_img {
 	position: absolute;
 	left: 50%; top: 50%;
 	transform: translate(-50%, -50%);
 	-webkit-transform: translate(-50%, -50%);
 	height:50%;
 }
-.detail_header .btn:hover, .detail_header .btn:focus {
+.channel_header .btn:hover, .channel_header .btn:focus {
 	color: #4fc08d;
     background: #fff;
 }
-.detail_header .btn {
+.channel_header .btn {
 	font-size: 14px;
     margin: 0 0.5em;
     border-radius: 2em;
@@ -109,7 +109,7 @@ body {
 }
 
 
-.detail_info_content {
+.channel_info_content {
 	display: flex;
 	flex-direction: column;
 	justify-content: space-between;
@@ -119,25 +119,25 @@ body {
 	box-shadow: 0 0 5px rgba(25, 25, 25, 0.25);
 	padding: 2em
 }
-.detail_info_content > * {
+.channel_info_content > * {
 	position: relative;
 	display: none;
 	flex-direction: column;
 }
-.detail_about_setting_img {
+.channel_about_setting_img {
 	position: absolute;
 	height: 20px;
 	right: 0; top: 0;
 }
 
-.detail_contact__right {
+.channel_contact__right {
 	border-left: 2px solid #373737;
 }
-.detail_contact table {
+.channel_contact table {
 	border : 0;
 	border-spacing: 0px;
 }
-.detail_contact td {
+.channel_contact td {
 	padding-left: 1em;
 	padding-right: 1em;
 }
@@ -174,4 +174,9 @@ body {
 .set_profile_image__uploader {
 	diaplay:flex;
 	flex-direction: column;
+}
+
+.channel_community_iframe {
+	width: 100%;
+	height: 100%;
 }

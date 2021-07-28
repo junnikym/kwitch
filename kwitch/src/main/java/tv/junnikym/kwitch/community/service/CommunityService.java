@@ -12,6 +12,8 @@ public interface CommunityService {
 
 
 	// < Community Menu >
+	
+	public CommunityMenuVO getMenu(String menuId) throws Exception;
 
 	List<CommunityMenuVO> getMenuList(String communityId) throws Exception;
 
@@ -20,7 +22,7 @@ public interface CommunityService {
 
 	// < Community Post >
 
-	void registPost(CommunityPostVO vo) throws Exception;
+	String registPost(CommunityPostVO vo) throws Exception;
 
 	List<CommunityPostVO> getPostList(String menuId) throws Exception;
 
@@ -34,5 +36,7 @@ public interface CommunityService {
 	// < Community Home >
 
 	List<CommunityPostVO> getHomeContent(String communityId) throws Exception;
-	
+
+	List<CommunityMenuVO> getHomeMenu(String communityId) throws Exception;
+
 }

@@ -15,7 +15,7 @@ import tv.junnikym.kwitch.util.AbstractMapper;
 public class CommunityDAOImpl extends AbstractMapper implements CommunityDAO {
 
 	/**
-	 *	Community Menu 연관 메소드
+	 *	Community Menu �뿰愿� 硫붿냼�뱶
 	 * --------------------------------------------------
 	 */
 
@@ -36,6 +36,10 @@ public class CommunityDAOImpl extends AbstractMapper implements CommunityDAO {
 	public void registMenuList(List<CommunityMenuVO> vo) throws Exception {
 		insert("CommunityDAO.registMenuList", vo);
 	}
+	
+	public CommunityMenuVO getMenu(String id) throws Exception {
+		return selectOne("CommunityDAO.getMenu", id);
+	}
 
 	@Override
 	public List<CommunityMenuVO> getMenuList(String communityId) throws Exception {
@@ -43,13 +47,15 @@ public class CommunityDAOImpl extends AbstractMapper implements CommunityDAO {
 	}
 
 	/**
-	 *	Community Post 연관 메소드
+	 *	Community Post �뿰愿� 硫붿냼�뱶
 	 * --------------------------------------------------
 	 */
 
 	@Override
-	public void registPost(CommunityPostVO vo) throws Exception {
+	public String registPost(CommunityPostVO vo) throws Exception {
 		insert("CommunityDAO.registPost", vo);
+		
+		return vo.getId();
 	}
 
 	@Override
@@ -73,7 +79,7 @@ public class CommunityDAOImpl extends AbstractMapper implements CommunityDAO {
 	}
 
 	/**
-	 *	Community Home 연관 메소드
+	 *	Community Home �뿰愿� 硫붿냼�뱶
 	 * --------------------------------------------------
 	 */
 
@@ -87,8 +93,14 @@ public class CommunityDAOImpl extends AbstractMapper implements CommunityDAO {
 		insert("CommunityDAO.registHomeList", vo);
 	}
 
+	@Override
 	public List<CommunityPostVO> getHomeContent(String communityId) throws Exception {
 		return selectList("CommunityDAO.getHomeContent", communityId);
+	}
+
+	@Override
+	public List<CommunityMenuVO> getHomeMenu (String communityId) throws Exception {
+		return selectList("CommunityDAO.getHomeMenu", communityId);
 	}
 	
 }

@@ -8,7 +8,7 @@ const header = new Vue({
     },
     methods: {
         detail: function(id) {
-        	location.href="/detail/"+id;
+        	location.href="/channel/"+id;
         },
         logout: function() {
             fetch('/api/auth/logout', {

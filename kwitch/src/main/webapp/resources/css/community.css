@@ -1,5 +1,5 @@
 :root {
-	--community-basic-thumb-height: 80px;
+	--community-basic-thumb-height: 100px;
 	--community-basic-thumb-image-width: 80px;
 	
 	--community-basic-thumb-header-height: 20px;
@@ -7,9 +7,78 @@
 	--community-basic-thumb-profile-size: 60px;
 }
 
+body {
+	position: relative; margin : 0;
+    overflow-x : hidden; overflow-y : scroll;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100vw;
+}
+
+#communitPostList {
+	display: flex;
+	flex-wrap: wrap;
+	position: absolute;
+	top: 65px; 
+	margin : 0;
+    overflow-x : hidden;
+}
+
+#communitHome {
+	display: flex;
+	flex-wrap: wrap;
+	position: absolute;
+	top: 65px; 
+	margin : 0;
+    overflow-x : hidden;
+}
+@media (max-width:1350px) {
+	#communitHome {width: 650px;}
+}
+
+@media (min-width:1350px) {
+	#communitHome {width: 1350px;}
+}
+
+.community_home_menu {
+	position: relative;
+	width: 50%;
+	width: 600px;
+	margin: 0.5em;
+}
+
+.more_btn {
+	position: absolute;
+	right: 2em;
+	top: 1em;
+}
+
 ul {
-   list-style:none;
-   padding-left:0px;
+	position:relation;
+	display: flex;
+	flex-direction: column;
+	list-style:none;
+	padding-left:0px;
+	width: 100%;
+	padding: 1em;
+}
+
+ul > li {
+	width: 100%;
+}
+
+ul > li:not(:last-child) {
+	margin-bottom: 0.5em;
+}
+
+h3, h2 {
+	width:150px; 
+	vertical-align:middle; 
+	overflow:hidden; 
+	text-overflow:ellipsis; 
+	white-space:nowrap;
 }
 
 .community_basic_thumb {
@@ -23,6 +92,7 @@ ul {
     overflow: hidden;
     box-shadow: 0 0 5px rgba(25, 25, 25, 0.25);
 
+	width: 100%;
 	min-width: 400px;
 	max-width: 750px;
 	height: var(--community-basic-thumb-height);
@@ -59,4 +129,28 @@ ul {
 
 .community_basic_thumb__background_image {
 	height: var(--community-basic-thumb-height);
+}
+
+.community_post__content {
+	position: relative;
+	padding: 1em
+}
+
+.community_post__modify {
+	position: absolute;
+	height: 20px;
+	right: 0; top: 0;
+}
+
+.community_post_list {
+	position: relative;
+	width: 50%;
+	min-width: 650px;
+	max-width: 1200px;
+	margin: 0.5em;
+}
+.community_post_list__modify {
+	position: absolute;
+	height: 20px;
+	right: 0; top: 0;
 }

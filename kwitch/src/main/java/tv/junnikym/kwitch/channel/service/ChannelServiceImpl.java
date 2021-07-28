@@ -45,4 +45,9 @@ public class ChannelServiceImpl implements ChannelService {
 		
 	}
 
+	@Override
+	public ChannelRoleVO getRole(ChannelRoleVO vo) throws Exception {
+		return channelDAO.getRole(vo);
+	}
+
 }

@@ -55,7 +55,7 @@ public class ResultModel {
 				.status(404)
 				.resultMessage("Not Found")
 				// @TODO : insert into here 404 page
-//				.view("detail")
+//				.view("channel")
 				.build()
 				.getModelAndView();
 	}
@@ -66,7 +66,7 @@ public class ResultModel {
 				.status(500)
 				.resultMessage("Internal Server Error")
 				// @TODO : insert into here 500 page
-//				.view("detail")
+//				.view("channel")
 				.build()
 				.getModelAndView();
 	}

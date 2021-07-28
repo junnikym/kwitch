@@ -15,7 +15,7 @@
 	<link rel="stylesheet" href="//cdn.jsdelivr.net/font-nanum/1.0/nanumbarungothic/nanumbarungothic.css"/>
 	
 	<!-- CSS -->
-	<link rel="stylesheet" type="text/css" href="/resources/css/detail.css" />
+	<link rel="stylesheet" type="text/css" href="/resources/css/channel.css" />
 	<link rel="stylesheet" type="text/css" href="/resources/css/common.css" />
 	<link rel="stylesheet" type="text/css" href="/resources/css/header.css" />
 
@@ -32,9 +32,9 @@
 
 	<div id="detail">
 
-		<table class="detail_header" border=0>
+		<table class="channel_header" border=0>
 			<tr>
-				<td class="detail_header__profile_image" rowspan="2">
+				<td class="channel_header__profile_image" rowspan="2">
 					
 					<c:choose>
 						<c:when test="${empty member.profileImagePath || empty member.profileImageExt}">
@@ -52,8 +52,8 @@
 
 					<c:set var="member_id" value="<%=member_id%>" />
 					<c:if test="${member.id eq member_id}">
-						<a class="detail_header__modify" v-on:click="toggleProfileImageSetter">
-							<img src="/resources/image/modify_icon.png" class="detail_header_setting_img" />
+						<a class="channel_header__modify" v-on:click="toggleProfileImageSetter">
+							<img src="/resources/image/modify_icon.png" class="channel_header_setting_img" />
 						</a>
 						
 						<div class="set_profile_image">
@@ -69,7 +69,7 @@
 					</c:if>
 					
 				</td>
-				<td class="detail_header__letter" colspan="2"><h1>
+				<td class="channel_header__letter" colspan="2"><h1>
 					<c:choose>
 						<c:when test="${empty member.alias}">
 							${member.name}
@@ -82,16 +82,16 @@
 			</tr>
 			<tr><c:choose>
 				<c:when test="${member.id eq member_id and empty member.ownChannelId}">
-					<td class="detail_header__letter"> subscriber </td> 
+					<td class="channel_header__letter"> subscriber </td>
 					<td><button class="btn" type="button" v-on:click="createChannel">Create Channel</button></td>
 				</c:when>
 				<c:otherwise>
-					<td colspan="2" class="detail_header__letter"> subscriber </td> 
+					<td colspan="2" class="channel_header__letter"> subscriber </td>
 				</c:otherwise>
 			</c:choose></tr>
 		</table>
 	
-		<div class="detail_info_content_wapper">
+		<div class="channel_info_content_wapper">
 			<nav class="menu" id="myMenu">
 				<ul>
 					<!-- active link and hover indicator, menu slider -->
@@ -115,23 +115,23 @@
 				</ul>
 			</nav>
 
-			<div class="detail_info_content">
-				<div class="detail_home">
+			<div class="channel_info_content">
+				<div class="channel_home">
 					<h1> Home </h1>
 				</div>
 				
-				<div class="detail_video">
+				<div class="channel_video">
 					<h1> Video </h1>
 				</div>
 				
-				<div class="detail_community">
+				<div class="channel_community">
 					<h1> Community </h1>
 					
 					
 				</div>
 
-				<div class="detail_about">
-					<h1 class="detail_alias"> About 
+				<div class="channel_about">
+					<h1 class="channel_alias"> About
 						<c:choose>
 							<c:when test="${empty member.alias}">${member.name} </c:when>
 							<c:otherwise>${member.alias} </c:otherwise>
@@ -140,36 +140,36 @@
 
 					<c:set var="member_id" value="<%=member_id%>" />
 					<c:if test="${member.id eq member_id}">
-						<a class="detail_about__modify">
-							<img src="/resources/image/setting_icon.png" class="detail_about_setting_img" />
+						<a class="channel_about__modify">
+							<img src="/resources/image/setting_icon.png" class="channel_about_setting_img" />
 						</a>
 					</c:if>
 					
-					<p class="detail_message">${member.message}</p>
+					<p class="channel_message">${member.message}</p>
 				</div>
 
-				<div class="detail_contact">
+				<div class="channel_contact">
 					<h1> Contact </h1>
 					
 					<table>
 						<c:if test="${not empty member.name}">
 							<tr>
 								<td width='50px'> name </td>
-								<td class="detail_contact__right"> ${member.name} </td>
+								<td class="channel_contact__right"> ${member.name} </td>
 							</tr>
 						</c:if>
 					
 						<c:if test="${not empty member.email}">
 							<tr>
 								<td width='50px'> email </td>
-								<td class="detail_contact__right"> ${member.email} </td>
+								<td class="channel_contact__right"> ${member.email} </td>
 							</tr>
 						</c:if>
 						
 						<c:if test="${not empty member.phone}">
 							<tr>
 								<td width='50px'> phone </td>
-								<td class="detail_contact__right"> ${member.phone} </td>
+								<td class="channel_contact__right"> ${member.phone} </td>
 							</tr>
 						</c:if>
 					</table>
@@ -182,10 +182,10 @@
 	<!-- JS -->
 	<script type="text/javascript" src="/resources/js/store.js"></script>
 
-	<script type="text/javascript" src="/resources/js/view/index.js"></script>
+	<script type="text/javascript" src="/resources/js/index.js"></script>
 	<script type="text/javascript" src="/resources/js/view/header.js"></script>
 	<script type="text/javascript" src="/resources/js/view/login.js"></script>
-	<script type="text/javascript" src="/resources/js/view/detail.js"></script>
+	<script type="text/javascript" src="/resources/js/componant/channel.js"></script>
 	
 	<script type="text/javascript" src="/resources/js/util/action.js"></script>
 	<script type="text/javascript" src="/resources/js/util/nav.js"></script>

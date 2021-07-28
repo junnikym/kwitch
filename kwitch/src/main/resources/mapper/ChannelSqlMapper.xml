@@ -66,5 +66,72 @@
     
     
     
+    
+    <select id="getRole" parameterType="ChannelRoleVO" resultType="ChannelRoleVO" >
+    
+    	SELECT 
+    		cr.authority 					AS authority,
+    		cr.role_flag::bit(16)::integer 	AS roleFlag
+    		
+    	FROM
+    		member_channel_role AS mcr
+    	
+    	LEFT JOIN channel_role AS cr ON mcr.role_id 	= cr.role_id
+    	
+    	WHERE
+    		
+   		<if test='memberId != null
+					and memberId != ""
+					and channelId != null
+					and channelId != "" '>
+					
+			mcr.member_id 	= #{memberId}::UUID
+			AND mcr.channel_id 	= #{channelId}::UUID
+		</if>
+    	
+    </select>
+    
+    
+    
+    
+    
+    <select id="getChannelIdByCommunityId" parameterType="String" resultType="String" >
+    	
+    	SELECT 	channel_id 
+    	FROM 	community 
+    	WHERE 	
+    	<if test='value != null and value != ""'>
+    		community_id = #{value}::UUID
+    	</if> 
+    
+    </select>
+    
+    <select id="getChannelIdByMenuId" parameterType="String" resultType="String" >
+    	
+    	SELECT 	c.channel_id 
+    	FROM 	community_menu AS cm
+    	LEFT JOIN community AS c ON cm.community_id = c.community_id
+    	WHERE 	
+    	<if test='value != null and value != ""'>
+    		cm.menu_id = #{value}::UUID
+    	</if> 
+    
+    </select>
+    
+    <select id="getChannelIdByPostId" parameterType="String" resultType="String" >
+    	
+    	SELECT 	channel_id 
+    	FROM 	community_post AS cp
+    	LEFT JOIN community AS c ON cp.community_id = c.community_id
+    	WHERE 	
+    	<if test='value != null and value != ""'>
+    		cp.post_id = #{value}::UUID
+    	</if> 
+    
+    </select>
+    
+    
+    
+    
 
 </mapper>

@@ -16,25 +16,34 @@
 	<link rel="stylesheet" type="text/css" href="/resources/css/common.css" />
 	<link rel="stylesheet" type="text/css" href="/resources/css/header.css" />
 	<link rel="stylesheet" type="text/css" href="/resources/css/nav.css" />
+	<link rel="stylesheet" type="text/css" href="/resources/css/channel.css" />
 
-	<!-- CDN -->
-	<script src="https://cdn.jsdelivr.net/npm/vue@2.6.0"></script>
-	
 </head>
 <body>
 	<%@ include file="header.jsp" %>
 
-	<div id="content">
+	<div id="home">
+		<router-view></router-view>
 	</div>
 
-	<!-- JS -->
+	<!-- CDN -->
+	<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+	<script type="text/javascript" src="https://unpkg.com/vue-router/dist/vue-router.js"></script>
+	<script type="text/javascript" src="https://unpkg.com/vuex"></script>
+
+	<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/es6-promise@4/dist/es6-promise.auto.js"></script>
+
+	<!-- Vuex Stroe -->
 	<script type="text/javascript" src="/resources/js/store.js"></script>
 
-	<script type="text/javascript" src="/resources/js/view/index.js"></script>
-	<script type="text/javascript" src="/resources/js/view/header.js"></script>
-	<script type="text/javascript" src="/resources/js/view/login.js"></script>
-	
-	<script type="text/javascript" src="/resources/js/util/action.js"></script>
-    
+	<!-- templates -->
+	<script>
+		const channelTemplate = `<%@ include file="/resources/template/channel.jsp" %>`;
+	</script>
+
+	<script type="text/javascript" src="/resources/js/component/channel.js"></script>
+
+	<script type="text/javascript" src="/resources/js/index.js"></script>
+
 </body>
 </html>

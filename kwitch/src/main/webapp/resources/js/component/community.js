@@ -25,7 +25,7 @@ const detail = new Vue({
     },
 
     mounted() {
-        document.getElementsByClassName("detail_"+this.navCursor)[0].style.display = "flex";
+        document.getElementsByClassName("channel_"+this.navCursor)[0].style.display = "flex";
         document.getElementById(this.navCursor+'_btn').className += ' active';
     }
     

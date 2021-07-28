@@ -1,11 +1,18 @@
-const store = {
+const gStore = new Vuex.Store({
     state: {
-        isLogin:false,
+        member: {
+            memberId: null,
+        }
     },
-    setLoginUser () {
-        this.isLogin = true;
-    },
-    clearLoginUser () {
-        this.isLogin = false;
+
+    mutations: {
+
+        setMember: (state, payload) => {
+            if(payload.member) {
+                state.member = payload.member;
+            }
+        }
+
     }
-}
+
+})

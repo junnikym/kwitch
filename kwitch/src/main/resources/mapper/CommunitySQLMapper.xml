@@ -81,6 +81,23 @@
 		</foreach>
 	       
     </insert>
+    
+    
+    
+    
+    
+    <select id="getMenu" parameterType="String" resultType="CommunityMenuVO">
+    	SELECT
+			menu_id 		AS id,
+			menu_title 		AS title,
+			community_id	AS communityId
+		FROM
+			community_menu
+		WHERE
+			<if test='value != null and value != ""'>
+				menu_id = #{value}::UUID
+			</if>
+    </select>
 
 
 
@@ -92,7 +109,7 @@
 			menu_id 	AS id,
 			menu_title 	AS title
 		FROM
-			community_member
+			community_menu
 		WHERE
 			<if test='value != null and value != ""'>
 				community_id = #{value}::UUID
@@ -104,7 +121,7 @@
 
 
 
-    <insert id="registPost" parameterType="CommunityPostVO">
+    <insert id="registPost" parameterType="CommunityPostVO" useGeneratedKeys="true" keyProperty="id">
 
     	INSERT INTO community_post(
 		    community_id,
@@ -114,7 +131,7 @@
 		    post_content,
 		    post_comment_block
 		) VALUES (
-		    #{community_id}::UUID,
+		    #{communityId}::UUID,
 		    #{menuId}::UUID,
 		    #{writerId}::UUID,
 		    #{title},
@@ -131,9 +148,10 @@
     <select id="getPostList" parameterType="String" resultType="CommunityPostVO">
     
     	SELECT
-		    cp.writer_id 		AS writerId,
+    		cp.post_id	 		AS id,
 		    cp.post_title 		AS title,
 		
+			cp.writer_id 		AS writerId,
 		    CASE WHEN m.member_alias IS NULL OR m.member_alias = ''
 		        THEN m.member_name
 		        ELSE m.member_alias
@@ -152,7 +170,7 @@
 		   		cm.menu_id = #{value}::UUID
 		   	</if>
 		   	
-		ORDER BY cp.created_at DESC;
+		ORDER BY cp.created_at ASC;
     
     </select>
     
@@ -174,13 +192,16 @@
 		        THEN m.member_name
 		        ELSE m.member_alias
 		    END AS writerAlias,
+		    m.profile_image 		AS writerProfileImage,
 		    
-		    m.profile_image 		AS writerProfileImage
+		    cm.menu_id 				AS menuId,
+		    cm.menu_title 			AS menuTitle
 		
 		FROM 
 		    community_post AS cp
 		
-		LEFT JOIN member AS m ON cp.writer_id = m.member_id
+		LEFT JOIN member 			AS m  ON cp.writer_id = m.member_id
+		LEFT JOIN community_menu	AS cm ON cp.menu_id	  = cm.menu_id
 		
 		WHERE
 		   	<if test='value != null and value != ""'>
@@ -216,6 +237,39 @@
 		);
 
 	</insert>
+
+
+
+
+
+	<update id="setPost" parameterType="CommunityPostVO">
+
+		UPDATE
+			community_post
+		SET
+			post_title 			= #{title},
+			post_content 		= #{content},
+			post_comment_block 	= #{isCommentBlock},
+			updated_at			= now()
+		WHERE
+			post_id = #{id}::UUID
+
+	</update>
+
+
+
+
+
+	<delete id="deletePost" parameterType="String">
+
+		DELETE FROM
+		community_post
+		WHERE
+		<if test='value != null and value != ""'>
+			post_id = #{value}::UUID
+		</if>
+
+	</delete>
 
 
 
@@ -257,65 +311,62 @@
     <select id="getHomeContent" parameterType="String" resultType="CommunityPostVO">
     	
     	SELECT
-		    ch.menu_id 						AS menuId,
-		    cp.writer_id 					AS writerId,
-		
+			ch.menu_id 						AS menuId,
+
 		    cp.post_id 						AS id,
 		    cp.post_title 					AS title,
 		    SUBSTR(cp.post_content, 0, 20) 	AS content,
-			
+
+			cp.writer_id 					AS writerId,
 			CASE WHEN m.member_alias IS NULL OR m.member_alias = ''
 		        THEN m.member_name
 		        ELSE m.member_alias
 		    END AS writerAlias,
-		
 		    m.profile_image 				AS writerProfileImage
-		
+
 		FROM
-		    community_home AS ch
-		
+			community_home AS ch
+
 		RIGHT	JOIN community_post 	AS cp 	ON ch.menu_id 	= cp.menu_id
+		RIGHT 	JOIN community_menu 	AS cm 	ON ch.menu_id	= cm.menu_id
 		LEFT 	JOIN member 			AS m 	ON cp.writer_id	= m.member_id
 		
 		WHERE
     		<if test='value != null and value != ""'>
 		   		ch.community_id = #{value}::UUID
 		   	</if>
+
+		ORDER BY ch.priority ASC ,
+				cp.created_at ASC
     	
     </select>
-    
-    
-    
-    
-    
-    <update id="setPost" parameterType="CommunityPostVO">
-    
-    	UPDATE 
-    		community_post
-    	SET 
-    		post_title 			= #{title},
-		    post_content 		= #{content},
-		    post_comment_block 	= #{isCommentBlock},
-		    updated_at			= now()
+
+
+
+
+
+	<select id="getHomeMenu" parameterType="String" resultType="CommunityMenuVO">
+
+		SELECT
+			cm.menu_id 				AS id,
+			cm.menu_title 			AS title,
+		    cm.menu_read_allow 		AS isAllowToRead,
+			cm.menu_write_allow 	AS isAllowToWrite,
+			ch.priority				AS homePriority
+
+		FROM
+			community_home	AS ch
+
+		RIGHT 	JOIN community_menu 	AS cm 	ON ch.menu_id	= cm.menu_id
+
 		WHERE
-			post_id = #{id}::UUID
-    
-    </update>
-    
-    
-    
-    
-    
-    <delete id="deletePost" parameterType="String">
-    
-    	DELETE FROM 
-    		community_post 
-    	WHERE 
-    		<if test='value != null and value != ""'>
-		   		post_id = #{value}::UUID
-		   	</if>
-    
-    </delete>
+			<if test='value != null and value != ""'>
+				ch.community_id = #{value}::UUID
+			</if>
+			
+		ORDER BY ch.priority ASC
+
+	</select>
     
     
     

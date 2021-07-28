@@ -11,6 +11,10 @@ const loginForm = new Vue({
 		stage: 'login',
     },
     methods: {
+
+    	modalClose: function() {
+		    parent.document.getElementById('model_login_close').click();
+	    },
     	
     	resetData: function() {
     		emailInput= '';
@@ -18,11 +22,21 @@ const loginForm = new Vue({
     		captchaInput= '';
     		stage= 'login';
     	},
+
+	    resizeIframe: function() {
+		    window.parent.document.getElementById('login_iframe').style.width =
+			    document.getElementById('login').offsetWidth+"px";
+
+		    window.parent.document.getElementById('login_iframe').style.height =
+			    document.getElementById('login').offsetHeight+"px";
+	    },
     	
     	stageSwitch: function() {
             document.getElementsByClassName(this.stage+"_stage")[0].style.display = "none";
             this.stage=(this.stage=='login')?'captcha':'login';
             document.getElementsByClassName(this.stage+"_stage")[0].style.display = "flex";
+
+			this.resizeIframe();
     	},
     	
         checkAndLogin: function() {
@@ -55,7 +69,7 @@ const loginForm = new Vue({
     	            	}
     	            	else {
     	            		this.resetData();
-    	            		location.reload();
+			                parent.document.location.reload();
     	            	}
     	            })
     	            .catch(err => console.log(err))
@@ -75,7 +89,7 @@ const loginForm = new Vue({
         back: function() {
         	this.resetData();
         	
-	    	if(location.pathname == "/login") 
+	    	if(location.pathname == "/login")
 	    		back();
 	    },
 	    
@@ -86,7 +100,10 @@ const loginForm = new Vue({
 	    	
 	    	this.captchaInput = '';
 	    }
-    }
+    },
+	mounted: function() {
+		this.resizeIframe();
+	}
 });
 
 function press(f){ 

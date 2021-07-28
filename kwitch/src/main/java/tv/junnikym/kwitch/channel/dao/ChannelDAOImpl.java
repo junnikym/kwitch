@@ -27,4 +27,26 @@ public class ChannelDAOImpl extends AbstractMapper implements ChannelDAO {
 	public void giveRole(ChannelRoleVO vo) throws Exception {
 		insert("ChannelDAO.giveRole", vo);
 	}
+
+	@Override
+	public ChannelRoleVO getRole(ChannelRoleVO vo) throws Exception {
+		return selectOne("ChannelDAO.getRole", vo);
+	}
+	
+	/**
+	 *  etc
+	 * --------------------------------------------------
+	 */
+	
+	public String getChannelIdByCommunityId(String id) throws Exception {
+		return selectOne("ChannelDAO.getChannelIdByCommunityId", id);
+	}
+	
+	public String getChannelIdByMenuId(String id) throws Exception {
+		return selectOne("ChannelDAO.getChannelIdByMenuId", id);
+	}
+	
+	public String getChannelIdByPostId(String id) throws Exception {
+		return selectOne("ChannelDAO.getChannelIdByPostId", id);
+	}
 }

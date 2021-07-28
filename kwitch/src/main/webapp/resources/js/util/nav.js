@@ -58,6 +58,3 @@ function initMenu(elem){
     window.addEventListener("resize", returnToActiveElement);
 
 }
-
-// start menu
-initMenu("#myMenu");

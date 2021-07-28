@@ -4,3 +4,11 @@ const back = function() {
 	else
 		location.href="/";
 }
+
+function loadScript(url) {
+	const script = document.createElement('script');
+	script.src = url;
+	script.type = "text/javascript";
+	script.async = false;
+	document.head.appendChild(script);
+}

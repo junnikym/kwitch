@@ -11,4 +11,14 @@ public interface ChannelDAO {
 	
 	void giveRole(ChannelRoleVO vo) throws Exception;
 	
+	ChannelRoleVO getRole(ChannelRoleVO vo) throws Exception;
+	
+	
+	
+	String getChannelIdByCommunityId(String id) throws Exception;
+	
+	String getChannelIdByMenuId(String id) throws Exception;
+	
+	String getChannelIdByPostId(String id) throws Exception;
+	
 }

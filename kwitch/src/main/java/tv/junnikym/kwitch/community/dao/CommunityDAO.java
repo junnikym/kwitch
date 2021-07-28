@@ -16,12 +16,14 @@ public interface CommunityDAO {
 
 	void registMenuList(List<CommunityMenuVO> vo) throws Exception;
 	
+	CommunityMenuVO getMenu(String id) throws Exception;
+	
 	List<CommunityMenuVO> getMenuList(String communityId) throws Exception;
 
 
 	// < Community Post >
 
-	void registPost(CommunityPostVO vo) throws Exception;
+	String registPost(CommunityPostVO vo) throws Exception;
 	
 	List<CommunityPostVO> getPostList(String menuId) throws Exception;
 	
@@ -39,4 +41,6 @@ public interface CommunityDAO {
 	void registHomeList(List<CommunityMenuVO> vo) throws Exception;
 
 	List<CommunityPostVO> getHomeContent(String communityId) throws Exception;
+
+	List<CommunityMenuVO> getHomeMenu(String communityId) throws Exception;
 }
