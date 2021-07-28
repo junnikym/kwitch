@@ -20,6 +20,7 @@ import tv.junnikym.kwitch.channel.vo.ChannelRoleVO.ChannelRoleFlag;
 import tv.junnikym.kwitch.community.service.CommunityService;
 import tv.junnikym.kwitch.community.vo.CommunityMenuVO;
 import tv.junnikym.kwitch.community.vo.CommunityPostVO;
+import tv.junnikym.kwitch.util.auth.ChannelRoleValidInterceptor;
 
 @Controller
 @RequestMapping(value = "/api")
@@ -106,17 +107,6 @@ public class CommunityAPIController {
 			HttpSession session
 	) throws Exception {
 		
-		boolean isValid = roleValication.validation(
-				id, 
-				ChannelIdType.CHANNEL_ID_TYPE_POST_ID, 
-				ChannelRoleFlag.CH_ROLE_DELETE, 
-				session
-		);
-		if(!isValid) {
-			response.sendError(401, "Unauthorized");
-			return;
-		}
-		
 		communityService.deletePost(id);
 	}
 	
@@ -133,17 +123,6 @@ public class CommunityAPIController {
 			HttpServletResponse response, 
 			HttpSession session
 	) throws Exception {
-		
-		boolean isValid = roleValication.validation(
-				id, 
-				ChannelIdType.CHANNEL_ID_TYPE_MENU_ID, 
-				ChannelRoleFlag.CH_ROLE_READ, 
-				session
-		);
-		if(!isValid) {
-			response.sendError(401, "Unauthorized");
-			return null;
-		}
 		
 		return communityService.getPostList(id);
 	}

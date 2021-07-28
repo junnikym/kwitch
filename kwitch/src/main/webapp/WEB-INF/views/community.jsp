@@ -40,7 +40,7 @@
 	
 </head>
 <body style="position: relative; margin : 0;overflow-x : hidden;overflow-y : hidden;">
-	<%@ include file="header.jsp" %>
+	<%@ include file="../../resources/template/header.jsp" %>
 	<iframe src="/resources/template/community/communityPost.jsp" name="thumb" class="iframe_00"></iframe>
 
 	<!-- JS -->

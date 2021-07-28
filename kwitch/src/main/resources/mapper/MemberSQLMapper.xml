@@ -2,43 +2,43 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="MemberDAO">
-    
-    
-    
-    
-    
+
+
+
+
+
     <select id="login" parameterType="LoginVO" resultType="MemberVO">
-    
-    	SELECT 
+
+    	SELECT
     		member_id 			 AS id,
     		member_name 		 AS name,
     		member_alias 		 AS alias,
-    		
+
     		i.image_path		 AS profileImagePath,
         	i.image_extension	 AS profileImageExt,
-        	
+
         	sr.authority		 AS systemAuthority
-        
+
     	FROM member AS m
-        
+
         LEFT JOIN image 			  AS i 	ON m.member_profile_image 	= i.image_id
-        
+
 		LEFT JOIN member_system_role  AS ms ON m.member_id 				= ms.memeber_id
-		LEFT JOIN system_role 		  AS sr ON sr.role_id 				= ms.role_id 
-        
+		LEFT JOIN system_role 		  AS sr ON sr.role_id 				= ms.role_id
+
     	<trim prefix="WHERE" prefixOverrides="AND">
     		AND member_email = #{email}
     		AND member_pw = #{pw}
     	</trim>
-    	
+
     </select>
-    
-    
-    
-    
-    
+
+
+
+
+
     <insert id="regist" parameterType="MemberVO">
-    
+
     	INSERT INTO member(
     		member_email,
     		member_pw,
@@ -54,55 +54,60 @@
     		#{phone},
     		#{birth}::TIMESTAMP
     	)
-    	
+
     </insert>
-    
-    
-    
-    
-    
+
+
+
+
+
     <select id="getDetail" parameterType="String" resultType="MemberVO">
-    
-        SELECT 
+
+        SELECT
         	member_id			 AS id,
         	member_email		 AS email,
         	member_name			 AS name,
-        	member_alias 		 AS alias,
+
+			CASE WHEN m.member_alias IS NULL OR m.member_alias = ''
+				THEN m.member_name
+				ELSE m.member_alias
+			END AS alias,
+
         	member_message 		 AS message,
         	member_birth 		 AS birth,
         	m.created_at		 AS createAt,
-        	
+
         	i.image_path		 AS profileImagePath,
         	i.image_extension	 AS profileImageExt,
-        	
+
         	ch.channel_id		 AS ownChannelId,
-        	
-        	co.community_id		 AS ownCommunityId 
-        	
+
+        	co.community_id		 AS ownCommunityId
+
         FROM member AS m
-        
+
         LEFT JOIN image 	AS i 	ON m.member_profile_image 	= i.image_id
-       	LEFT JOIN channel 	AS ch 	ON m.member_id 				= ch.owner_id 
+       	LEFT JOIN channel 	AS ch 	ON m.member_id 				= ch.owner_id
        	LEFT JOIN community AS co	ON ch.channel_id			= co.channel_id
-        
+
         <where>
         	<if test='value != null and value != ""'>
         		AND member_id = #{value}::uuid
         	</if>
         </where>
-        
+
     </select>
-    
-    
-    
-    
-    
+
+
+
+
+
     <update id="setProfileImage" parameterType="HashMap">
-    	
+
     	UPDATE member
     	SET member_profile_image 	= #{imageId}::uuid
         WHERE member_id 			= #{memberId}::uuid
-    
+
     </update>
 
 

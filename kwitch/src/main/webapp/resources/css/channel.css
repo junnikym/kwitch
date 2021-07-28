@@ -1,35 +1,32 @@
 :root {
-    --detail-header-max: 850px;
-    --detail-header-min: 500px;
+    --channel-header-max: 850px;
+    --channel-header-min: 500px;
     
-    --detail-header-profile-img-size: 120px;
+    --channel-header-profile-img-size: 120px;
 }
 
-
-body {
-	 flex-direction: column;
-	 color: #373737;
-	 justify-content: start;
+#channel {
+	margin-top: 10em;
 }
 
 .channel_header {
-	min-width : var(--detail-header-min);
-	max-width : var(--detail-header-max);
+	min-width : var(--channel-header-min);
+	max-width : var(--channel-header-max);
 }
 
-.user_profile_img_wapper__detail {
+.user_profile_img_wapper__channel {
 	position: relative;
-	border-radius: calc(var(--detail-header-profile-img-size)/2);
+	border-radius: calc(var(--channel-header-profile-img-size)/2);
 	background-color:white;
 	margin-left: 1em;
 	margin-right: 1em;
 	overflow: hidden;
-	height: var(--detail-header-profile-img-size); 
-	width: var(--detail-header-profile-img-size);
+	height: var(--channel-header-profile-img-size);
+	width: var(--channel-header-profile-img-size);
 	border-radius: 60px;
 }
 
-.user_profile_img__detail {
+.user_profile_img__channel {
 	position: absolute;
     left: 50%; top: 50%;
     transform: translate(-50%, -50%);
@@ -40,22 +37,22 @@ body {
 	box-shadow: 0 0 5px rgba(25, 25, 25, 0.25);
 }
 
-.user_profile_img_wapper__detail {
+.user_profile_img_wapper__channel {
 	position: relative;
-	border-radius: calc(var(--detail-header-profile-img-size)/2);
+	border-radius: calc(var(--channel-header-profile-img-size)/2);
 	background-color:#4fc08d;
 	margin-left: 1em;
 	margin-right: 1em;
 	overflow: hidden;
-	height: var(--detail-header-profile-img-size); 
-	width: var(--detail-header-profile-img-size);
+	height: var(--channel-header-profile-img-size);
+	width: var(--channel-header-profile-img-size);
 	border-radius: 60px;
 }
 .user_profile_img_wapper__channel__custom {
 	background-color:white;
 }
 
-.user_profile_img__detail {
+.user_profile_img__channel {
 	position: absolute;
     left: 50%; top: 50%;
     transform: translate(-50%, -50%);
@@ -67,8 +64,8 @@ body {
 }
 
 .channel_header__letter {
-	min-width : calc(var(--detail-header-min) - var(--detail-header-profile-img-size));
-	max-width : calc(var(--detail-header-max) - var(--detail-header-profile-img-size));
+	min-width : calc(var(--channel-header-min) - var(--channel-header-profile-img-size));
+	max-width : calc(var(--channel-header-max) - var(--channel-header-profile-img-size));
 	float: left;
 }
 .channel_header__profile_image {

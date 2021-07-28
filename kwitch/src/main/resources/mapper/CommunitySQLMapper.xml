@@ -375,39 +375,6 @@
 
 
 
-	<update id="setPost" parameterType="CommunityPostVO">
-
-		UPDATE
-			community_post
-		SET
-			post_title 			= #{title},
-			post_content 		= #{content},
-			post_comment_block 	= #{isCommentBlock},
-			updated_at			= now()
-		WHERE
-			post_id = #{id}::UUID
-
-	</update>
-
-
-
-
-
-	<delete id="deletePost" parameterType="String">
-
-		DELETE FROM
-		community_post
-		WHERE
-		<if test='value != null and value != ""'>
-			post_id = #{value}::UUID
-		</if>
-
-	</delete>
-
-
-
-
-
 	<insert id="registHomeList" parameterType="List">
 
 		<foreach collection="list" item="menu" separator="; ">

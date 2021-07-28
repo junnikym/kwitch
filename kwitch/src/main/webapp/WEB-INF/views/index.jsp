@@ -20,10 +20,13 @@
 
 </head>
 <body>
-	<%@ include file="header.jsp" %>
 
 	<div id="home">
-		<router-view></router-view>
+		<header-component></header-component>
+
+		<div id="home_content">
+			<router-view></router-view>
+		</div>
 	</div>
 
 	<!-- CDN -->
@@ -38,9 +41,11 @@
 
 	<!-- templates -->
 	<script>
+		const headerTemplate = `<%@ include file="/resources/template/header.jsp" %>`;
 		const channelTemplate = `<%@ include file="/resources/template/channel.jsp" %>`;
 	</script>
 
+	<script type="text/javascript" src="/resources/js/component/header.js"></script>
 	<script type="text/javascript" src="/resources/js/component/channel.js"></script>
 
 	<script type="text/javascript" src="/resources/js/index.js"></script>

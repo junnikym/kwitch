@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @Controller
 public class ChannelController {
 	
-	@RequestMapping(value = {"/detail/{id}"}, method = RequestMethod.GET)
+	@RequestMapping(value = {"/channel/{id}"}, method = RequestMethod.GET)
 	public String channel(HttpServletRequest request, HttpSession session) {
 		if(request.isRequestedSessionIdValid()) {
 			String member_id = (String) session.getAttribute("member_id");

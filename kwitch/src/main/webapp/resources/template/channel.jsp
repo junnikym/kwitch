@@ -1,5 +1,5 @@
 
-<div id="detail">
+<div id="channel">
 
 	<!--------------------------------------------------------------
 			[ Profile Header ]
@@ -12,13 +12,13 @@
 
 				<!--  Profile Image  -->
 
-				<div class="user_profile_img_wapper__detail">
+				<div class="user_profile_img_wapper__channel">
 					<img v-bind:src="profileImageURL" class="default_user_profile_img" />
 				</div>
 
 				<!--  Profile Setting Button  -->
 
-				<a v-if="this.$store.state.count == member.id"
+				<a v-if="this.$store.state.member.memberId == member.id"
 				   class="channel_header__modify"
 				   v-on:click="toggleProfileImageSetter">
 
@@ -27,7 +27,7 @@
 
 				<!--  Profile Image Setting Modal  -->
 
-				<div v-if="this.$store.state.count == member.id"
+				<div v-if="this.$store.state.member.memberId == member.id"
 					 class="set_profile_image">
 
 					<div id="set_profile_image__thumb"> <img /> </div>
@@ -35,7 +35,7 @@
 					<div class="set_profile_image__uploader">
 						<input type="file" name="profile_image" id="upload_profile_image" @change="setProfileImageThumb"/>
 						<button class="btn"  type="button" v-on:click="toggleProfileImageSetter">cancel</button>
-						<button class="btn"  type="button" v-on:click="uploadProfileImage('<%=member_id%>')">Finish</button>
+						<button class="btn"  type="button" v-on:click="uploadProfileImage('this.$store.state.member.memberId')">Finish</button>
 					</div>
 				</div>
 			</td>
@@ -47,7 +47,7 @@
 			</td>
 		</tr>
 
-		<tr v-if="this.$store.state.count == member.id && !(member?.ownChannelId)">
+		<tr v-if="this.$store.state.member.memberId == member.id && !(member?.ownChannelId)">
 				<td class="channel_header__letter"> subscriber </td>
 				<td><button class="btn" type="button" v-on:click="createChannel">Create Channel</button></td>
 		</tr>
@@ -95,7 +95,7 @@
 			<div class="channel_about">
 				<h1 class="channel_alias"> About {{member.alias}} </h1>
 
-				<a v-if="this.$store.state.count == member.id"
+				<a v-if="this.$store.state.member.memberId == member.id"
 				   class="channel_about__modify">
 
 					<img src="/resources/image/setting_icon.png" class="channel_about_setting_img" />
@@ -111,17 +111,17 @@
 
 					<tr v-if="member.name">
 						<td width='50px'> name </td>
-						<td class="channel_contact__right"> ${member.name} </td>
+						<td class="channel_contact__right"> {{member.name}} </td>
 					</tr>
 
 					<tr v-if="member.email">
 						<td width='50px'> email </td>
-						<td class="channel_contact__right"> ${member.email} </td>
+						<td class="channel_contact__right"> {{member.email}} </td>
 					</tr>
 
 					<tr v-if="member.phone">
 						<td width='50px'> phone </td>
-						<td class="channel_contact__right"> ${member.phone} </td>
+						<td class="channel_contact__right"> {{member.phone}} </td>
 					</tr>
 
 				</table>

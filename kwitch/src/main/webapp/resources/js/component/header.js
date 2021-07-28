@@ -1,11 +1,9 @@
-const header = new Vue({
-    el: '#header',
-    data: {
-        searchInput: '',
-
-        privateState: {},
-        sharedState: store.state
-    },
+const headerComponent = {
+    template: headerTemplate,
+    store: gStore,
+    data() { return {
+        searchInput: ''
+    }},
     methods: {
         detail: function(id) {
         	location.href="/channel/"+id;
@@ -15,10 +13,9 @@ const header = new Vue({
                 method: 'GET',
             })
             .then(res => {
-            	store.clearLoginUser();
             	location.href="/";
             })
             .catch(err => console.log(err))
         }
     }
-});
+};

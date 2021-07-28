@@ -1,7 +1,7 @@
 const routes = [
 	{
 		path: '/',
-		component: channelComponent
+		component: {template : "<div><h1>home</h1></div>"}
 	},
 	{
 		/**
@@ -43,6 +43,8 @@ const routes = [
 		]
 	}
 ];
+
+Vue.component('header-component', headerComponent);
 
 const router = new VueRouter({
 	routes: routes,
