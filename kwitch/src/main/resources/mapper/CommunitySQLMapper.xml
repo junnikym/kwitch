@@ -245,6 +245,7 @@
     	
     	SELECT 
 		    cp.writer_id 			AS writerId,
+			cp.post_view 			AS nView,
 		    cp.post_title 			AS title,
 		    cp.post_content 		AS content,
 		    cp.post_comment_block 	AS isCommentBlock,
@@ -283,7 +284,7 @@
     	
     	UPDATE 	community_post
     	SET 	post_view = post_view+1
-    	WHERE 	cp.post_id = #{value}::UUID
+    	WHERE 	post_id = #{value}::UUID
     	
     	</if>
     	
@@ -418,6 +419,10 @@
 		    cp.post_id 						AS id,
 		    cp.post_title 					AS title,
 		    SUBSTR(cp.post_content, 0, 20) 	AS content,
+
+    	    cp.created_at::timestamp(0)		AS createdAt,
+    	    cp.updated_at::timestamp(0) 	AS updatedAt,
+    	    cp.post_view					AS nView,
 
 			cp.writer_id 					AS writerId,
 			CASE WHEN m.member_alias IS NULL OR m.member_alias = ''

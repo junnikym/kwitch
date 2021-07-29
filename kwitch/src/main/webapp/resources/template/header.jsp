@@ -22,7 +22,7 @@
 		<button class="btn btn__search h_center_wrapper" type="button"><img src="/resources/image/search_icon.png" class="btn__search_icon h_center_content" /></button>
 	</div>
 
-	<div v-if="this.$store.state.member.memberId"
+	<div v-if="this.$store.state.member.id"
 		 class="dropdown">
 
 		<button onclick="dp_menu()" class="button">
@@ -37,7 +37,7 @@
 
 
 		<div style="display: none;" id="drop-content">
-			<a v-on:click="channel(this.$store.state.member.memberId)"> profile </a>
+			<a v-on:click="channel()"> profile </a>
 			<a v-on:click="logout" class="logout_btn"> logout </a>
 		</div>
 	</div>

@@ -23,6 +23,10 @@ body, #home, #home_content {
     font-family: "Source Sans Pro", sans-serif;
 }
 
+li {
+	list-style:none;
+}
+
 #home_content {
     margin-top: 65px;
     height: calc(100vh - 65px);
@@ -106,6 +110,21 @@ button:hover {
     outline: none;
 }
 
+.horizontal_rule {
+	width: 100%;
+	height: 2px;
+	padding-left: 1em;
+	padding-right: 1em;
+	background: #4fc08d;
+}
+.sub_horizontal_rule {
+    width: 100%;
+    height: 1px;
+    padding-left: 1em;
+    padding-right: 1em;
+    background: #373737;
+}
+
 .w_center {
     text-align: center;
 }
@@ -132,7 +151,7 @@ button:hover {
 	 align-items: center;
 	 justify-content: center;
 }
- .modal.open {
+ .modal.open, #login {
 	 visibility: visible;
 	 opacity: 1;
 	 transition-delay: 0s;
@@ -159,4 +178,18 @@ button:hover {
 
 .captcha_stage {
 	display:none;
+}
+
+
+
+.sharp_icon {
+    background: center / contain no-repeat url("/resources/image/sharp_icon.png");
+}
+
+.clock_icon {
+    background: center / contain no-repeat url("/resources/image/clock_icon.png");
+}
+
+.view_icon {
+    background: center / contain no-repeat url("/resources/image/view_icon.png");
 }

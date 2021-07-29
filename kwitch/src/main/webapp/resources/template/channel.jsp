@@ -18,7 +18,7 @@
 
 				<!--  Profile Setting Button  -->
 
-				<a v-if="this.$store.state.member.memberId == member.id"
+				<a v-if="this.$store.state.member.id == member.id"
 				   class="channel_header__modify"
 				   v-on:click="toggleProfileImageSetter">
 
@@ -27,7 +27,7 @@
 
 				<!--  Profile Image Setting Modal  -->
 
-				<div v-if="this.$store.state.member.memberId == member.id"
+				<div v-if="this.$store.state.member.id == member.id"
 					 class="set_profile_image">
 
 					<div id="set_profile_image__thumb"> <img /> </div>
@@ -35,7 +35,7 @@
 					<div class="set_profile_image__uploader">
 						<input type="file" name="profile_image" id="upload_profile_image" @change="setProfileImageThumb"/>
 						<button class="btn"  type="button" v-on:click="toggleProfileImageSetter">cancel</button>
-						<button class="btn"  type="button" v-on:click="uploadProfileImage('this.$store.state.member.memberId')">Finish</button>
+						<button class="btn"  type="button" v-on:click="uploadProfileImage('this.$store.state.member.id')">Finish</button>
 					</div>
 				</div>
 			</td>
@@ -47,7 +47,7 @@
 			</td>
 		</tr>
 
-		<tr v-if="this.$store.state.member.memberId == member.id && !(member?.ownChannelId)">
+		<tr v-if="this.$store.state.member.id == member.id && !(member?.ownChannelId)">
 				<td class="channel_header__letter"> subscriber </td>
 				<td><button class="btn" type="button" v-on:click="createChannel">Create Channel</button></td>
 		</tr>
@@ -95,7 +95,7 @@
 			<div class="channel_about">
 				<h1 class="channel_alias"> About {{member.alias}} </h1>
 
-				<a v-if="this.$store.state.member.memberId == member.id"
+				<a v-if="this.$store.state.member.id == member.id"
 				   class="channel_about__modify">
 
 					<img src="/resources/image/setting_icon.png" class="channel_about_setting_img" />

@@ -13,6 +13,7 @@ import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
 import tv.junnikym.kwitch.channel.dao.ChannelDAO;
 import tv.junnikym.kwitch.channel.vo.ChannelRoleVO;
+import tv.junnikym.kwitch.util.auth.ChannelRoleValid.IdGetMethod;
 
 public class ChannelRoleValidInterceptor extends HandlerInterceptorAdapter {
 	
@@ -33,22 +34,37 @@ public class ChannelRoleValidInterceptor extends HandlerInterceptorAdapter {
     		HttpSession session = request.getSession();
         	
         	HandlerMethod method = ((HandlerMethod)handler);
-        	ChannelRoleValid ChannelRoleValid = method.getMethodAnnotation(ChannelRoleValid.class);
+        	ChannelRoleValid channelRoleValid = method.getMethodAnnotation(ChannelRoleValid.class);
            
-        	String memberId = (String)session.getAttribute("member_id");
-        	
-        	Map<?, ?> pathVariables = (Map<?, ?>) request.getAttribute(HandlerMapping.URI_TEMPLATE_VARIABLES_ATTRIBUTE);  
-        	String id = (String)pathVariables.get("id"); 
-        	
-        	if(ChannelRoleValid == null)
+        	if(channelRoleValid == null)
         		return true;
+        	
+        	String memberId = (String)session.getAttribute("member_id");
         	
     		if(memberId == null || memberId == "") {
     			response.sendError(401, "Unauthorized");
     			return false;
     		}
     		
-    		String channelId = getChannelId(id, ChannelRoleValid.idType());
+    		String 			id 			= null;
+    		ChannelIdType 	idType		= channelRoleValid.idType();
+    		IdGetMethod 	idGetMethod	= channelRoleValid.idGetMethod();
+    		
+    		if(idGetMethod == IdGetMethod.JUST_ID) {
+    			id = request.getParameter("id");
+    		}
+    		else if(idGetMethod == IdGetMethod.FULLNAME) {
+    			getIdFromVO(request, idType);
+        	}
+    		else {
+				Map<?, ?> pathVariables = (Map<?, ?>) request.getAttribute(HandlerMapping.URI_TEMPLATE_VARIABLES_ATTRIBUTE);  
+		    	id = (String)pathVariables.get("id"); 
+    		}
+    		
+    		if(id == null || id == "") 
+    			return false;
+    		
+    		String channelId = getChannelId(id, idType);
     		ChannelRoleVO vo = ChannelRoleVO.builder()
     									.memberId(memberId)
     									.channelId(channelId)
@@ -58,7 +74,7 @@ public class ChannelRoleValidInterceptor extends HandlerInterceptorAdapter {
     		
     		int memberRoleFlag = vo.getRoleFlag();
     		
-    		if((ChannelRoleValid.role() & memberRoleFlag) > 0)
+    		if((channelRoleValid.role() & memberRoleFlag) > 0)
     			return true;
     	
     		response.sendError(401, "Unauthorized");
@@ -67,6 +83,33 @@ public class ChannelRoleValidInterceptor extends HandlerInterceptorAdapter {
     	}
     	
     	return true;
+    }
+    
+    private String getIdFromVO(
+    		HttpServletRequest request, 
+    		ChannelIdType idType
+    ) {
+    	switch(idType) {
+			case CHANNEL_ID_TYPE_CHANNEL_ID:
+				return request.getParameter("channelId");
+		
+			case CHANNEL_ID_TYPE_COMMUNITY_ID:
+				return request.getParameter("communityId");
+				
+			case CHANNEL_ID_TYPE_OWNER_ID:
+				return request.getParameter("ownChannelId");
+				
+			case CHANNEL_ID_TYPE_MENU_ID:
+				return request.getParameter("menuId");
+				
+			case CHANNEL_ID_TYPE_POST_ID:
+				return request.getParameter("postId");
+				
+			default:
+				break;
+		}
+	
+		return null;
     }
     
     private String getChannelId(

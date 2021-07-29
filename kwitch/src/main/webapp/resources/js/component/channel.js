@@ -1,4 +1,4 @@
-const channelComponent = {
+const ChannelComponent = {
     template: channelTemplate,
 	store: gStore,
     data() { return {

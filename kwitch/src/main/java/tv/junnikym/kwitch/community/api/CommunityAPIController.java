@@ -20,7 +20,10 @@ import tv.junnikym.kwitch.channel.vo.ChannelRoleVO.ChannelRoleFlag;
 import tv.junnikym.kwitch.community.service.CommunityService;
 import tv.junnikym.kwitch.community.vo.CommunityMenuVO;
 import tv.junnikym.kwitch.community.vo.CommunityPostVO;
+import tv.junnikym.kwitch.util.auth.ChannelRoleValid;
 import tv.junnikym.kwitch.util.auth.ChannelRoleValidInterceptor;
+import tv.junnikym.kwitch.util.auth.ChannelRoleValid.IdGetMethod;
+import tv.junnikym.kwitch.util.auth.ChannelRoleValidInterceptor.ChannelIdType;
 
 @Controller
 @RequestMapping(value = "/api")
@@ -53,6 +56,11 @@ public class CommunityAPIController {
 	
 	@ResponseBody
 	@RequestMapping(value = "/community/post", method = RequestMethod.POST)
+	@ChannelRoleValid(
+			role 		= ChannelRoleFlag.CH_ROLE_WRITE,
+			idType 		= ChannelIdType.CHANNEL_ID_TYPE_COMMUNITY_ID,
+			idGetMethod	= IdGetMethod.FULLNAME
+	)
 	public String registPost (
 			@RequestBody() CommunityPostVO vo,
 			HttpServletRequest request, 
@@ -83,6 +91,11 @@ public class CommunityAPIController {
 	
 	@ResponseBody
 	@RequestMapping(value = "/community/post/{postId}", method = RequestMethod.PUT)
+	@ChannelRoleValid(
+			role 		= ChannelRoleFlag.CH_ROLE_UPDATE,
+			idType 		= ChannelIdType.CHANNEL_ID_TYPE_POST_ID,
+			idGetMethod	= IdGetMethod.NONE
+	)
 	public void setPost (
 			@PathVariable("postId") String id,
 			@RequestBody() CommunityPostVO vo,
@@ -100,6 +113,11 @@ public class CommunityAPIController {
 	
 	@ResponseBody
 	@RequestMapping(value = "/community/post/{postId}", method = RequestMethod.DELETE)
+	@ChannelRoleValid(
+			role 		= ChannelRoleFlag.CH_ROLE_DELETE,
+			idType 		= ChannelIdType.CHANNEL_ID_TYPE_POST_ID,
+			idGetMethod	= IdGetMethod.NONE
+	)
 	public void deletePostId (
 			@PathVariable("postId") String id,
 			HttpServletRequest request, 

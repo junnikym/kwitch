@@ -17,4 +17,8 @@ public @interface ChannelRoleValid {
 	
 	ChannelIdType idType() default ChannelIdType.CHANNEL_ID_TYPE_CHANNEL_ID;
 	
+	IdGetMethod idGetMethod() default IdGetMethod.NONE;
+
+	public enum IdGetMethod { NONE, FULLNAME, JUST_ID }
+	
 }

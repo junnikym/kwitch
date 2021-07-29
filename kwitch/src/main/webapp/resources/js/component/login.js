@@ -1,6 +1,7 @@
-const loginForm = new Vue({
-    el: '#loginForm',
-    data: {   	
+const LoginComponent = {
+    template: loginTemplate,
+    store: gStore,
+    data() { return {
         emailInput: '',
         pwInput: '',
 		wrongInput: 0,
@@ -9,7 +10,7 @@ const loginForm = new Vue({
 		captchaInput: '',
 			
 		stage: 'login',
-    },
+    }},
     methods: {
 
     	modalClose: function() {
@@ -17,30 +18,29 @@ const loginForm = new Vue({
 	    },
     	
     	resetData: function() {
-    		emailInput= '';
-            pwInput= '';
-    		captchaInput= '';
-    		stage= 'login';
+    		this.emailInput= '';
+    		this.pwInput= '';
+    		this.captchaInput= '';
+    		this.wrongInput= 0;
+    		this.wrongCaptcha= 0;
+    		
+    		if(this.stage == 'captcha') {
+    			this.stageSwitch()
+    		}
     	},
-
-	    resizeIframe: function() {
-		    window.parent.document.getElementById('login_iframe').style.width =
-			    document.getElementById('login').offsetWidth+"px";
-
-		    window.parent.document.getElementById('login_iframe').style.height =
-			    document.getElementById('login').offsetHeight+"px";
-	    },
     	
     	stageSwitch: function() {
             document.getElementsByClassName(this.stage+"_stage")[0].style.display = "none";
             this.stage=(this.stage=='login')?'captcha':'login';
             document.getElementsByClassName(this.stage+"_stage")[0].style.display = "flex";
-
-			this.resizeIframe();
     	},
     	
         checkAndLogin: function() {
 
+        	/**
+			 * Check Cpatcha
+			 */
+        	
         	fetch('/captcha/check', {
         		method: 'POST',
         		headers: {
@@ -49,6 +49,10 @@ const loginForm = new Vue({
         		body: this.captchaInput
         	}).then(res => {
         		if(res.status == 200) {
+        			
+        			/**
+        			 * Login
+        			 */
         			
         			fetch('/api/auth/login', {
     	                method: 'POST',
@@ -61,18 +65,38 @@ const loginForm = new Vue({
     	                })
     	            })
     	            .then(res => {
-    	            	if(res.status != 200) {
-    						this.wrongInput++;
+    	            	if(res.status == 200) {
+    	            		this.resetData();
+    	            		
+    	            		return res.json();
+    	            	}
+    	            	else {
+    	            		this.wrongInput++;
     						this.resetCaptcha();
     						if(this.stage != 'login')
     							this.stageSwitch();
-    	            	}
-    	            	else {
-    	            		this.resetData();
-			                parent.document.location.reload();
+    						
+    						return null;
     	            	}
     	            })
+    	            .then(json => {
+    	            	if(json != null) {
+    	            		this.$store.commit('setMember', {member: json})
+    	            		
+    	            		const modal = document.getElementById("modal-login");
+    	            		modal.classList.remove("open");
+    	            		
+    	            		console.log("running")
+    	            		console.log("member is : ", this.$store.state.member);
+    	            	}
+    	            	else {
+    	            		console.log("else - running")
+    	            	}
+    	            		
+    	            })
     	            .catch(err => console.log(err))
+        			
+        			
         			
         		}
         		else {
@@ -90,7 +114,7 @@ const loginForm = new Vue({
         	this.resetData();
         	
 	    	if(location.pathname == "/login")
-	    		back();
+	    		this.$router.back();
 	    },
 	    
 	    resetCaptcha: function() {
@@ -104,7 +128,7 @@ const loginForm = new Vue({
 	mounted: function() {
 		this.resizeIframe();
 	}
-});
+};
 
 function press(f){ 
 	if(f.keyCode == 13) loginForm.submit();

@@ -22,6 +22,8 @@ public class CommunityPostVO implements Serializable {
 	private String content;
 	
 	private Boolean isCommentBlock;
+
+	private Integer nView;
 	
 	private String createdAt;
 	

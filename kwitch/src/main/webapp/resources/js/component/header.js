@@ -1,12 +1,11 @@
-const headerComponent = {
+const HeaderComponent = {
     template: headerTemplate,
-    store: gStore,
     data() { return {
         searchInput: ''
     }},
     methods: {
-        detail: function(id) {
-        	location.href="/channel/"+id;
+        channel: function() {
+        	this.$router.push("/channel/"+this.$store.state.member.id);
         },
         logout: function() {
             fetch('/api/auth/logout', {

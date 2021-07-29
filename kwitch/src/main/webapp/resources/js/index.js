@@ -8,20 +8,25 @@ const routes = [
 		 * Channel Related Routes
 		 */
 		path: '/channel/:id',
-		component: channelComponent
+		component: ChannelComponent
 	},
 	{
 		/**
 		 *  Community Related Routes
 		 */
 		path: '/c/:communityId',
-		component: channelComponent,
+		component: CommunityComponent,
 		children: [
+			
+			{
+				path: '',
+				component: CommunityHomeComponent
+			},
 
 			// Menu Routes
 			{
 				path: 'm/:menuId',
-				component: channelComponent
+				component: ChannelComponent
 			}
 
 		]
@@ -31,20 +36,21 @@ const routes = [
 		 * Post Related Routes
 		 */
 		path: '/p/:id',
-		component: channelComponent,
+		component: communityPostComponent,
 		children: [
 
 			// Post Upload & Update
 			{
 				path: 'Upload/:menuId',
-				component: channelComponent
+				component: ChannelComponent
 			}
 
 		]
 	}
 ];
 
-Vue.component('header-component', headerComponent);
+Vue.component('header-component', HeaderComponent);
+Vue.component('login-component', LoginComponent);
 
 const router = new VueRouter({
 	routes: routes,
@@ -58,6 +64,7 @@ const homeVue = new Vue({
 	store: gStore,
 
 	mounted() {
+		
 		this.$store.commit('increment')
 
 		console.log(this.$store.state.count);

@@ -26,7 +26,7 @@ public class CommunityController {
 	 * [ CREATE ]
 	 */
 	
-	@RequestMapping(value = "/community/post/upload/{id}", method = RequestMethod.GET)
+	@RequestMapping(value = "/c/p/{id}/upload", method = RequestMethod.GET)
 	@ChannelRoleValid(
 			role 	= ChannelRoleFlag.CH_ROLE_WRITE,
 			idType 	= ChannelIdType.CHANNEL_ID_TYPE_CHANNEL_ID
@@ -44,9 +44,9 @@ public class CommunityController {
 	 */
 	
 	@RequestMapping(value = {
-			"/community/{id}", 
-			"/community/post/{id}", 
-			"/community/menu/{id}"
+			"/c/{id}", 
+			"/p/{id}", 
+			"/c/m/{id}"
 	}, method = RequestMethod.GET)	
 	public String communityRead(
 			HttpServletRequest request, 
@@ -60,7 +60,7 @@ public class CommunityController {
 	 * [ UPDATE ]
 	 */
 	
-	@RequestMapping(value = "/community/post/{id}/edit", method = RequestMethod.GET)	
+	@RequestMapping(value = "/c/p/{id}/edit", method = RequestMethod.GET)	
 	@ChannelRoleValid(
 			role 	= ChannelRoleFlag.CH_ROLE_UPDATE,
 			idType 	= ChannelIdType.CHANNEL_ID_TYPE_CHANNEL_ID

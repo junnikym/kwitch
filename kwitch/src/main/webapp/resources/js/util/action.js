@@ -1,10 +1,14 @@
-const modals = document.querySelectorAll("[data-modal]");
+const Modals = document.querySelectorAll("[data-modal]");
 
-modals.forEach(function (trigger) {
+Modals.forEach(function (trigger) {
+	console.log("trigger is ", trigger);
+	
   trigger.addEventListener("click", function (event) {
     event.preventDefault();
+    
     const modal = document.getElementById(trigger.dataset.modal);
     modal.classList.add("open");
+    
     const exits = modal.querySelectorAll(".modal-exit");
     exits.forEach(function (exit) {
       exit.addEventListener("click", function (event) {
@@ -12,7 +16,9 @@ modals.forEach(function (trigger) {
         modal.classList.remove("open");
       });
     });
+    
   });
+  
 });
 
 function dp_menu(){
