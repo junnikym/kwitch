@@ -41,6 +41,11 @@ public class MemberServiceImpl implements MemberService {
 	}
 	
 	@Override
+	public MemberVO getMy(String id) throws Exception {
+		return memberDAO.getMy(id);
+	}
+	
+	@Override
 	public int regist(MemberVO vo) throws Exception {
 		return memberDAO.regist(vo);
 	}

@@ -12,6 +12,8 @@ public interface MemberService {
 	
 	MemberVO login(LoginVO vo, HttpServletRequest request, HttpSession session) throws Exception;
 	
+	MemberVO getMy(String id) throws Exception;
+	
 	int regist(MemberVO vo) throws Exception;
 	
 	MemberVO getDetail(String id) throws Exception;

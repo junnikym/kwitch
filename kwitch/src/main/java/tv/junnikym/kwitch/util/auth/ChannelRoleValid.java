@@ -19,6 +19,6 @@ public @interface ChannelRoleValid {
 	
 	IdGetMethod idGetMethod() default IdGetMethod.NONE;
 
-	public enum IdGetMethod { NONE, FULLNAME, JUST_ID }
+	public enum IdGetMethod { NONE, FULLNAME, JUST_ID, VO }
 	
 }

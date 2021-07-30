@@ -11,6 +11,18 @@ const gStore = new Vuex.Store({
             if(payload.member) {
                 state.member = payload.member;
             }
+        },
+        
+        connectCommunity: (state, payload) => {
+            if(payload.member) {
+                state.connectedCommunity = payload;
+            }
+        },
+        
+        connectMenu: (state, payload) => {
+            if(payload.member) {
+                state.connectedMenu = payload;
+            }
         }
 
     }

@@ -101,7 +101,22 @@ public class MemberAPIController {
 
 		return objectMapper.convertValue(member, Map.class);
 	}
+	
+	@ResponseBody
+	@RequestMapping(value = "/my", method = RequestMethod.GET)
+	public Map<String, Object> isLogin(
+			HttpServletResponse response,
+			HttpSession session
+	) throws Exception {
 
-
+		String memberId = (String)session.getAttribute("member_id");
+		if(memberId == null || memberId == "") {
+			response.setStatus(404);
+			return null;
+		}
+		
+		response.setStatus(200);
+		return objectMapper.convertValue(memberService.getMy(memberId), Map.class);
+	}
 
 }

@@ -9,8 +9,13 @@ const CommunityMenuComponent = {
     	}
     },
     mounted() {
+    	const id = 
+    		this.$store.state.connectedCommunity 
+    			? this.$store.state.connectedCommunity 
+    			: this.$route.params.communityId;
+		
     	    	
-    	fetch('/api/community/'+this.$route.params.communityId+'/menu', {
+    	fetch('/api/community/'+id+'/menu', {
             method: 'GET',
             headers: {
                 "Content-Type": "application/json"

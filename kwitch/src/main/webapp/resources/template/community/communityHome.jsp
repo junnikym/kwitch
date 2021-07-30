@@ -1,6 +1,8 @@
 
 <div id="communitHome">
 
+	<button class="community_upload_post btn" v-on:click="$router.push('/c/'+$route.params.communityId+'/upload')"> Write Post </button>
+
 	<div class="community_home_menu" v-for="item in communityContent">
 	
 		<h2> {{item.title}} </h2>

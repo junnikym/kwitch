@@ -53,6 +53,7 @@
 		</tr>
 		<tr v-else>
 				<td colspan="2" class="channel_header__letter"> subscriber </td>
+				<td><button class="btn" type="button" v-on:click="goToCommunity">Go Community</button></td>
 		</tr>
 
 	</table>

@@ -49,20 +49,26 @@ public class ChannelRoleValidInterceptor extends HandlerInterceptorAdapter {
     		String 			id 			= null;
     		ChannelIdType 	idType		= channelRoleValid.idType();
     		IdGetMethod 	idGetMethod	= channelRoleValid.idGetMethod();
+    		Map<?, ?> pathVariables = (Map<?, ?>) request.getAttribute(HandlerMapping.URI_TEMPLATE_VARIABLES_ATTRIBUTE);
     		
     		if(idGetMethod == IdGetMethod.JUST_ID) {
-    			id = request.getParameter("id");
+    			id = (String)pathVariables.get("id");
     		}
     		else if(idGetMethod == IdGetMethod.FULLNAME) {
-    			getIdFromVO(request, idType);
+    			id = getIdFromPath(pathVariables, idType);
         	}
-    		else {
-				Map<?, ?> pathVariables = (Map<?, ?>) request.getAttribute(HandlerMapping.URI_TEMPLATE_VARIABLES_ATTRIBUTE);  
+    		else if(idGetMethod == IdGetMethod.NONE) {  
 		    	id = (String)pathVariables.get("id"); 
     		}
+    		else if(idGetMethod == IdGetMethod.VO) {
+    			id = getIdFromVO(request, idType);
+    			System.out.println("id : "+id);
+    		}
     		
-    		if(id == null || id == "") 
+    		if(id == null || id == "") {
+    			response.sendError(401, "Unauthorized");
     			return false;
+    		}
     		
     		String channelId = getChannelId(id, idType);
     		ChannelRoleVO vo = ChannelRoleVO.builder()
@@ -91,19 +97,46 @@ public class ChannelRoleValidInterceptor extends HandlerInterceptorAdapter {
     ) {
     	switch(idType) {
 			case CHANNEL_ID_TYPE_CHANNEL_ID:
-				return request.getParameter("channelId");
+				return (String)request.getAttribute("channelId");
 		
 			case CHANNEL_ID_TYPE_COMMUNITY_ID:
-				return request.getParameter("communityId");
+				return (String)request.getAttribute("communityId");
 				
 			case CHANNEL_ID_TYPE_OWNER_ID:
-				return request.getParameter("ownChannelId");
+				return (String)request.getAttribute("ownChannelId");
 				
 			case CHANNEL_ID_TYPE_MENU_ID:
-				return request.getParameter("menuId");
+				return (String)request.getAttribute("menuId");
 				
 			case CHANNEL_ID_TYPE_POST_ID:
-				return request.getParameter("postId");
+				return (String)request.getAttribute("postId");
+				
+			default:
+				break;
+		}
+	
+		return null;
+    }
+    
+    private String getIdFromPath(
+    		Map<?, ?> pathVariables, 
+    		ChannelIdType idType
+    ) {
+    	switch(idType) {
+			case CHANNEL_ID_TYPE_CHANNEL_ID:
+				return (String)pathVariables.get("channelId");
+		
+			case CHANNEL_ID_TYPE_COMMUNITY_ID:
+				return (String)pathVariables.get("communityId");
+				
+			case CHANNEL_ID_TYPE_OWNER_ID:
+				return (String)pathVariables.get("ownChannelId");
+				
+			case CHANNEL_ID_TYPE_MENU_ID:
+				return (String)pathVariables.get("menuId");
+				
+			case CHANNEL_ID_TYPE_POST_ID:
+				return (String)pathVariables.get("postId");
 				
 			default:
 				break;

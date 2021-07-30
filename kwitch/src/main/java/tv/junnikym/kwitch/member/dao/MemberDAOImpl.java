@@ -19,6 +19,11 @@ public class MemberDAOImpl extends AbstractMapper implements MemberDAO {
 	}
 	
 	@Override
+	public MemberVO getMy(String id) throws Exception {
+		return selectOne("MemberDAO.getMy", id);
+	}
+	
+	@Override
 	public int regist(MemberVO vo) throws Exception {
 		return insert("MemberDAO.regist", vo);
 	}

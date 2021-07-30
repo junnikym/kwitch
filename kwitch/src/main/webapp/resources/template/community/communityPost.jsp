@@ -1,11 +1,14 @@
 
 <div id="communityPost">
-
-	<h3> {{postContent.menuTitle}} </h3>
+	
+	<div class="community_post_menu_title">
+		<button class="btn" v-on:click="$router.go(-1)"> Back </button>
+		<h3> {{postContent.menuTitle}} </h3>
+	</div>
 
 	<div class="sub_horizontal_rule"> </div>
 
-	<h1> {{postContent.title}} </h1>
+	<h1 class="community_post_title"> {{postContent.title}} </h1>
 
 	<div class="community_post_writer">
 		<div class="user_profile_img_wapper">
@@ -17,7 +20,22 @@
 	<div class="horizontal_rule"></div>
 	<div class="community_post_sub_info">
 		<div class="clock_icon"></div> &nbsp; {{ calcTime(postContent.createdAt) }} &nbsp;&nbsp;
-		<div class="view_icon"></div> &nbsp; {{ postContent.nView }} &nbsp;&nbsp
+		<div class="clock_icon"></div> &nbsp; {{ calcTime(postContent.updatedAt) }} &nbsp;&nbsp;
+		<div class="view_icon"></div> &nbsp; {{ postContent.nView }} &nbsp;&nbsp;
+		
+		<button v-if="this.$store.state.member.id == postContent.writerId"
+				class="community_post_edit"
+				v-on:click="$router.push('/c/p/'+$route.params.id+'/edit')">
+			Edit
+		</button>
+		
+		<button v-if="this.$store.state.member.id == postContent.writerId"
+				class="community_post_delete"
+				v-on:click="deletePost">
+			Delete
+		</button>
 	</div>
+	
+	<div class="community_post_content" v-html="postContent.content"></div>
 
 </div>

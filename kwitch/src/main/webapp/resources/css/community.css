@@ -9,7 +9,7 @@
 #community {
 	position: relative; margin : 0;
     overflow-x : hidden; overflow-y : scroll;
-    height: 100vh;
+    height: calc(100vh - 65px);
     width: 100vw;
     display: flex;
     flex-direction: column;
@@ -18,10 +18,36 @@
     font-family: "Source Sans Pro", sans-serif;
 }
 
+#communitHome {
+	position: relative;
+	padding-top: 25px;
+}
+.community_upload_post {
+	position: absolute;
+	top: 1em; right: 1em;
+}
+
+.community_title {
+	position:absolute;
+	top: 0;
+	height: 75px;
+	width: 100%;
+	display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    
+    color:#fcfcfc;
+    background:#373737;
+    box-shadow: 2px 0 2px 1px rgba(0, 0, 0, 0.2);
+}
+
 .community_content {
+	position:absolute;
+	top: 125px;
 	display: flex;
 	flex-direction: row;
-	padding: 5em;
+	padding: 0 5em 5em 5em;
 }
 
 .community_content_view {
@@ -134,7 +160,7 @@
 	display: flex;
 	justify-content: flex-end;
 	flex-direction: row;
-	width: 50%;
+	width: calc(100% - 370px);
 }
 .community_post_item_small_writer_alias {
 	margin: 0; padding: 0;
@@ -156,7 +182,7 @@
 	flex-direction: row;
 	align-items: center;
 	justify-content: start;
-	width: 50%;
+	width: 370px;
 }
 .community_post_item_small_sub_info .sharp_icon,
 .community_post_item_small_sub_info .clock_icon,
@@ -168,6 +194,7 @@
 	min-width: 450px;
 	max-width: 750px;
 	width: 100%;
+	padding: 2em;
 }
 
 .community_post_writer {
@@ -189,7 +216,12 @@
 	margin: 1em 0 0 0;
 }
 
+.community_post_title {
+	width: 100%;
+}
+
 .community_post_sub_info {
+	position: relative;
 	display: flex;
 	flex-direction: row;
 	align-items: center;
@@ -204,4 +236,100 @@
 .community_post_sub_info .clock_icon,
 .community_post_sub_info .view_icon{
 	width: 20px; height: 20px; filter: invert(100%);
+}
+
+.community_post_menu_title {
+	position: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: start;
+	margin-bottom: 1em;
+	
+}
+.community_post_menu_title > h3 {
+	display: inline;
+	margin: 0; padding: 0;
+}
+
+.community_post_content {
+	padding: 1em;
+	width: 100%;
+	border-radius: 0 0 0.5em 0.5em ;
+	background: #efefef;
+}
+.community_post_edit {
+	position: absolute;
+	position: flex;
+	align-items: center;
+	justify-content: center;
+	right: 0;
+	background: #4fc08d;
+	height: 100%;
+	width: 50px;
+	transition: 250ms ease-out;
+}
+.community_post_delete {
+	position: absolute;
+	position: flex;
+	align-items: center;
+	justify-content: center;
+	right: 50px;
+	background: red;
+	height: 100%;
+	width: 65px;
+	transition: 250ms ease-out;
+}
+
+.community_post_edit:hover .community_post_edit:focus {
+	color: #373737;
+    background: white;
+}
+
+#communityPostEditor {
+	display: flex;
+	flex-direction: column;
+    border-radius: 1em;
+    background: #fff;
+    overflow: hidden;
+    align-items: center;
+    width: 100%;
+}
+
+
+.ck-editor__main {
+	border: none;
+}
+
+.editor_title {
+	margin-bottom: 0.5em;
+}
+
+.editor_title, .editor_title > tbody, .editor_title tr {
+	position:relation;
+	display: flex;
+	align-items: center;
+    justify-content: center;
+	width: 100%;
+}
+
+.editor_title_latter {
+	padding: 0 1em 0 2em;
+}
+.editor_setting_latter {
+	padding: 0 1em 0 1em;
+}
+
+.editor_title_input {
+	width: 50%;
+	padding: 0 2em 0 0;
+}
+
+.editor_setting_input {
+	width: 25%;
+	padding: 0 2em 0 0;
+}
+
+.ck-editor__editable {
+    min-height: 500px;
+    max-width: 650px;
 }

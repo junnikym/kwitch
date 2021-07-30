@@ -82,7 +82,7 @@ const ChannelComponent = {
 		
 		
 		goToCommunity: function() {
-			parent.document.location.href = "/community/"+this.member.ownCommunityId
+			this.$router.push("/c/"+this.member.ownCommunityId);
 		}
     },
 

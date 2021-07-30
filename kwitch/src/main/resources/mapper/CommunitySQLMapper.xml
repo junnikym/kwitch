@@ -259,13 +259,15 @@
 		    m.member_profile_image 		AS writerProfileImage,
 		    
 		    cm.menu_id 				AS menuId,
-		    cm.menu_title 			AS menuTitle
+		    cm.menu_title 			AS menuTitle,
+		    
+		    cp.community_id			AS communityId
 		
 		FROM 
 		    community_post AS cp
 		
-		LEFT JOIN member 			AS m  ON cp.writer_id = m.member_id
-		LEFT JOIN community_menu	AS cm ON cp.menu_id	  = cm.menu_id
+		LEFT JOIN member 			AS m 	ON cp.writer_id 	= m.member_id
+		LEFT JOIN community_menu	AS cm 	ON cp.menu_id 		= cm.menu_id
 		
 		WHERE
 		   	<if test='value != null and value != ""'>
@@ -301,6 +303,7 @@
 		UPDATE
 			community_post
 		SET
+			menu_id				= #{menuId}::UUID,
 			post_title 			= #{title},
 			post_content 		= #{content},
 			post_comment_block 	= #{isCommentBlock},

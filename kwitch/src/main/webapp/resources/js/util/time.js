@@ -19,4 +19,6 @@ function timeDifference(current, previous) {
 	else if (elapsed < msPerDay ) {
 		return Math.round(elapsed/msPerHour ) + ' hours ago';
 	}
+	
+	return previous.toLocaleDateString() + " " + previous.toLocaleTimeString('en-US');
 }

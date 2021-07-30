@@ -15,11 +15,11 @@ const CommunityHomeComponent = {
         },
         
         goToPost: function(id) {
-	        this.$router.push("/p/"+id);
+	        this.$router.push("/c/p/"+id);
 		},
 		
 		goToPostList: function(id) {
-        	parent.document.location.href = "/community/menu/"+id;
+			this.$router.push("/c/m/"+id);
 		}
         
     },

@@ -14,39 +14,48 @@ const routes = [
 		/**
 		 *  Community Related Routes
 		 */
-		path: '/c/:communityId',
+		path: '/c',
 		component: CommunityComponent,
 		children: [
 			
 			{
-				path: '',
-				component: CommunityHomeComponent
+				path: ':communityId',
+				component: CommunityHomeComponent,
 			},
-
-			// Menu Routes
+			
+			/**
+			 *  Post Related Routes
+			 */
+			
+			{
+				path: 'p/:id',
+				component: communityPostComponent,
+			},
+			{
+				path: 'p/:postId/edit',
+				component: communityPostEditorComponent
+			},
+			{	
+				path: ':communityId/upload/',
+				component: communityPostEditorComponent,
+			},
+			
+			
+			/**
+			 * 	---------- End Of Post Related ----------
+			 */
+			
+			// < Menu >
 			{
 				path: 'm/:menuId',
 				component: ChannelComponent
-			}
-
+			},
+			
 		]
-	},
-	{
 		/**
-		 * Post Related Routes
+		 * 	---------- End Of Community Related ----------
 		 */
-		path: '/p/:id',
-		component: communityPostComponent,
-		children: [
-
-			// Post Upload & Update
-			{
-				path: 'Upload/:menuId',
-				component: ChannelComponent
-			}
-
-		]
-	}
+	},
 ];
 
 Vue.component('header-component', HeaderComponent);
@@ -63,7 +72,22 @@ const homeVue = new Vue({
 	router: router,
 	store: gStore,
 
-	mounted() {
+	mounted() {	
+		fetch('/api/my', {
+            method: 'GET',
+            headers: {"Content-Type": "application/json"}
+        })
+        .then(res => {
+        	if(res.status == 200)
+	        	return res.json();
+        	else
+        		return null;
+        })
+        .then(json => {
+        	if(json)
+        		this.$store.commit('setMember', {member: json})
+        })
+        .catch(err => console.log(err))
 		
 		this.$store.commit('increment')
 

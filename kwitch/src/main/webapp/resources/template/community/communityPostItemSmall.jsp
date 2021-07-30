@@ -18,7 +18,7 @@
 	</div>
 
 	<div class="community_post_item_small_content">
-		{{item.content}}
+		{{removeHtmlTag(item.content)}}
 	</div>
 	
 </div>

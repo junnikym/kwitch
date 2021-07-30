@@ -21,6 +21,24 @@ const communityPostComponent = {
 
 		goToEditor: function(id) {
 			parent.document.location.href = "/community/post/"+this.urlId+"/edit";
+		},
+		
+		deletePost: function() {
+			fetch('/api/community/post/' + this.$route.params.id, {
+				method: 'DELETE',
+				headers: {
+					"Content-Type": "application/json"
+				}
+			}).then(res => {
+				if(res.status == 200)
+					this.$router.go(-1);
+				
+				else if(res.status == 401) 
+					throw "삭제할 권한이 없습니다.";
+				
+			}).catch(err => {
+				alter(err);
+			});
 		}
 
 	},
@@ -35,7 +53,17 @@ const communityPostComponent = {
 		.then(res => res.json())
 		.then(json => {
 
-			this.postContent = json
+			this.postContent = json;
+			
+			console.log("time is ", calcTime(this.postContent.createdAt));
+			
+			if(this.$store.state.connectedCommunity != this.postConnect.communityId) {
+				this.$store.commit('connectCommunity', this.postConnect.communityId)
+			}
+			
+			if(this.$store.state.connectedMenu != this.postConnect.communityMenu) {
+				this.$store.commit('connectMenu', this.postConnect.communityMenu);
+			}
 
 		})
 		.catch(err => console.log(err))

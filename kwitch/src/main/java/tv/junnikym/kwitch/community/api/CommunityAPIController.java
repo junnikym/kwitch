@@ -55,11 +55,11 @@ public class CommunityAPIController {
 	 */
 	
 	@ResponseBody
-	@RequestMapping(value = "/community/post", method = RequestMethod.POST)
+	@RequestMapping(value = "/community/post/", method = RequestMethod.POST)
 	@ChannelRoleValid(
 			role 		= ChannelRoleFlag.CH_ROLE_WRITE,
 			idType 		= ChannelIdType.CHANNEL_ID_TYPE_COMMUNITY_ID,
-			idGetMethod	= IdGetMethod.FULLNAME
+			idGetMethod	= IdGetMethod.VO
 	)
 	public String registPost (
 			@RequestBody() CommunityPostVO vo,
@@ -94,7 +94,7 @@ public class CommunityAPIController {
 	@ChannelRoleValid(
 			role 		= ChannelRoleFlag.CH_ROLE_UPDATE,
 			idType 		= ChannelIdType.CHANNEL_ID_TYPE_POST_ID,
-			idGetMethod	= IdGetMethod.NONE
+			idGetMethod	= IdGetMethod.FULLNAME
 	)
 	public void setPost (
 			@PathVariable("postId") String id,
@@ -116,7 +116,7 @@ public class CommunityAPIController {
 	@ChannelRoleValid(
 			role 		= ChannelRoleFlag.CH_ROLE_DELETE,
 			idType 		= ChannelIdType.CHANNEL_ID_TYPE_POST_ID,
-			idGetMethod	= IdGetMethod.NONE
+			idGetMethod	= IdGetMethod.FULLNAME
 	)
 	public void deletePostId (
 			@PathVariable("postId") String id,

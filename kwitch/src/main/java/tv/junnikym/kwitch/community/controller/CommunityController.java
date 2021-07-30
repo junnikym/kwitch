@@ -26,7 +26,7 @@ public class CommunityController {
 	 * [ CREATE ]
 	 */
 	
-	@RequestMapping(value = "/c/p/{id}/upload", method = RequestMethod.GET)
+	@RequestMapping(value = "/c/{id}/upload", method = RequestMethod.GET)
 	@ChannelRoleValid(
 			role 	= ChannelRoleFlag.CH_ROLE_WRITE,
 			idType 	= ChannelIdType.CHANNEL_ID_TYPE_CHANNEL_ID
@@ -45,7 +45,7 @@ public class CommunityController {
 	
 	@RequestMapping(value = {
 			"/c/{id}", 
-			"/p/{id}", 
+			"/c/p/{id}", 
 			"/c/m/{id}"
 	}, method = RequestMethod.GET)	
 	public String communityRead(

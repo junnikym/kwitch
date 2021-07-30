@@ -39,6 +39,8 @@
 
 	<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/es6-promise@4/dist/es6-promise.auto.js"></script>
 
+	<script src="https://cdn.ckeditor.com/ckeditor5/29.0.0/classic/ckeditor.js"></script>
+
 	<!-- Vuex Stroe -->
 	<script type="text/javascript" src="/resources/js/store.js"></script>
 
@@ -50,10 +52,11 @@
 		
 		
 		
-		const communityTemplate		= `<%@ include file="/resources/template/community/community.jsp" %>`;
-		const communityHomeTemplate	= `<%@ include file="/resources/template/community/communityHome.jsp" %>`;
-		const communityMenuTemplate	= `<%@ include file="/resources/template/community/communityMenu.jsp" %>`;
-		const communityPostTemplate	= `<%@ include file="/resources/template/community/communityPost.jsp" %>`;
+		const communityTemplate				= `<%@ include file="/resources/template/community/community.jsp" %>`;
+		const communityHomeTemplate			= `<%@ include file="/resources/template/community/communityHome.jsp" %>`;
+		const communityMenuTemplate			= `<%@ include file="/resources/template/community/communityMenu.jsp" %>`;
+		const communityPostTemplate			= `<%@ include file="/resources/template/community/communityPost.jsp" %>`;
+		const communityPostEditorTemplate	= `<%@ include file="/resources/template/community/communityPostEditor.jsp" %>`;
 
 		const communityPostItemSmallTemplate	= `<%@ include file="/resources/template/community/communityPostItemSmall.jsp" %>`;
 	</script>
@@ -64,7 +67,8 @@
 	<script type="text/javascript" src="/resources/js/component/channel.js"></script>
 	
 	<script type="text/javascript" src="/resources/js/component/community/communityPostItemSmall.js"></script>
-
+	
+	<script type="text/javascript" src="/resources/js/component/community/communityPostEditor.js"></script>
 	<script type="text/javascript" src="/resources/js/component/community/communityPost.js"></script>
 	<script type="text/javascript" src="/resources/js/component/community/communityMenu.js"></script>
 	<script type="text/javascript" src="/resources/js/component/community/communityHome.js"></script>
