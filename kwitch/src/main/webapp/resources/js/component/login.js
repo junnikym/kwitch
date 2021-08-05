@@ -86,8 +86,7 @@ const LoginComponent = {
     	            		const modal = document.getElementById("modal-login");
     	            		modal.classList.remove("open");
     	            		
-    	            		console.log("running")
-    	            		console.log("member is : ", this.$store.state.member);
+    	            		window.location.reload();
     	            	}
     	            	else {
     	            		console.log("else - running")

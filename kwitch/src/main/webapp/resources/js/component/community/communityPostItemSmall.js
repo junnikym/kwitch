@@ -1,6 +1,6 @@
 const communityPostItemSmallComponent = {
     template: communityPostItemSmallTemplate,
-    props: ['item', 'index'],
+    props: ['item', 'index', 'showChannelInfo'],
     data() { return {
 
     }},
@@ -18,6 +18,6 @@ const communityPostItemSmallComponent = {
         }
     },
     mounted() {
-    	console.log(this.item);
+    	
     }
 };

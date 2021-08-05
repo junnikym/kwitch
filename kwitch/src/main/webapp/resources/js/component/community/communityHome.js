@@ -1,7 +1,9 @@
 const CommunityHomeComponent = {
     template: communityHomeTemplate,
+    store: gStore,
     data() { return {
         communityContent: [],
+		role: 0,
     }},
     methods: {
     	
@@ -11,15 +13,13 @@ const CommunityHomeComponent = {
         	
         	formData.append('profileImage', profileImage.files[0]);
         	
-        	
         },
-        
-        goToPost: function(id) {
-	        this.$router.push("/c/p/"+id);
-		},
 		
-		goToPostList: function(id) {
-			this.$router.push("/c/m/"+id);
+		hasRoleWrite() {
+			if (this.$store.state.communityRole.roleFlag & this.$store.state.communityRoleFlags.CH_ROLE_WRITE)
+				return true;
+			
+			return false;
 		}
         
     },

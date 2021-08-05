@@ -11,14 +11,17 @@ import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.HandlerMapping;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
-import tv.junnikym.kwitch.channel.dao.ChannelDAO;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
+import tv.junnikym.kwitch.channel.service.ChannelService;
 import tv.junnikym.kwitch.channel.vo.ChannelRoleVO;
+import tv.junnikym.kwitch.channel.vo.ChannelRoleVO.ChannelIdBy;
 import tv.junnikym.kwitch.util.auth.ChannelRoleValid.IdGetMethod;
 
 public class ChannelRoleValidInterceptor extends HandlerInterceptorAdapter {
 	
-	@Resource(name="ChannelDAO")
-	ChannelDAO channelDAO;
+	@Resource(name="ChannelService")
+	ChannelService channelService;
 	 
     @Override
     public boolean preHandle(
@@ -31,6 +34,7 @@ public class ChannelRoleValidInterceptor extends HandlerInterceptorAdapter {
     	System.out.println("--------------------------------------------------");
     	
     	if (handler instanceof HandlerMethod) {
+    		
     		HttpSession session = request.getSession();
         	
         	HandlerMethod method = ((HandlerMethod)handler);
@@ -47,7 +51,7 @@ public class ChannelRoleValidInterceptor extends HandlerInterceptorAdapter {
     		}
     		
     		String 			id 			= null;
-    		ChannelIdType 	idType		= channelRoleValid.idType();
+    		ChannelIdBy 	getIdBy		= channelRoleValid.idBy();
     		IdGetMethod 	idGetMethod	= channelRoleValid.idGetMethod();
     		Map<?, ?> pathVariables = (Map<?, ?>) request.getAttribute(HandlerMapping.URI_TEMPLATE_VARIABLES_ATTRIBUTE);
     		
@@ -55,13 +59,13 @@ public class ChannelRoleValidInterceptor extends HandlerInterceptorAdapter {
     			id = (String)pathVariables.get("id");
     		}
     		else if(idGetMethod == IdGetMethod.FULLNAME) {
-    			id = getIdFromPath(pathVariables, idType);
+    			id = getIdFromPath(pathVariables, getIdBy);
         	}
     		else if(idGetMethod == IdGetMethod.NONE) {  
 		    	id = (String)pathVariables.get("id"); 
     		}
     		else if(idGetMethod == IdGetMethod.VO) {
-    			id = getIdFromVO(request, idType);
+    			id = getIdFromVO(request, getIdBy);
     			System.out.println("id : "+id);
     		}
     		
@@ -70,17 +74,21 @@ public class ChannelRoleValidInterceptor extends HandlerInterceptorAdapter {
     			return false;
     		}
     		
-    		String channelId = getChannelId(id, idType);
     		ChannelRoleVO vo = ChannelRoleVO.builder()
-    									.memberId(memberId)
-    									.channelId(channelId)
-    									.build();
+					.memberId(memberId)
+					.targetId(id)
+					.channelIdBy(getIdBy)
+					.build();
     		
-    		vo = channelDAO.getRole(vo);
+    		vo = channelService.getRole(vo);
+    		if(vo == null) {
+    			response.sendError(401, "Unauthorized");
+    			return false;
+    		}
     		
-    		int memberRoleFlag = vo.getRoleFlag();
+    		Integer memberRoleFlag = vo.getRoleFlag();
     		
-    		if((channelRoleValid.role() & memberRoleFlag) > 0)
+    		if( memberRoleFlag != null && (channelRoleValid.role() & memberRoleFlag) > 0)
     			return true;
     	
     		response.sendError(401, "Unauthorized");
@@ -93,23 +101,27 @@ public class ChannelRoleValidInterceptor extends HandlerInterceptorAdapter {
     
     private String getIdFromVO(
     		HttpServletRequest request, 
-    		ChannelIdType idType
-    ) {
-    	switch(idType) {
+    		ChannelIdBy idBy
+    ) throws Exception {
+    	ObjectMapper mapper = new ObjectMapper();
+    	Map<String, String> body = mapper.readValue(
+    			(String) request.getAttribute("requestBody"), Map.class);
+    	
+    	switch(idBy) {
 			case CHANNEL_ID_TYPE_CHANNEL_ID:
-				return (String)request.getAttribute("channelId");
+				return (String)body.get("channelId");
 		
 			case CHANNEL_ID_TYPE_COMMUNITY_ID:
-				return (String)request.getAttribute("communityId");
+				return (String)body.get("communityId");
 				
 			case CHANNEL_ID_TYPE_OWNER_ID:
-				return (String)request.getAttribute("ownChannelId");
+				return (String)body.get("ownChannelId");
 				
 			case CHANNEL_ID_TYPE_MENU_ID:
-				return (String)request.getAttribute("menuId");
+				return (String)body.get("menuId");
 				
 			case CHANNEL_ID_TYPE_POST_ID:
-				return (String)request.getAttribute("postId");
+				return (String)body.get("postId");
 				
 			default:
 				break;
@@ -120,9 +132,9 @@ public class ChannelRoleValidInterceptor extends HandlerInterceptorAdapter {
     
     private String getIdFromPath(
     		Map<?, ?> pathVariables, 
-    		ChannelIdType idType
+    		ChannelIdBy idBy
     ) {
-    	switch(idType) {
+    	switch(idBy) {
 			case CHANNEL_ID_TYPE_CHANNEL_ID:
 				return (String)pathVariables.get("channelId");
 		
@@ -145,40 +157,8 @@ public class ChannelRoleValidInterceptor extends HandlerInterceptorAdapter {
 		return null;
     }
     
-    private String getChannelId(
-			String id, 
-			ChannelIdType idType 
-	) throws Exception {
-		
-		switch(idType) {
-			case CHANNEL_ID_TYPE_CHANNEL_ID:
-				return id;
-		
-			case CHANNEL_ID_TYPE_COMMUNITY_ID:
-				return channelDAO.getChannelIdByCommunityId(id);
-				
-			case CHANNEL_ID_TYPE_OWNER_ID:
-				return channelDAO.getChannelIdByOwnerId(id);
-				
-			case CHANNEL_ID_TYPE_MENU_ID:
-				return channelDAO.getChannelIdByMenuId(id);
-				
-			case CHANNEL_ID_TYPE_POST_ID:
-				return channelDAO.getChannelIdByPostId(id);
-				
-			default:
-				break;
-		}
-		
-		return null;
-	}
+    
 	
-	public enum ChannelIdType {
-		CHANNEL_ID_TYPE_CHANNEL_ID,
-		CHANNEL_ID_TYPE_COMMUNITY_ID,
-		CHANNEL_ID_TYPE_OWNER_ID,
-		CHANNEL_ID_TYPE_MENU_ID,
-		CHANNEL_ID_TYPE_POST_ID, 
-	}
+	
 	
 }

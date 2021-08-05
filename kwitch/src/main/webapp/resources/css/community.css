@@ -20,6 +20,10 @@
 
 #communitHome {
 	position: relative;
+	display:flex;
+	flex-wrap: wrap;
+	align-items: start;
+	justify-content: start;
 	padding-top: 25px;
 }
 .community_upload_post {
@@ -84,6 +88,7 @@
     justify-content: center;
     
     width: 150px;
+    z-index: 10;
 }
 .community_menu::before {
   content: "";
@@ -112,10 +117,53 @@
   box-shadow: 0 1em 0 0 #373737;
 }
 
+.community_mune_cursor {
+	position: absolute;
+	background: #4fc08d;
+	border-radius: 0.5em 0 0 0.5em;
+    
+    width: 140px;
+    margin-left: 10px;
+    top: 0;
+    z-index: 100;
+}
+.community_mune_cursor::before {
+  content: "";
+  position: absolute;
+  
+  background-color: transparent;
+  bottom: -2em;
+  right: 0;
+  
+  height: 2em;
+  width: 1em;
+  border-top-right-radius: 0.5em;
+  box-shadow: 0 -1em 0 0 #4fc08d;
+}
+.community_mune_cursor::after {
+  content: "";
+  position: absolute;
+  
+  background-color: transparent;
+  top: -2em;
+  right: 0;
+  
+  height: 2em;
+  width: 1em;
+  border-bottom-right-radius: 0.5em;
+  box-shadow: 0 1em 0 0 #4fc08d;
+}
 
 .community_menu_btn {
-	padding: 0.25em 1em;
+	display:flex;
+	justify-content: center;
+	align-items: center;
+	height: 40px;
 	width: 100%;
+	z-index: 1000;
+}
+.community_menu_btn a {
+	padding: 0.5em 1em;
 }
 
 .community_menu_design_top {
@@ -144,7 +192,7 @@
 	display: flex;
 	flex-direction: column;
 	width: 100%;
-	height: 70px;
+	height: 150px;
 	margin: 0.5em 0;
 }
 
@@ -154,7 +202,11 @@
 .community_post_item_small_head_info {
 	display: flex;
 	flex-direction: row;
+	align-items: center;
 	width: 100%;
+	height: 35px;
+	margin: 5px;
+	overflow: hidden;
 }
 .community_post_item_small_writer {
 	display: flex;
@@ -162,6 +214,13 @@
 	flex-direction: row;
 	width: calc(100% - 370px);
 }
+.community_post_item_small_channel {
+	display: flex;
+	justify-content: flex-start;
+	flex-direction: row;
+	width: 100%;
+}
+
 .community_post_item_small_writer_alias {
 	margin: 0; padding: 0;
 }
@@ -180,8 +239,9 @@
 .community_post_item_small_sub_info {
 	display: flex;
 	flex-direction: row;
-	align-items: center;
+	align-items: start;
 	justify-content: start;
+	height: 25px;
 	width: 370px;
 }
 .community_post_item_small_sub_info .sharp_icon,
@@ -296,6 +356,18 @@
 }
 
 
+.sharp, .clock, .view {
+	display: flex;
+	flex-direction: row;
+	height: 25px;
+	
+	margin: 0; padding: 0;
+}
+.sharp { width: 50px; }
+.clock { width: 250px; }
+.view { width: 70px; }
+
+
 .ck-editor__main {
 	border: none;
 }
@@ -332,4 +404,15 @@
 .ck-editor__editable {
     min-height: 500px;
     max-width: 650px;
+}
+
+
+#communitPostList {
+	display: flex;
+	flex-direction: column;
+    border-radius: 1em;
+    background: #fff;
+    overflow: hidden;
+    align-items: center;
+    width: 100%;
 }

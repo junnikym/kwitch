@@ -2,6 +2,7 @@ package tv.junnikym.kwitch.channel.api;
 
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.annotation.Resource;
@@ -49,6 +50,13 @@ public class ChannelAPIController {
 			e.printStackTrace();
 		}
 
+	}
+	
+	@ResponseBody
+	@RequestMapping(value = {"/channel/new"}, method = RequestMethod.GET)
+	public List<ChannelVO> getNewChannel(HttpServletRequest request) throws Exception {
+		
+		return channelService.getNewChannel();
 	}
 	
 }

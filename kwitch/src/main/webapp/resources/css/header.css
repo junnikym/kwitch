@@ -135,7 +135,7 @@
 .user_profile_img_wapper {
 	position: relative;
 	height:40px; width:40px;
-	border-radius: 20px;
+	border-radius: 50%;
 	background-color:#4fc08d;
 	margin-left: 1em;
 	margin-right: 1em;

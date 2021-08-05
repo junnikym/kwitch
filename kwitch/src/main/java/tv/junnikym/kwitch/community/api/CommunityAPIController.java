@@ -16,14 +16,15 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import tv.junnikym.kwitch.channel.service.ChannelService;
+import tv.junnikym.kwitch.channel.vo.ChannelRoleVO;
+import tv.junnikym.kwitch.channel.vo.ChannelRoleVO.ChannelIdBy;
 import tv.junnikym.kwitch.channel.vo.ChannelRoleVO.ChannelRoleFlag;
 import tv.junnikym.kwitch.community.service.CommunityService;
 import tv.junnikym.kwitch.community.vo.CommunityMenuVO;
 import tv.junnikym.kwitch.community.vo.CommunityPostVO;
 import tv.junnikym.kwitch.util.auth.ChannelRoleValid;
-import tv.junnikym.kwitch.util.auth.ChannelRoleValidInterceptor;
 import tv.junnikym.kwitch.util.auth.ChannelRoleValid.IdGetMethod;
-import tv.junnikym.kwitch.util.auth.ChannelRoleValidInterceptor.ChannelIdType;
 
 @Controller
 @RequestMapping(value = "/api")
@@ -31,6 +32,11 @@ public class CommunityAPIController {
 
 	@Resource(name="CommunityService")
 	private CommunityService communityService;
+	
+	@Resource(name="ChannelService")
+	private ChannelService channelService;
+	
+	
 	
 	@ResponseBody
 	@RequestMapping(value = "/community/{communityId}", method = RequestMethod.GET)
@@ -49,6 +55,8 @@ public class CommunityAPIController {
 		return map;
 	}
 	
+	
+	
 	/**
 	 * Post Related
 	 * --------------------------------------------------
@@ -58,7 +66,7 @@ public class CommunityAPIController {
 	@RequestMapping(value = "/community/post/", method = RequestMethod.POST)
 	@ChannelRoleValid(
 			role 		= ChannelRoleFlag.CH_ROLE_WRITE,
-			idType 		= ChannelIdType.CHANNEL_ID_TYPE_COMMUNITY_ID,
+			idBy 	= ChannelIdBy.CHANNEL_ID_TYPE_COMMUNITY_ID,
 			idGetMethod	= IdGetMethod.VO
 	)
 	public String registPost (
@@ -93,7 +101,7 @@ public class CommunityAPIController {
 	@RequestMapping(value = "/community/post/{postId}", method = RequestMethod.PUT)
 	@ChannelRoleValid(
 			role 		= ChannelRoleFlag.CH_ROLE_UPDATE,
-			idType 		= ChannelIdType.CHANNEL_ID_TYPE_POST_ID,
+			idBy 		= ChannelIdBy.CHANNEL_ID_TYPE_POST_ID,
 			idGetMethod	= IdGetMethod.FULLNAME
 	)
 	public void setPost (
@@ -115,7 +123,7 @@ public class CommunityAPIController {
 	@RequestMapping(value = "/community/post/{postId}", method = RequestMethod.DELETE)
 	@ChannelRoleValid(
 			role 		= ChannelRoleFlag.CH_ROLE_DELETE,
-			idType 		= ChannelIdType.CHANNEL_ID_TYPE_POST_ID,
+			idBy 	= ChannelIdBy.CHANNEL_ID_TYPE_POST_ID,
 			idGetMethod	= IdGetMethod.FULLNAME
 	)
 	public void deletePostId (
@@ -127,6 +135,8 @@ public class CommunityAPIController {
 		
 		communityService.deletePost(id);
 	}
+	
+	
 	
 	/**
 	 * Menu Related
@@ -167,6 +177,30 @@ public class CommunityAPIController {
 	) throws Exception {
 		
 		return communityService.getMenu(id);
+	}
+
+	
+	
+	/**
+	 * User Auth Check
+	 * --------------------------------------------------
+	 */
+	
+	@ResponseBody
+	@RequestMapping(value = "/community/auth", method = RequestMethod.POST)
+	public ChannelRoleVO getCommunityAuthChack (
+			@RequestBody() ChannelRoleVO vo,
+			HttpServletRequest request, 
+			HttpServletResponse response, 
+			HttpSession session
+	) throws Exception {
+		
+		String memberId = (String)session.getAttribute("member_id");
+		if(memberId == null || memberId == "")
+			return null;
+		
+		vo.setMemberId(memberId);
+		return channelService.getRole(vo);
 	}
 	
 }

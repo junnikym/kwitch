@@ -15,9 +15,11 @@
 	<!-- CSS -->
 	<link rel="stylesheet" type="text/css" href="/resources/css/common.css" />
 	<link rel="stylesheet" type="text/css" href="/resources/css/header.css" />
+	<link rel="stylesheet" type="text/css" href="/resources/css/search.css" />
 	<link rel="stylesheet" type="text/css" href="/resources/css/nav.css" />
 	<link rel="stylesheet" type="text/css" href="/resources/css/channel.css" />
 	<link rel="stylesheet" type="text/css" href="/resources/css/community.css" />
+	<link rel="stylesheet" type="text/css" href="/resources/css/mainPage.css" />
 
 </head>
 <body>
@@ -47,13 +49,16 @@
 	<!-- templates -->
 	<script>
 		const headerTemplate 	= `<%@ include file="/resources/template/header.jsp" %>`;
-		const channelTemplate 	= `<%@ include file="/resources/template/channel.jsp" %>`;
 		const loginTemplate		= `<%@ include file="/resources/template/login.jsp" %>`;
+		const searchTemplate 	= `<%@ include file="/resources/template/search.jsp" %>`;
+		const mainPageTemplate	= `<%@ include file="/resources/template/mainPage.jsp" %>`;
 		
-		
+		const channelTemplate 				= `<%@ include file="/resources/template/channel/channel.jsp" %>`;
+		const channelSimpleItemTemplate 	= `<%@ include file="/resources/template/channel/channelSimpleItem.jsp" %>`;
 		
 		const communityTemplate				= `<%@ include file="/resources/template/community/community.jsp" %>`;
 		const communityHomeTemplate			= `<%@ include file="/resources/template/community/communityHome.jsp" %>`;
+		const communityPostListTemplate		= `<%@ include file="/resources/template/community/communityPostList.jsp" %>`;
 		const communityMenuTemplate			= `<%@ include file="/resources/template/community/communityMenu.jsp" %>`;
 		const communityPostTemplate			= `<%@ include file="/resources/template/community/communityPost.jsp" %>`;
 		const communityPostEditorTemplate	= `<%@ include file="/resources/template/community/communityPostEditor.jsp" %>`;
@@ -62,9 +67,12 @@
 	</script>
 
 	<script type="text/javascript" src="/resources/js/component/login.js"></script>
-
 	<script type="text/javascript" src="/resources/js/component/header.js"></script>
-	<script type="text/javascript" src="/resources/js/component/channel.js"></script>
+	<script type="text/javascript" src="/resources/js/component/mainPage.js"></script>
+	<script type="text/javascript" src="/resources/js/component/search.js"></script>
+
+	<script type="text/javascript" src="/resources/js/component/channel/channel.js"></script>
+	<script type="text/javascript" src="/resources/js/component/channel/channelSimpleItem.js"></script>
 	
 	<script type="text/javascript" src="/resources/js/component/community/communityPostItemSmall.js"></script>
 	
@@ -72,7 +80,16 @@
 	<script type="text/javascript" src="/resources/js/component/community/communityPost.js"></script>
 	<script type="text/javascript" src="/resources/js/component/community/communityMenu.js"></script>
 	<script type="text/javascript" src="/resources/js/component/community/communityHome.js"></script>
+	<script type="text/javascript" src="/resources/js/component/community/communityPostList.js"></script>
 	<script type="text/javascript" src="/resources/js/component/community/community.js"></script>
+	
+	<script>
+		Vue.component('community-menu-component', CommunityMenuComponent);
+		Vue.component('community-post-item-small', communityPostItemSmallComponent);
+		Vue.component('header-component', HeaderComponent);
+		Vue.component('login-component', LoginComponent);
+		Vue.component('channel-simple-item-component', channelSimpleItemComponent);
+	</script>
 
 	<script type="text/javascript" src="/resources/js/index.js"></script>
 

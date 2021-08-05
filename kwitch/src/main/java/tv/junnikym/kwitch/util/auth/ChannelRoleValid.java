@@ -6,7 +6,7 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
-import tv.junnikym.kwitch.util.auth.ChannelRoleValidInterceptor.ChannelIdType;
+import tv.junnikym.kwitch.channel.vo.ChannelRoleVO.ChannelIdBy;
 
 @Target({ ElementType.METHOD, ElementType.TYPE }) 
 @Retention(RetentionPolicy.RUNTIME)
@@ -15,7 +15,7 @@ public @interface ChannelRoleValid {
 	
 	int role();
 	
-	ChannelIdType idType() default ChannelIdType.CHANNEL_ID_TYPE_CHANNEL_ID;
+	ChannelIdBy idBy() default ChannelIdBy.CHANNEL_ID_TYPE_CHANNEL_ID;
 	
 	IdGetMethod idGetMethod() default IdGetMethod.NONE;
 

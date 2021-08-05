@@ -14,4 +14,8 @@ public class ChannelVO {
 	
 	private String message;
 	
+	private String profileImagePath;
+	
+	private String profileImageExt;
+	
 }

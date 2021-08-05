@@ -9,9 +9,13 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
-@JsonAutoDetect(fieldVisibility = Visibility.ANY)
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
+@JsonAutoDetect(fieldVisibility = JsonAutoDetect.Visibility.ANY)
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class CommunityPostVO implements Serializable {
 	
@@ -43,5 +47,10 @@ public class CommunityPostVO implements Serializable {
 	
 	
 	private String communityId;
+	
+	
+	private String channelId;
+	
+	private String channelTitle;
 	
 }

@@ -1,7 +1,12 @@
 const routes = [
 	{
 		path: '/',
-		component: {template : "<div><h1>home</h1></div>"}
+		component: mainPageComponent
+	},
+	{
+		path: '/q/:searchQuery',
+		component: searchComponent,
+		props: true
 	},
 	{
 		/**
@@ -28,12 +33,12 @@ const routes = [
 			 */
 			
 			{
-				path: 'p/:id',
+				path: 'p/:postId',
 				component: communityPostComponent,
 			},
 			{
 				path: 'p/:postId/edit',
-				component: communityPostEditorComponent
+				component: communityPostEditorComponent,
 			},
 			{	
 				path: ':communityId/upload/',
@@ -48,7 +53,7 @@ const routes = [
 			// < Menu >
 			{
 				path: 'm/:menuId',
-				component: ChannelComponent
+				component: communityPostListComponent,
 			},
 			
 		]
@@ -57,9 +62,6 @@ const routes = [
 		 */
 	},
 ];
-
-Vue.component('header-component', HeaderComponent);
-Vue.component('login-component', LoginComponent);
 
 const router = new VueRouter({
 	routes: routes,
@@ -77,20 +79,15 @@ const homeVue = new Vue({
             method: 'GET',
             headers: {"Content-Type": "application/json"}
         })
-        .then(res => {
-        	if(res.status == 200)
-	        	return res.json();
-        	else
-        		return null;
-        })
+        .then(res => res.json())
         .then(json => {
         	if(json)
         		this.$store.commit('setMember', {member: json})
         })
         .catch(err => console.log(err))
 		
-		this.$store.commit('increment')
-
-		console.log(this.$store.state.count);
+//		this.$store.commit('increment')
+//
+//		console.log(this.$store.state.count);
 	}
 })

@@ -8,7 +8,7 @@ const CommunityMenuComponent = {
     		console.log(id);
     	}
     },
-    mounted() {
+    mounted() {    	
     	const id = 
     		this.$store.state.connectedCommunity 
     			? this.$store.state.connectedCommunity 
@@ -25,6 +25,7 @@ const CommunityMenuComponent = {
         .then(json => {
         	this.communityMenu = json;
         })
+        .then(()=>initMenu("#communityMenu", true))
         .catch(err => console.log(err))
     }
 };

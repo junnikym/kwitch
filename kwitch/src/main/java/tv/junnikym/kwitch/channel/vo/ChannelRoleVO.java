@@ -7,9 +7,6 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import tv.junnikym.kwitch.community.vo.CommunityMenuVO;
-import tv.junnikym.kwitch.file.vo.ImageVO;
-import tv.junnikym.kwitch.file.vo.ImageVO.SysetmAuthority;
 
 @Data
 @Builder
@@ -29,6 +26,9 @@ public class ChannelRoleVO {
 	
 	private Integer roleFlag;
 	
+	private ChannelIdBy channelIdBy;
+	private String 		targetId;
+	
 	public class ChannelRoleFlag {
 		public static final int CH_ROLE_READ 			= 1 << 0;
 		public static final int CH_ROLE_WRITE 			= 1 << 1;
@@ -40,6 +40,14 @@ public class ChannelRoleVO {
 		public static final int CH_ROLE_READ_PRIVATE	= 1 << 7;
 		public static final int CH_ROLE_BAN				= 1 << 8;
 		public static final int CH_ROLE_FREEZE 			= 1 << 9;
+	}
+	
+	public enum ChannelIdBy {
+		CHANNEL_ID_TYPE_CHANNEL_ID,
+		CHANNEL_ID_TYPE_COMMUNITY_ID,
+		CHANNEL_ID_TYPE_OWNER_ID,
+		CHANNEL_ID_TYPE_MENU_ID,
+		CHANNEL_ID_TYPE_POST_ID, 
 	}
 	
 }

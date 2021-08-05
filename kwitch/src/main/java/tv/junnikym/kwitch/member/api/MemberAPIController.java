@@ -110,12 +110,12 @@ public class MemberAPIController {
 	) throws Exception {
 
 		String memberId = (String)session.getAttribute("member_id");
+		response.setStatus(200);
+
 		if(memberId == null || memberId == "") {
-			response.setStatus(404);
 			return null;
 		}
-		
-		response.setStatus(200);
+
 		return objectMapper.convertValue(memberService.getMy(memberId), Map.class);
 	}
 

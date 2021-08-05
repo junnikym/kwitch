@@ -9,6 +9,7 @@ const communityPostEditorComponent = {
     		menuList: null,
     		menuTitle: null,
     	},
+    	prePostContent: {},
     	postId: null,
     	communityId: null,
     	menuList: [],
@@ -20,24 +21,27 @@ const communityPostEditorComponent = {
 			const editorData = this.editor.getData();
 			
 			if( ! this.postContent.title) {
-				alter("title is empty");
+				alert("title is empty");
 				return
 			}
 			
 			if( ! editorData) {
-				alter("content is empty");
+				alert("content is empty");
 				return
 			}
 			
 			if( ! this.selectedMenuId) {
-				alter("not select menu");
+				alert("not select menu");
 				return
 			}
 			
 			
 				
 			if(this.postId) {
-				console.log("postpostpostpostpostpostpostpostpostpostpostpostpost")
+				if(this.prePostContent == this.postContent) {
+					alert("not changed content");
+					return
+				}
 				
 				fetch('/api/community/post/' + this.postId, {
           		  	method: 'PUT',
@@ -70,8 +74,6 @@ const communityPostEditorComponent = {
 			
 			
 			if(this.communityId) {
-				console.log("communitycommunitycommunitycommunitycommunitycommunitycommunitycommunitycommunitycommunitycommunitycommunitycommunity")
-				
 				fetch('/api/community/post/', {
           		  	method: 'POST',
 	          		headers: {
@@ -95,12 +97,12 @@ const communityPostEditorComponent = {
               			return res.text();
               		}
               		else {
-              			alter("error");
+              			alert("error");
               		}
 
               	})
               	.then(txt => {
-              		parent.document.location.href = "/community/post/"+txt;
+              		parent.document.location.href = "/c/p/"+txt;
               	})
               	.catch(err => {
               		alert("글을 등록할 권한이 없습니다.");
@@ -142,8 +144,6 @@ const communityPostEditorComponent = {
     	this.isExist = postId?true:false;
         	
     	if(this.postId) {
-    		console.log("postpostpostpostpostpostpostpostpostpostpostpostpost")
-    		
         	fetch('/api/community/post/' + this.postId, {
       		  	method: 'GET',
           		headers: {
@@ -152,7 +152,9 @@ const communityPostEditorComponent = {
   			})
           	.then(res => res.json())
           	.then(json => {
+          		
 				this.postContent = json;
+				this.prePostContent = this.postContent;
 				
 				if(json.writerId != this.$store.state.member.id) {
 					throw "게시글 작성자가 아닙니다."
@@ -180,7 +182,7 @@ const communityPostEditorComponent = {
     	} 
     	
     	if(this.communityId){
-    		console.log("communitycommunitycommunitycommunitycommunitycommunitycommunitycommunitycommunitycommunitycommunitycommunitycommunity")
+    		
     		fetch('/api/community/' + this.communityId + '/menu', {
       		  	method: 'GET',
           		headers: {

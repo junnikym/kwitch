@@ -3,16 +3,15 @@ package tv.junnikym.kwitch.community.controller;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import tv.junnikym.kwitch.channel.vo.ChannelRoleVO.ChannelIdBy;
 import tv.junnikym.kwitch.channel.vo.ChannelRoleVO.ChannelRoleFlag;
 import tv.junnikym.kwitch.community.service.CommunityService;
 import tv.junnikym.kwitch.util.auth.ChannelRoleValid;
-import tv.junnikym.kwitch.util.auth.ChannelRoleValidInterceptor.ChannelIdType;
 
 @Controller
 public class CommunityController {
@@ -29,7 +28,7 @@ public class CommunityController {
 	@RequestMapping(value = "/c/{id}/upload", method = RequestMethod.GET)
 	@ChannelRoleValid(
 			role 	= ChannelRoleFlag.CH_ROLE_WRITE,
-			idType 	= ChannelIdType.CHANNEL_ID_TYPE_CHANNEL_ID
+			idBy 	= ChannelIdBy.CHANNEL_ID_TYPE_COMMUNITY_ID
 	)
 	public String communityCreate(
 			HttpServletRequest request, 
@@ -63,7 +62,7 @@ public class CommunityController {
 	@RequestMapping(value = "/c/p/{id}/edit", method = RequestMethod.GET)	
 	@ChannelRoleValid(
 			role 	= ChannelRoleFlag.CH_ROLE_UPDATE,
-			idType 	= ChannelIdType.CHANNEL_ID_TYPE_CHANNEL_ID
+			idBy 	= ChannelIdBy.CHANNEL_ID_TYPE_POST_ID
 	)
 	public String communityUpload(
 			HttpServletRequest request, 

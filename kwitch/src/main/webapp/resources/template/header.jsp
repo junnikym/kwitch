@@ -19,7 +19,8 @@
 	
 	<div class="search_wapper">
 		<input class="input form__input from__search_input w_center" type="text" v-model="searchInput"/>
-		<button class="btn btn__search h_center_wrapper" type="button"><img src="/resources/image/search_icon.png" class="btn__search_icon h_center_content" /></button>
+		<button class="btn btn__search h_center_wrapper" type="button" v-on:click="$router.push('/q/'+searchInput)">
+			<img src="/resources/image/search_icon.png" class="btn__search_icon h_center_content" /></button>
 	</div>
 
 	<div v-if="this.$store.state.member.id"
@@ -30,8 +31,7 @@
 				<img v-if="this.$store.state.member.profileImagePath && this.$store.state.member.profileImageExt"
 					 v-bind:src="'/api/profile/image/' + member_profile_image + '/' + member_profile_image_ext"
 					 class="default_user_profile_img" />
-				<img
-						src="/resources/image/user_icon.png" class="user_profile_img" />
+				<img v-else src="/resources/image/user_icon.png" class="user_profile_img" />
 			</div>
 		</button>
 

@@ -12,4 +12,6 @@ public interface ChannelService {
 	
 	ChannelRoleVO getRole(ChannelRoleVO vo) throws Exception;
 	
+	List<ChannelVO> getNewChannel() throws Exception;
+	
 }

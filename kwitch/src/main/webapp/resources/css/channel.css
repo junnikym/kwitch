@@ -182,3 +182,17 @@
 	width: 100%;
 	word-break:break-all;
 }
+
+#channelSimpleList {
+	margin: 1em;
+	padding: 1em;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+}
+
+#channelSimpleList > .user_profile_img_wapper {
+	width: 100px;
+	height: 100px;
+}

@@ -26,6 +26,10 @@ body, #home, #home_content {
 li {
 	list-style:none;
 }
+.bg_black {
+	background: #373737;
+	color: #fff
+}
 
 #home_content {
     margin-top: 65px;

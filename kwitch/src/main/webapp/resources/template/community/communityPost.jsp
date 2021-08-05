@@ -19,17 +19,17 @@
 
 	<div class="horizontal_rule"></div>
 	<div class="community_post_sub_info">
-		<div class="clock_icon"></div> &nbsp; {{ calcTime(postContent.createdAt) }} &nbsp;&nbsp;
-		<div class="clock_icon"></div> &nbsp; {{ calcTime(postContent.updatedAt) }} &nbsp;&nbsp;
+		<div class="clock_icon" v-if="postContent.createdAt"></div> &nbsp; {{ calcTime( postContent.createdAt ) }} &nbsp;&nbsp;
+		<div class="clock_icon" v-if="postContent.updatedAt"></div> &nbsp; {{ calcTime( postContent.updatedAt ) }} &nbsp;&nbsp;
 		<div class="view_icon"></div> &nbsp; {{ postContent.nView }} &nbsp;&nbsp;
 		
-		<button v-if="this.$store.state.member.id == postContent.writerId"
+		<button v-if="hasRoleUpdate()"
 				class="community_post_edit"
-				v-on:click="$router.push('/c/p/'+$route.params.id+'/edit')">
+				v-on:click="$router.push('/c/p/'+$route.params.postId+'/edit')">
 			Edit
 		</button>
 		
-		<button v-if="this.$store.state.member.id == postContent.writerId"
+		<button v-if="hasRoleOtherDelete()"
 				class="community_post_delete"
 				v-on:click="deletePost">
 			Delete

@@ -23,11 +23,25 @@
 			<param-value>/WEB-INF/spring/appServlet/servlet-context.xml</param-value>
 		</init-param>
 		<load-on-startup>1</load-on-startup>
+		<async-supported>true</async-supported>
 	</servlet>
 		
 	<servlet-mapping>
 		<servlet-name>appServlet</servlet-name>
 		<url-pattern>/</url-pattern>
 	</servlet-mapping>
+	
+	<filter>
+		<filter-name>RequestBodyFilter</filter-name>
+		<filter-class>tv.junnikym.kwitch.util.RequestBodyFilter</filter-class>
+	</filter>
+	<filter-mapping>
+		<filter-name>RequestBodyFilter</filter-name>
+		
+		<url-pattern>/c/*</url-pattern>
+		<url-pattern>/channel/*</url-pattern>
+		<url-pattern>/api/community/*</url-pattern>
+		<url-pattern>/api/channel/*</url-pattern>
+	</filter-mapping>
 
 </web-app>

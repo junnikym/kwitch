@@ -1,5 +1,7 @@
 package tv.junnikym.kwitch.channel.dao;
 
+import java.util.List;
+
 import org.springframework.stereotype.Repository;
 
 import tv.junnikym.kwitch.channel.vo.ChannelRoleVO;
@@ -14,6 +16,13 @@ public class ChannelDAOImpl extends AbstractMapper implements ChannelDAO {
 		insert("ChannelDAO.regist", vo);
 		return vo.getId();
 	}
+	
+	@Override
+	public List<ChannelVO> getNewChannel() throws Exception {
+		return selectList("ChannelDAO.getNewChannel");
+	}
+	
+	
 	
 	@Override
 	public String setDefaultRole(String id) throws Exception {
@@ -53,4 +62,5 @@ public class ChannelDAOImpl extends AbstractMapper implements ChannelDAO {
 	public String getChannelIdByPostId(String id) throws Exception {
 		return selectOne("ChannelDAO.getChannelIdByPostId", id);
 	}
+	
 }

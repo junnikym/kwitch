@@ -1,14 +1,17 @@
 <div id="communityMenu">
 
 	<ul class="community_menu">
+		<div class="community_mune_cursor m-active"></div>
+		
+		<li class="community_menu_btn"> 
+			<a> Home </a> </li>
+		
 		<li v-for="item in communityMenu" 
-			v-on:click="goToMenu(item.id)" 
+			v-on:click="$router.push('/c/m/'+item.id)" 
 			class="community_menu_btn">
-			{{item.title}}
+			<a> {{item.title}} </a>
 		</li>
 		
 	</ul>
-	
-	
 
 </div>

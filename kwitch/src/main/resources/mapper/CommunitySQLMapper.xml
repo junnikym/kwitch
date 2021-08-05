@@ -189,7 +189,7 @@
 		WHERE
 		   	cm.menu_id = #{value}::UUID
 		   	
-		ORDER BY cp.created_at ASC;
+		ORDER BY cp.created_at ASC
     
     	</if>
     
@@ -204,31 +204,48 @@
     	<if test='title != null and title != ""'>
     	
     	SELECT
-    		cp.post_id	 		AS id,
-		    cp.post_title 		AS title,
+			cp.post_id 						AS id,
+		    cp.post_title 					AS title,
+		    SUBSTR(cp.post_content, 0, 20) 	AS content,
+
+    	    cp.created_at::timestamp(0)		AS createdAt,
+    	    cp.updated_at::timestamp(0) 	AS updatedAt,
+    	    cp.post_view					AS nView,
 		
-			cp.writer_id 		AS writerId,
-		    CASE WHEN m.member_alias IS NULL OR m.member_alias = ''
+			cp.writer_id 					AS writerId,
+			
+			CASE WHEN m.member_alias IS NULL OR m.member_alias = ''
 		        THEN m.member_name
 		        ELSE m.member_alias
 		    END AS writerAlias,
 		    
-		    m.member_profile_image 	AS writerProfileImage
+		    m.member_profile_image 	AS writerProfileImage,
+		    
+		    cm.menu_id 				AS menuId,
+		    cm.menu_title 			AS menuTitle,
+		    
+		    co.community_id			AS communityId,
+		    
+		    ch.channel_id			AS channelId,
+		    ch.channel_title 		AS channelTitle
 		
 		FROM 
 		    community_post AS cp
 		
-		LEFT JOIN member AS m 			ON cp.writer_id = m.member_id
+		LEFT JOIN member 			AS m 	ON cp.writer_id 	= m.member_id
+		LEFT JOIN community 		AS co 	ON cp.community_id 	= co.community_id
+		LEFT JOIN community_menu 	AS cm 	ON cp.menu_id 		= cm.menu_id
+		LEFT JOIN channel 			AS ch 	ON co.channel_id 	= ch.channel_id
 
 		WHERE
-		   	cp.title = CONCAT('%', #{title}, '%')
+		   	cp.post_title LIKE CONCAT('%', #{title}, '%')
 		   	
 		   	<if test='menuId != null and menuId != ""'>
 		   	AND cp.menu_id = #{menuId}::UUID
 		   	</if>
 		   	
 		   	<if test='communityId != null and communityId != ""'>
-		   	AND cp.community_id = #{community_id}::UUID
+		   	AND cp.community_id = #{communityId}::UUID
 		   	</if>
 		   	
 		ORDER BY cp.created_at ASC;

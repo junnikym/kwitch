@@ -1,0 +1,11 @@
+#mainPage {
+    min-width: 400px;
+    max-width: 1200px;
+    width: 80%;
+}
+
+.main_page_new_channel_list {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+}

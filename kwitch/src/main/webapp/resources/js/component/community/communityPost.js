@@ -8,7 +8,12 @@ const communityPostComponent = {
 	methods: {
 
 		calcTime: function(t) {
-			const time = new Date(t.replace(/-/g, "/"));
+			if(!t)
+				return;
+
+			console.log(t);
+			const time = new Date(t.replace(/\s+/g, 'T'));
+			console.log(time);
 			return timeDifference(Date.now(), time);
 		},
 
@@ -24,7 +29,7 @@ const communityPostComponent = {
 		},
 		
 		deletePost: function() {
-			fetch('/api/community/post/' + this.$route.params.id, {
+			fetch('/api/community/post/' + this.$route.params.postId, {
 				method: 'DELETE',
 				headers: {
 					"Content-Type": "application/json"
@@ -39,12 +44,33 @@ const communityPostComponent = {
 			}).catch(err => {
 				alter(err);
 			});
+		},
+		
+		hasRoleOtherDelete() {
+			const userFlag 	= this.$store.state.communityRole.roleFlag;
+			const checkFlag	= this.$store.state.communityRoleFlags.CH_ROLE_CH_ROLE_DELETE_OTHERS;
+			
+			if (userFlag & checkFlag)
+				return true;
+			
+			if (this.$store.state.member.id == this.postContent.writerId)
+				return true;
+			
+			return false;
+		},
+		
+		hasRoleUpdate() {
+			const userFlag 	= this.$store.state.communityRole.roleFlag;
+			const checkFlag	= this.$store.state.communityRoleFlags.CH_ROLE_UPDATE;
+			
+			if ((this.$store.state.member.id == this.postContent.writerId) && (userFlag & checkFlag))
+				return true;
 		}
 
 	},
 
 	mounted() {
-		fetch('/api/community/post/' + this.$route.params.id, {
+		fetch('/api/community/post/' + this.$route.params.postId, {
 			method: 'GET',
 			headers: {
 				"Content-Type": "application/json"
@@ -54,8 +80,6 @@ const communityPostComponent = {
 		.then(json => {
 
 			this.postContent = json;
-			
-			console.log("time is ", calcTime(this.postContent.createdAt));
 			
 			if(this.$store.state.connectedCommunity != this.postConnect.communityId) {
 				this.$store.commit('connectCommunity', this.postConnect.communityId)
