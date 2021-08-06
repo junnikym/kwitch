@@ -187,7 +187,12 @@
 			<version>1.2.1</version>
 		</dependency>
 		
-		
+		<!-- FFmpeg -->
+		<dependency>
+	  <groupId>net.bramp.ffmpeg</groupId>
+	  <artifactId>ffmpeg</artifactId>
+	  <version>0.6.2</version>
+		</dependency>
 		
 		<dependency>
 			<groupId>commons-io</groupId>

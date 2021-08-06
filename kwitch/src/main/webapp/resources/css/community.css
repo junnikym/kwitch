@@ -416,3 +416,16 @@
     align-items: center;
     width: 100%;
 }
+
+#communityClipItem {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+    justify-content: center;
+}
+.community_clip_thumb {
+	width: 350px;
+	height: 200px;
+	background: #373737;
+	border-radius: 0.25em;
+}
