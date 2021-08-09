@@ -45,7 +45,7 @@
 	<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/es6-promise@4/dist/es6-promise.auto.js"></script>
 
 	<script src="https://cdn.ckeditor.com/ckeditor5/29.0.0/classic/ckeditor.js"></script>
-	
+
 	<script src="https://unpkg.com/video.js@7.0.0/dist/video.min.js"></script>
 
 	<!-- Vuex Stroe -->

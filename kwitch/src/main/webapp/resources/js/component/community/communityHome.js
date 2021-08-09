@@ -46,10 +46,10 @@ const CommunityHomeComponent = {
 						)
 				});
 	
-				console.log(this.communityContent);
-	
-	
-	      	})
+	      	}).then(() => {
+	    		this.$store.commit('connectCommunity', this.$route.params.communityId);
+	    		console.log("router : " + this.$store.state.connectedCommunity);
+		    }).then(()=>{})
 	      	.catch(err => console.log(err))
 	    	
     	}

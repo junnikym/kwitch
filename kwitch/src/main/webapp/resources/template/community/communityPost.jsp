@@ -8,7 +8,7 @@
 
 	<div class="sub_horizontal_rule"> </div>
 
-	<h1 class="community_post_title"> {{postContent.title}} </h1>
+	<h1 class="community_post_title"> {{ postContent.isBlock ? 'This post blocked by admin.' : postContent.title}}  </h1>
 
 	<div class="community_post_writer">
 		<div class="user_profile_img_wapper">
@@ -29,13 +29,19 @@
 			Edit
 		</button>
 		
-		<button v-if="hasRoleOtherDelete()"
+		<button v-if="hasRoleDelete()"
 				class="community_post_delete"
 				v-on:click="deletePost">
 			Delete
 		</button>
+
+		<button v-else-if="hasRoleDeleteOthers()"
+				class="community_post_delete"
+				v-on:click="deleteOthersPost">
+			Delete
+		</button>
 	</div>
 	
-	<div class="community_post_content" v-html="postContent.content"></div>
+	<div class="community_post_content" v-html="postContent.isBlock ? '<p>This post blocked by admin.</p>' : postContent.content"></div>
 
 </div>

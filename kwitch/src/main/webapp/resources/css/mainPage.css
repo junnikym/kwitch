@@ -1,11 +1,44 @@
 #mainPage {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    overflow-y: auto;
+    align-items: center;
+    justify-content: center;
+}
+
+.main_page_content {
     min-width: 400px;
     max-width: 1200px;
     width: 80%;
+    margin: 0;
+    margin-top: 500px;
+    margin-bottom: 2em;
+    padding: 0;
+    background: #fff;
+    z-index: 100;
+}
+
+.main_page_header {
+    margin: 0;
+    padding: 0.75em;
+    background: #373737;
+    width: 100%;
+    color: white;
 }
 
 .main_page_new_channel_list {
     display: flex;
     flex-direction: row;
     width: 100%;
+}
+
+.main_page_not_found {
+    margin: 0;
+    padding: 2em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: xx-large;
+    color: #373737;
 }

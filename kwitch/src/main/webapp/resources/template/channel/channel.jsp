@@ -1,13 +1,14 @@
 
 <div id="channel">
 	
-	<div class="channel_streaming_video_bg">
-		<div class="channel_streaming_video_wapper">
-			<video-js id="streamingVideo" width=960 height=540 class="video-js vjs-theme-forest" controls>
+	<div class="live_stream_bg">
+		<div class="live_stream_wapper">
+			<video id="streamingVideo" ref="streamingVideo" width=960 height=540 class="video-js vjs-theme-forest" controls preload="auto">
 			  <source
-			     src="https://trainee-rdb-uomfa.run.goorm.io/hls/stream.m3u8"
-			     type="application/x-mpegURL">
-			</video-js>
+					 src="https://trainee-rdb-uomfa.run.goorm.io/hls/stream.m3u8"
+					 type="application/x-mpegURL"
+					 crossorigin="use-credentials">
+			</video>
 		</div>
 	</div>
 

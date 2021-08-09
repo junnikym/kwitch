@@ -87,8 +87,13 @@ public class CommunityServiceImpl implements CommunityService {
 	}
 
 	@Override
-	public void deletePost(String PostId) throws Exception {
-		communityDAO.deletePost(PostId);
+	public void deletePost(String postId) throws Exception {
+		communityDAO.deletePost(postId);
+	}
+
+	@Override
+	public void blockPost(String postId) throws Exception {
+		communityDAO.blockPost(postId);
 	}
 
 	/**

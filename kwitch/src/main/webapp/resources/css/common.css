@@ -22,6 +22,9 @@ body, #home, #home_content {
     justify-content: center;
     font-family: "Source Sans Pro", sans-serif;
 }
+#home_content {
+    overflow-y: auto;
+}
 
 li {
 	list-style:none;
@@ -196,4 +199,29 @@ button:hover {
 
 .view_icon {
     background: center / contain no-repeat url("/resources/image/view_icon.png");
+}
+
+.live_stream_bg {
+    position:absolute;
+    top: -50px; left: -10%;
+    width: 120%;
+    height: 570px;
+    background-color: black;
+    overflow: hidden;
+    transform: rotate(-2.5deg);
+    transform-origin: 50% 50%;
+}
+.live_stream_bg .live_stream_wapper {
+    position:relative;
+    height: 100%;
+    width: 100%;
+    display:flex;
+    align-items: center;
+    justify-content: center;
+}
+.live_stream_bg #streamingVideo {
+    position:absolute;
+    transform: rotate(2.5deg);
+    transform-origin: 50% 50%;
+    bottom: -20px;
 }

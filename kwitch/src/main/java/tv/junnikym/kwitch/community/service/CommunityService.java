@@ -35,8 +35,9 @@ public interface CommunityService {
 
 	void setPost(CommunityPostVO vo) throws Exception;
 
-	void deletePost(String PostId) throws Exception;
+	void deletePost(String postId) throws Exception;
 
+	void blockPost(String postId) throws Exception;
 
 	// < Community Home >
 

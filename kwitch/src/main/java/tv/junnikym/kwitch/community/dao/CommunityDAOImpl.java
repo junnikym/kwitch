@@ -87,8 +87,13 @@ public class CommunityDAOImpl extends AbstractMapper implements CommunityDAO {
 	}
 
 	@Override
-	public void deletePost(String PostId) throws Exception {
-		delete("CommunityDAO.deletePost", PostId);
+	public void deletePost(String postId) throws Exception {
+		delete("CommunityDAO.deletePost", postId);
+	}
+
+	@Override
+	public void blockPost(String postId) throws Exception {
+		update( "CommunityDAO.deletePostByAdmin", postId);
 	}
 
 	/**

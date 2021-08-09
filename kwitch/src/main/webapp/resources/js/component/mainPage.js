@@ -17,7 +17,15 @@ const mainPageComponent = {
       	.then(json => {
       		this.newChannelList = json;
       	})
+		.then(() => {
+			videojs(this.$refs.streamingVideo);
+		})
       	.catch(err => console.log(err))
+	},
 
+	beforeDestroy() {
+		if (this.$refs.streamingVideo) {
+			this.$refs.streamingVideo.dispose()
+		}
 	}
 };

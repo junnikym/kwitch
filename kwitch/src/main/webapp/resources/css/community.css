@@ -18,7 +18,7 @@
     font-family: "Source Sans Pro", sans-serif;
 }
 
-#communitHome {
+#communitHome, #communitPostList {
 	position: relative;
 	display:flex;
 	flex-wrap: wrap;
@@ -75,6 +75,10 @@
 	#communitHome {width: 1240px;}
 }
 
+#communitPostList {
+	width: 620px;
+}
+
 .community_menu {
 	position: relative;
 	background: #373737;
@@ -86,7 +90,7 @@
 	flex-direction: column;
     align-items: center;
     justify-content: center;
-    
+
     width: 150px;
     z-index: 10;
 }
@@ -121,9 +125,9 @@
 	position: absolute;
 	background: #4fc08d;
 	border-radius: 0.5em 0 0 0.5em;
-    
+	transition: all 0.2s linear;
     width: 140px;
-    margin-left: 10px;
+    margin-left: 5px;
     top: 0;
     z-index: 100;
 }

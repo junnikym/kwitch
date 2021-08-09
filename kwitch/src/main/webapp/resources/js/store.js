@@ -17,7 +17,10 @@ const gStore = new Vuex.Store({
         	CH_ROLE_READ_PRIVATE	: 1 << 7,
         	CH_ROLE_BAN				: 1 << 8,
         	CH_ROLE_FREEZE 			: 1 << 9,
-        }
+        },
+
+	    connectedCommunity: undefined,
+	    connectedMenu: undefined,
         
     },
 
@@ -30,15 +33,11 @@ const gStore = new Vuex.Store({
         },
         
         connectCommunity: (state, payload) => {
-            if(payload.member) {
-                state.connectedCommunity = payload;
-            }
+            state.connectedCommunity = payload;
         },
         
         connectMenu: (state, payload) => {
-            if(payload.member) {
-                state.connectedMenu = payload;
-            }
+            state.connectedMenu = payload;
         },
         
         setCommunityRole: (state, payload) => {

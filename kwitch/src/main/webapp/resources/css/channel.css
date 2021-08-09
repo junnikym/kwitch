@@ -15,31 +15,6 @@
 	overflow-x : hidden; overflow-y : auto;
 }
 
-.channel_streaming_video_bg {
-	position:absolute;
-	top: -50px; left: -10%;
-	width: 120%;
-	height: 570px;
-	background-color: black;
-	overflow: hidden;
-	transform: rotate(-2.5deg);
-    transform-origin: 50% 50%;
-}
-.channel_streaming_video_wapper {
-	position:relative;
-	height: 100%;
-	width: 100%;
-	display:flex;
-	align-items: center;
-    justify-content: center;
-}
-#streamingVideo {
-	position:absolute;
-	transform: rotate(2.5deg);
-    transform-origin: 50% 50%;
-    bottom: -20px;
-}
-
 .channel_info {
 	position: relative; margin : 0;
 	width : 100%;

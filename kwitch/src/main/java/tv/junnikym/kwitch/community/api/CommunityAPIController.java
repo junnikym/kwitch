@@ -135,7 +135,25 @@ public class CommunityAPIController {
 		
 		communityService.deletePost(id);
 	}
-	
+
+
+	@ResponseBody
+	@RequestMapping(value = "/community/post/{postId}/block", method = RequestMethod.DELETE)
+	@ChannelRoleValid(
+			role 		= ChannelRoleFlag.CH_ROLE_DELETE_OTHERS,
+			idBy 	= ChannelIdBy.CHANNEL_ID_TYPE_POST_ID,
+			idGetMethod	= IdGetMethod.FULLNAME
+	)
+	public void blockPostId (
+			@PathVariable("postId") String id,
+			HttpServletRequest request,
+			HttpServletResponse response,
+			HttpSession session
+	) throws Exception {
+
+		communityService.blockPost(id);
+	}
+
 	
 	
 	/**

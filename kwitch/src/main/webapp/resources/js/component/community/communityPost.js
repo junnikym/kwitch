@@ -45,17 +45,49 @@ const communityPostComponent = {
 				alter(err);
 			});
 		},
+
+		deleteOthersPost: function() {
+			if (this.$store.state.member.id == this.postContent.writerId) {
+				console.log("delete!!!!!!!!")
+				// this.deletePost();
+			}
+			else {
+				fetch('/api/community/post/' + this.$route.params.postId + '/block', {
+					method: 'DELETE',
+					headers: {
+						"Content-Type": "application/json"
+					}
+				}).then(res => {
+					if (res.status == 200)
+						window.location.reload();
+
+					else if (res.status == 401)
+						throw "삭제할 권한이 없습니다.";
+
+				}).catch(err => {
+					alter(err);
+				});
+			}
+		},
 		
-		hasRoleOtherDelete() {
+		hasRoleDeleteOthers() {
 			const userFlag 	= this.$store.state.communityRole.roleFlag;
-			const checkFlag	= this.$store.state.communityRoleFlags.CH_ROLE_CH_ROLE_DELETE_OTHERS;
+			const checkFlag	= this.$store.state.communityRoleFlags.CH_ROLE_DELETE_OTHERS;
 			
 			if (userFlag & checkFlag)
 				return true;
 			
-			if (this.$store.state.member.id == this.postContent.writerId)
+			return false;
+		},
+
+		hasRoleDelete() {
+			const userFlag 	= this.$store.state.communityRole.roleFlag;
+			const checkFlag	= this.$store.state.communityRoleFlags.CH_ROLE_DELETE;
+
+			const hasRole = userFlag & checkFlag;
+			if ((this.$store.state.member.id == this.postContent.writerId) && hasRole > 0)
 				return true;
-			
+
 			return false;
 		},
 		
@@ -65,7 +97,7 @@ const communityPostComponent = {
 			
 			if ((this.$store.state.member.id == this.postContent.writerId) && (userFlag & checkFlag))
 				return true;
-		}
+		},
 
 	},
 
@@ -81,12 +113,12 @@ const communityPostComponent = {
 
 			this.postContent = json;
 			
-			if(this.$store.state.connectedCommunity != this.postConnect.communityId) {
-				this.$store.commit('connectCommunity', this.postConnect.communityId)
+			if(this.$store.state.connectedCommunity != this.postContent.communityId) {
+				this.$store.commit('connectCommunity', this.postContent.communityId)
 			}
 			
-			if(this.$store.state.connectedMenu != this.postConnect.communityMenu) {
-				this.$store.commit('connectMenu', this.postConnect.communityMenu);
+			if(this.$store.state.connectedMenu != this.postContent.communityMenu) {
+				this.$store.commit('connectMenu', this.postContent.communityMenu);
 			}
 
 		})

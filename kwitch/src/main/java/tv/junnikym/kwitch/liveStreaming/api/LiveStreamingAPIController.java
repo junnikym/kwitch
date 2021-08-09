@@ -6,6 +6,7 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.mvc.method.annotation.SseEmitter;
@@ -19,8 +20,8 @@ public class LiveStreamingAPIController {
 	@Resource(name = "LiveStreamingService")
 	LiveStreamingService liveStreamingService;
 	
-    @RequestMapping("/events")
-    public SseEmitter handle(String key) {
+    @RequestMapping("/events/{key}")
+    public SseEmitter handle (@PathVariable("key") String key) {
         SseEmitter emitter = new SseEmitter();
         liveStreamingService.setEmitter(key, emitter);
         
@@ -38,10 +39,14 @@ public class LiveStreamingAPIController {
         return emitter;
     }
     
-    @RequestMapping(value = "/signal", method = RequestMethod.POST)
-    public void signal(String key, HttpServletResponse response) throws IOException {
-    	response.setStatus(200);
+    @RequestMapping(value = "/signal/{key}", method = RequestMethod.POST)
+    public void signal(
+			@PathVariable("key") String key,
+    		HttpServletResponse response
+	) throws IOException {
+
     	liveStreamingService.sendEmitter(key);
+		response.setStatus(200);
     }
 
 }

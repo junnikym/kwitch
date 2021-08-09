@@ -52,5 +52,8 @@ public class CommunityPostVO implements Serializable {
 	private String channelId;
 	
 	private String channelTitle;
+
+
+	private Boolean isBlock;
 	
 }

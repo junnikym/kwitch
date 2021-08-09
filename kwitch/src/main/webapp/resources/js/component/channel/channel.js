@@ -117,13 +117,17 @@ const ChannelComponent = {
 	        }
 		    
 	    })
-	    .then(() => { initMenu("#myMenu"); })
+	    .then(() => {
+	    	initMenu("#myMenu");
+		    videojs(this.$refs.streamingVideo);
+	    })
 	    .catch(err => console.log(err));
-	    
-	    
-	    
-	    var player = videojs('streamingVideo');
-	    player.play();
-    }
+    },
+
+	beforeDestroy() {
+		if (this.$refs.streamingVideo) {
+			this.$refs.streamingVideo.dispose()
+		}
+	}
     
 };

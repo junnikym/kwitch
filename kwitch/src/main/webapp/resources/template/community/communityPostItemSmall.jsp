@@ -12,7 +12,9 @@
 	</div>
 	
 	<div v-on:click="$router.push('/c/p/'+item.id)">
-		<h3 class="community_post_item_small_title">{{item.title}}</h3>
+		<h3 class="community_post_item_small_title">
+			{{ item.isBlock ? 'This post blocked by admin.' : item.title}}
+		</h3>
 	
 		<div class="community_post_item_small_head_info">
 			<div class="community_post_item_small_sub_info">
@@ -30,7 +32,7 @@
 		</div>
 		
 		<div class="community_post_item_small_content">
-			{{removeHtmlTag(item.content)}}
+			{{ item.isBlock ? 'This post blocked by admin.' : removeHtmlTag(item.content) }}
 		</div>
 	</div>
 	
