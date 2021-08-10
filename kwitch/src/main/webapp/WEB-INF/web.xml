@@ -43,5 +43,6 @@
 		<url-pattern>/api/community/*</url-pattern>
 		<url-pattern>/api/channel/*</url-pattern>
 	</filter-mapping>
+			
 
 </web-app>

@@ -123,7 +123,7 @@ const ChannelComponent = {
 	    })
 	    .catch(err => console.log(err));
     },
-
+    
 	beforeDestroy() {
 		if (this.$refs.streamingVideo) {
 			this.$refs.streamingVideo.dispose()

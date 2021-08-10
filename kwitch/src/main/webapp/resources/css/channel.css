@@ -214,3 +214,48 @@
 	width: 100px;
 	height: 100px;
 }
+
+#channelChat {
+	position: fixed;
+	display:flex;
+	flex-direction: column;
+	height: calc(100vh - 65px - 4em);
+	width: 350px;
+	margin: 2em;
+	top: 65px + 2em;
+	right: 0;
+	z-index: 99999;
+}
+
+#channel_chat_viewer {
+	position: relative;
+	display:flex;
+	flex-direction: column;
+	height: calc(100% - 170px);
+	width: 100%;
+	padding: 1em;
+}
+.channel_chat_header {
+	height: 50px;
+	width: 100%;
+	background: #373737;
+}
+
+.channel_chat_input {
+	height: 120px;
+	width: 100%;
+}
+
+.channel_chat_input input {
+	width: 100%;
+	font-size: 15px;
+	padding: 1em;
+	border: 0;
+	border-top: 1px solid #373737;
+	border-bottom: 1px solid #373737;
+}
+
+.channel_chat_input button {
+	float: right;
+	margin: 1em;
+}

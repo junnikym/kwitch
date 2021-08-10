@@ -147,5 +147,7 @@
 		</div>
 		
 	</div>
+	
+	<channel-chat-component></channel-chat-component>
 
 </div>

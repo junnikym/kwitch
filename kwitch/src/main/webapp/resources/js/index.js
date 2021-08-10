@@ -4,6 +4,10 @@ const routes = [
 		component: mainPageComponent
 	},
 	{
+		path: '/test',
+		component: channelChatComponent
+	},
+	{
 		path: '/q/:searchQuery',
 		component: searchComponent,
 		props: true
