@@ -7,26 +7,43 @@ import java.util.concurrent.ConcurrentHashMap;
 import org.springframework.stereotype.Service;
 import org.springframework.web.servlet.mvc.method.annotation.SseEmitter;
 
-@Service("LiveStreamingService")
-public class LiveStreamingService {
+import tv.junnikym.kwitch.liveStreaming.vo.LiveStreamingVO;
 
-private Map<String, SseEmitter> datas = new ConcurrentHashMap<String, SseEmitter>();
-    
-    public void setEmitter(String key, SseEmitter emitter) {
-        this.datas.put(key, emitter);
-    }
-    
-    public void sendEmitter(String key) throws IOException {
-        for (Map.Entry<String, SseEmitter> data : this.datas.entrySet()) {
-            if (data.getKey().equals(key)) {
-                data.getValue().send(key + " is sended");
-            }
-        }
-        
-    }
-    
-    public void remove(String key) {
-        this.datas.remove(key);
-    }
+//@Service("LiveStreamingService")
+//public class LiveStreamingService {
+//
+//private Map<String, SseEmitter> datas = new ConcurrentHashMap<String, SseEmitter>();
+//    
+//    public void setEmitter(String key, SseEmitter emitter) {
+//        this.datas.put(key, emitter);
+//    }
+//    
+//    public void sendEmitter(String key) throws IOException {
+//        for (Map.Entry<String, SseEmitter> data : this.datas.entrySet()) {
+//            if (data.getKey().equals(key)) {
+//                data.getValue().send(key + " is sended");
+//            }
+//        }
+//        
+//    }
+//    
+//    public void remove(String key) {
+//        this.datas.remove(key);
+//    }
+//
+//}
 
+
+public interface LiveStreamingService {
+	
+	LiveStreamingVO regist(LiveStreamingVO vo) throws Exception;
+	
+	LiveStreamingVO getOwnStreaming(String ownerId) throws Exception;
+	
+	LiveStreamingVO getChannelStreaming(String channelId) throws Exception;
+	
+	int start(String ownerId) throws Exception;
+	
+	int stop(String ownerId) throws Exception;
+	
 }

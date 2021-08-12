@@ -13,6 +13,7 @@
 		
 		<typeAlias alias="ChannelVO" type="tv.junnikym.kwitch.channel.vo.ChannelVO" />
 		<typeAlias alias="ChannelRoleVO" type="tv.junnikym.kwitch.channel.vo.ChannelRoleVO" />
+		<typeAlias alias="SubscribeVO" type="tv.junnikym.kwitch.channel.vo.SubscribeVO" />
 		
 		<typeAlias alias="CommunityVO" type="tv.junnikym.kwitch.community.vo.CommunityVO" />
 		<typeAlias alias="CommunityMenuVO" type="tv.junnikym.kwitch.community.vo.CommunityMenuVO" />
@@ -20,6 +21,8 @@
 		<typeAlias alias="CommunityPostHistoryVO" type="tv.junnikym.kwitch.community.vo.CommunityPostHistoryVO" />
 		
 		<typeAlias alias="ImageVO" type="tv.junnikym.kwitch.file.vo.ImageVO" />
+		
+		<typeAlias alias="LiveStreamingVO" type="tv.junnikym.kwitch.liveStreaming.vo.LiveStreamingVO" />
 		
 	</typeAliases>
 

@@ -6,6 +6,7 @@ import org.springframework.stereotype.Repository;
 
 import tv.junnikym.kwitch.channel.vo.ChannelRoleVO;
 import tv.junnikym.kwitch.channel.vo.ChannelVO;
+import tv.junnikym.kwitch.channel.vo.SubscribeVO;
 import tv.junnikym.kwitch.util.AbstractMapper;
 
 @Repository("ChannelDAO")
@@ -42,23 +43,51 @@ public class ChannelDAOImpl extends AbstractMapper implements ChannelDAO {
 		return selectOne("ChannelDAO.getRole", vo);
 	}
 	
+	@Override
+	public String getDefaultRole(String channelId) throws Exception {
+		return selectOne("ChannelDAO.getDefaultRole", channelId);
+	}
+	
+	/**
+	 * Subscribe
+	 */
+	
+	@Override
+	public int subscribe(SubscribeVO vo) throws Exception {
+		return insert("ChannelDAO.subscribe", vo);
+	}
+
+	@Override
+	public int unsubscribe(SubscribeVO vo) throws Exception {
+		return delete("ChannelDAO.unsubscribe", vo);
+	}
+
+	@Override
+	public Boolean isSubscribed(SubscribeVO vo) throws Exception {
+		return selectOne("ChannelDAO.isSubscribed", vo);
+	}
+	
 	/**
 	 *  etc
 	 * --------------------------------------------------
 	 */
 	
+	@Override
 	public String getChannelIdByCommunityId(String id) throws Exception {
 		return selectOne("ChannelDAO.getChannelIdByCommunityId", id);
 	}
 	
+	@Override
 	public String getChannelIdByOwnerId(String id) throws Exception {
 		return selectOne("ChannelDAO.getChannelIdByOwnerId", id);
 	}
 	
+	@Override
 	public String getChannelIdByMenuId(String id) throws Exception {
 		return selectOne("ChannelDAO.getChannelIdByMenuId", id);
 	}
 	
+	@Override
 	public String getChannelIdByPostId(String id) throws Exception {
 		return selectOne("ChannelDAO.getChannelIdByPostId", id);
 	}

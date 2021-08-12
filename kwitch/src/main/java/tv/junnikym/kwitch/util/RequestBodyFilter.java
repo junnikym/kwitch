@@ -18,7 +18,6 @@ public class RequestBodyFilter implements Filter {
 	@Override
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
 		try {
-			System.out.println("do RequestBodyFilter");
 			ReadableRequestBodyWrapper wrapper = new ReadableRequestBodyWrapper((HttpServletRequest)request);
 			wrapper.setAttribute("requestBody", wrapper.getRequestBody());
 			chain.doFilter(wrapper, response);

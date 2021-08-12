@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="LiveStreamingDAO">
+
+	<insert id="regist" parameterType="LiveStreamingVO" useGeneratedKeys="true" keyProperty="id">
+    
+    	INSERT INTO channel_streaming (
+		    channel_id, 
+		    channel_owner_id, 
+		    streaming_password,
+		    start_at,
+		    end_at,
+		    is_private
+		)
+		SELECT
+			c.channel_id, 
+			c.owner_id, 
+			#{password},
+			NULL,
+			NULL,
+			#{isPrivate}
+		FROM 
+			channel AS c
+		WHERE 
+			owner_id = #{channelOwnerId}::UUID;
+		
+    </insert>
+    
+    
+    
+    
+    
+    <select id="getOwnStreaming" parameterType="String" resultType="LiveStreamingVO">
+    	<if test='value != null and value != ""'>
+    	
+    	SELECT
+    		streaming_id 		AS id,
+    		streaming_password 	AS password,
+    		start_at			AS startAt,
+    		end_at				AS endAt,
+    		is_private			AS isPrivate,
+    		channel_id			AS channelId,
+    		channel_owner_id	AS channelOwnerId
+    		
+    	FROM 
+    		channel_streaming
+    		
+    	WHERE
+    		channel_owner_id = #{value}::UUID
+    	AND end_at IS NULL
+    
+    	</if>
+    </select>
+    
+    
+    
+    
+    
+    <select id="getChannelStreaming" parameterType="String" resultType="LiveStreamingVO">
+    	<if test='value != null and value != ""'>
+    	
+    	SELECT
+    		streaming_id 		AS id,
+    		streaming_password 	AS password,
+    		start_at			AS startAt,
+    		end_at				AS endAt,
+    		is_private			AS isPrivate,
+    		channel_id			AS channelId,
+    		channel_owner_id	AS channelOwnerId
+    		
+    	FROM 
+    		channel_streaming
+    		
+    	WHERE
+    		channel_id = #{value}::UUID
+    	AND start_at IS NOT NULL
+    	AND end_at IS NULL
+    
+    	</if>
+    </select>
+    
+    
+    
+    
+    
+    <update id="start" parameterType="String">
+    	<if test='value != null and value != ""'>
+    	
+    	UPDATE
+			channel_streaming
+		SET
+			start_at = now()
+		WHERE
+			channel_owner_id = #{value}::UUID 
+		AND start_at IS NULL
+		AND end_at IS NULL
+		
+		</if>
+    </update>
+    
+    
+    
+    
+    
+    <update id="stop" parameterType="String">
+    	<if test='value != null and value != ""'>
+    
+    	UPDATE
+			channel_streaming
+		SET
+			end_at = now()
+		WHERE
+			channel_owner_id  = #{value}::UUID
+		AND end_at IS NULL
+    	
+    	</if>
+    </update>
+
+</mapper>

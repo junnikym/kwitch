@@ -4,6 +4,7 @@ import java.util.List;
 
 import tv.junnikym.kwitch.channel.vo.ChannelRoleVO;
 import tv.junnikym.kwitch.channel.vo.ChannelVO;
+import tv.junnikym.kwitch.channel.vo.SubscribeVO;
 
 public interface ChannelDAO {
 	
@@ -13,12 +14,21 @@ public interface ChannelDAO {
 	
 	
 	
-	
 	String setDefaultRole(String id) throws Exception;
 	
 	void giveRole(ChannelRoleVO vo) throws Exception;
 	
 	ChannelRoleVO getRole(ChannelRoleVO vo) throws Exception;
+	
+	String getDefaultRole(String channelId) throws Exception;
+	
+	
+	
+	int subscribe(SubscribeVO vo) throws Exception;
+	
+	int unsubscribe(SubscribeVO vo) throws Exception;
+	
+	Boolean isSubscribed(SubscribeVO vo) throws Exception;
 	
 	
 	

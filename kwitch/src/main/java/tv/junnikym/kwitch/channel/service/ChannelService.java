@@ -4,6 +4,7 @@ import java.util.List;
 
 import tv.junnikym.kwitch.channel.vo.ChannelRoleVO;
 import tv.junnikym.kwitch.channel.vo.ChannelVO;
+import tv.junnikym.kwitch.channel.vo.SubscribeVO;
 import tv.junnikym.kwitch.community.vo.CommunityMenuVO;
 
 public interface ChannelService {
@@ -13,5 +14,13 @@ public interface ChannelService {
 	ChannelRoleVO getRole(ChannelRoleVO vo) throws Exception;
 	
 	List<ChannelVO> getNewChannel() throws Exception;
+	
+	/* Subscribe */
+	
+	int subscribe(SubscribeVO vo) throws Exception;
+	
+	int unsubscribe(SubscribeVO vo) throws Exception;
+	
+	Boolean isSubscribed(SubscribeVO vo) throws Exception;
 	
 }

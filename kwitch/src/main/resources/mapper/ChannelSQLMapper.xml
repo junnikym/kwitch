@@ -57,12 +57,12 @@
     	INSERT INTO channel_role (
 		    channel_id, 
 		    authority,
-		    role_flag
+		    role_flag,
+		    is_default
 		) VALUES 
 		<if test='value != null and value != ""'>
-			( #{value}::UUID,     'ADMIN',     B'1111111111111111' ), 
-		    ( #{value}::UUID,     'USER',      B'0000000000111111' ), 
-		    ( #{value}::UUID,     'GUEST',     B'0000000000000001' );
+			( #{value}::UUID,     'ADMIN',     B'1111111111111111', FALSE ), 
+		    ( #{value}::UUID,     'USER',      B'0000000000111111', TRUE );
         </if>
         
         <selectKey keyProperty="value" resultType="String" order="AFTER">
@@ -121,6 +121,23 @@
     
     
     
+    <select id="getDefaultRole" parameterType="String" resultType="String" >
+    
+    	<if test=' value != null and value != "" '>
+    	
+    	SELECT role_id
+    	FROM channel_role
+    	WHERE 
+    		channel_id = #{value}::UUID
+    	AND is_default = TRUE
+    	
+    	</if>
+    
+    </select>
+    
+    
+    
+    
     
     <select id="getChannelIdByCommunityId" parameterType="String" resultType="String" >
     	
@@ -171,5 +188,39 @@
     
     
     
+    
+    <insert id="subscribe" parameterType="SubscribeVO">
+    
+    	INSERT INTO channel_subscribe (
+    		subscriber_id, channel_id
+    	) VALUES(
+    		#{subscriberId}::UUID, #{channelId}::UUID
+    	)
+    
+    </insert>
+
+    <delete id="unsubscribe" parameterType="SubscribeVO">
+    
+    	DELETE FROM 
+    		channel_subscribe
+    	WHERE
+    		subscriber_id = #{subscriberId}::UUID
+    	AND channel_id	  = #{channelId}::UUID
+    	
+    </delete>
+    
+    <select id="isSubscribed" parameterType="SubscribeVO" resultType="Boolean">
+    
+    	SELECT EXISTS (
+	    	SELECT * 
+	    	FROM channel_subscribe
+	    	WHERE
+	    		subscriber_id = #{subscriberId}::UUID
+	    	AND channel_id	  = #{channelId}::UUID
+	    )
+	    
+    </select>
+    
+
 
 </mapper>
