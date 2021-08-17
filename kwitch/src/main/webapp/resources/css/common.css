@@ -201,6 +201,10 @@ button:hover {
     background: center / contain no-repeat url("/resources/image/view_icon.png");
 }
 
+.video_upload_icon {
+	background: center / contain no-repeat url("/resources/image/video_upload_icon.png");
+}
+
 .live_stream_bg {
     position:absolute;
     top: -50px; left: -10%;

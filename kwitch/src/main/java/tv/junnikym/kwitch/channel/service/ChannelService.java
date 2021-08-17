@@ -14,7 +14,9 @@ public interface ChannelService {
 	ChannelRoleVO getRole(ChannelRoleVO vo) throws Exception;
 	
 	List<ChannelVO> getNewChannel() throws Exception;
-	
+
+	void grantRole(ChannelRoleVO vo) throws Exception;
+
 	/* Subscribe */
 	
 	int subscribe(SubscribeVO vo) throws Exception;
@@ -23,4 +25,5 @@ public interface ChannelService {
 	
 	Boolean isSubscribed(SubscribeVO vo) throws Exception;
 	
+	Integer nSubscribe(String channelId) throws Exception;
 }

@@ -62,6 +62,7 @@
 		const channelChatTemplate 			= `<%@ include file="/resources/template/channel/channelChat.jsp" %>`;
 		const channelChatItemTemplate 		= `<%@ include file="/resources/template/channel/channelChatItem.jsp" %>`;
 		const channelSimpleItemTemplate 	= `<%@ include file="/resources/template/channel/channelSimpleItem.jsp" %>`;
+		const channelVideoThumbItemTemplate = `<%@ include file="/resources/template/channel/channelVideoThumbItem.jsp" %>`;
 		
 		const communityTemplate				= `<%@ include file="/resources/template/community/community.jsp" %>`;
 		const communityHomeTemplate			= `<%@ include file="/resources/template/community/communityHome.jsp" %>`;
@@ -82,6 +83,7 @@
 	<script type="text/javascript" src="/resources/js/component/channel/channelChat.js"></script>
 	<script type="text/javascript" src="/resources/js/component/channel/channelChatItem.js"></script>
 	<script type="text/javascript" src="/resources/js/component/channel/channelSimpleItem.js"></script>
+	<script type="text/javascript" src="/resources/js/component/channel/channelVideoThumbItem.js"></script>
 	
 	<script type="text/javascript" src="/resources/js/component/community/communityPostItemSmall.js"></script>
 	
@@ -100,6 +102,7 @@
 		Vue.component('channel-simple-item-component', channelSimpleItemComponent);
 		Vue.component('channel-chat-item-component', channelChatItemComponent);
 		Vue.component('channel-chat-component', channelChatComponent);
+		Vue.component('channel-video-thumb-item-component', channelVideoThumbItemComponent);
 	</script>
 
 	<script type="text/javascript" src="/resources/js/index.js"></script>

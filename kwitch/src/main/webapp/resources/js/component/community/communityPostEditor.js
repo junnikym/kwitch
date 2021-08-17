@@ -152,6 +152,7 @@ const communityPostEditorComponent = {
   			})
           	.then(res => res.json())
           	.then(json => {
+          		this.$store.commit('connectCommunity', json.communityId);
           		
 				this.postContent = json;
 				this.prePostContent = this.postContent;
@@ -182,6 +183,8 @@ const communityPostEditorComponent = {
     	} 
     	
     	if(this.communityId){
+    		
+    		this.$store.commit('connectCommunity', this.$route.params.communityId);
     		
     		fetch('/api/community/' + this.communityId + '/menu', {
       		  	method: 'GET',

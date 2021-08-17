@@ -73,6 +73,25 @@
 
 
 
+<video id="my-video"
+			class="video-js vjs-theme-forest"
+			controls
+			preload="auto"
+			width="640"
+			height="264"
+			poster="MY_VIDEO_POSTER.jpg"
+			data-setup="{}">
+		
+		<source src="http://172.18.229.187/contents/5/0038275005/playlist.m3u8" type="application/x-mpegURL">
+	</video>
+
+	<script src="https://unpkg.com/video.js/dist/video.js"></script>
+	<script src="https://unpkg.com/videojs-flash/dist/videojs-flash.js"></script>
+	<script src="https://unpkg.com/videojs-contrib-hls/dist/videojs-contrib-hls.js"></script>
+
+
+
+
 
 
 
@@ -85,6 +104,25 @@
 <body>
 <h2>Select files to upload</h2>
 <form name="upload" method="POST" enctype="multipart/form-data" action="https://trainee-rdb-uomfa.run.goorm.io/upload">
+	<input type="file" name="file1"><br>
+	<input type="file" name="file2"><br>
+	<input type="file" name="file3"><br>
+	<input type="file" name="file4"><br>
+	<input type="file" name="file5"><br>
+	<input type="file" name="file6"><br>
+	<input type="submit" name="submit" value="Upload">
+	<input type="hidden" name="test" value="value">
+</form>
+</body>
+</html>
+
+<html>
+<head>
+	<title>Test upload</title>
+</head>
+<body>
+<h2>Select files to upload</h2>
+<form name="upload" method="POST" enctype="multipart/form-data" action="http://172.18.229.187/upload">
 	<input type="file" name="file1"><br>
 	<input type="file" name="file2"><br>
 	<input type="file" name="file3"><br>

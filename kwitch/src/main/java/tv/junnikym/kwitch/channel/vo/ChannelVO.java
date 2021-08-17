@@ -18,4 +18,6 @@ public class ChannelVO {
 	
 	private String profileImageExt;
 	
+	private Integer nSubscribe;
+	
 }

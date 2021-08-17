@@ -21,6 +21,7 @@
 		<typeAlias alias="CommunityPostHistoryVO" type="tv.junnikym.kwitch.community.vo.CommunityPostHistoryVO" />
 		
 		<typeAlias alias="ImageVO" type="tv.junnikym.kwitch.file.vo.ImageVO" />
+		<typeAlias alias="VideoVO" type="tv.junnikym.kwitch.file.vo.VideoVO" />
 		
 		<typeAlias alias="LiveStreamingVO" type="tv.junnikym.kwitch.liveStreaming.vo.LiveStreamingVO" />
 		

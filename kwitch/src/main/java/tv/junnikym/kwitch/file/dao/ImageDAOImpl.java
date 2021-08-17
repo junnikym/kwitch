@@ -1,5 +1,7 @@
 package tv.junnikym.kwitch.file.dao;
 
+import javax.annotation.Resource;
+
 import org.springframework.stereotype.Repository;
 
 import tv.junnikym.kwitch.file.vo.ImageVO;
@@ -8,6 +10,11 @@ import tv.junnikym.kwitch.util.AbstractMapper;
 @Repository("ImageDAO")
 public class ImageDAOImpl extends AbstractMapper implements ImageDAO {
 
+	@Resource(name="ImageDAO")
+	private ImageDAO imageDAO;
+	
+	
+	
 	@Override
 	public String upload(ImageVO vo) throws Exception {
 		insert("ImageDAO.upload", vo);

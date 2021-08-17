@@ -34,7 +34,7 @@ public class ChannelServiceImpl implements ChannelService {
 		communityService.setDefaultMenu(communityId);
 		
 		String roleId 		= channelDAO.setDefaultRole(channelId);
-		channelDAO.giveRole (
+		this.grantRole (
 				ChannelRoleVO.builder()
 						.memberId(vo.getOwnerId())
 						.channelId(channelId)
@@ -49,12 +49,14 @@ public class ChannelServiceImpl implements ChannelService {
 	public List<ChannelVO> getNewChannel() throws Exception {
 		return channelDAO.getNewChannel();
 	}
-	
-	
-	public void giveRole(ChannelRoleVO vo) throws Exception {
-		asdfasdfasdf
-		!!!!
-		//!TODO : 권한 추가 시 이미 존재 할 경우 추가 ㄴㄴ 그리고 DAO.giveRole 쓰는거 이걸로 다 바꾸기
+
+	@Override
+	public void grantRole(ChannelRoleVO vo) throws Exception {
+		ChannelRoleVO isExist = channelDAO.getRole(vo);
+
+		if(isExist == null) {
+			channelDAO.grantRole(vo);
+		}
 	}
 	
 
@@ -84,13 +86,13 @@ public class ChannelServiceImpl implements ChannelService {
 			
 			String roleId = channelDAO.getDefaultRole(vo.getChannelId());
 			
-			ChannelRoleVO roleVO = ChannelRoleVO.builder()
+			this.grantRole(
+				ChannelRoleVO.builder()
 					.memberId(vo.getSubscriberId())
 					.roleId(roleId)
 					.channelId(vo.getChannelId())
-					.build();
-			
-			channelDAO.giveRole(roleVO);
+					.build()
+			);
 			
 			return 1;
 		}
@@ -100,12 +102,23 @@ public class ChannelServiceImpl implements ChannelService {
 
 	@Override
 	public int unsubscribe(SubscribeVO vo) throws Exception {
-		return channelDAO.unsubscribe(vo);
+		return channelDAO.unsubscribe(vo)
+				+ channelDAO.revokeRole(
+					ChannelRoleVO.builder()
+						.memberId(vo.getSubscriberId())
+						.channelId(vo.getChannelId())
+						.build()
+				);
 	}
 
 	@Override
 	public Boolean isSubscribed(SubscribeVO vo) throws Exception {
 		return channelDAO.isSubscribed(vo);
+	}
+	
+	@Override
+	public Integer nSubscribe(String channelId) throws Exception {
+		return channelDAO.nSubscribe(channelId);
 	}
 	
 	

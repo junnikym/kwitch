@@ -1,59 +1,30 @@
+<!DOCTYPE html>
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
-<title>Insert title here</title>
+	<meta charset=utf-8 />
+	<title>hls.js</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<link href="https://vjs.zencdn.net/7.11.4/video-js.css" rel="stylesheet" />
+	<link href="https://unpkg.com/@videojs/themes@1/dist/forest/index.css" rel="stylesheet">
+
 </head>
-<body>
-    <div>
-        <input type="text" id="sender" style="display: none;">
-        <input type="text" id="messageinput">
-    </div>
-    <div>
-        <button type="button" onclick="openSocket();">Open</button>
-        <button type="button" onclick="send();">Send</button>
-        <button type="button" onclick="closeSocket();">Close</button>
-    </div>
-    <!-- Server responses get written here -->
-    <div id="messages">
-    
-    </div>
-    
-    <script type="text/javascript">
-        var ws;
-        var messages=document.getElementById("messages");
-        
-        function openSocket(){
-            if(ws!==undefined && ws.readyState!==WebSocket.CLOSED){
-                writeResponse("WebSocket is already opened.");
-                return;
-            }
-            //웹소켓 객체 만드는 코드
-            ws=new WebSocket("ws://localhost:8080/ws/chat");
-            
-            ws.onopen=function(event){
-                if(event.data===undefined) return;
-                
-                writeResponse(event.data);
-            };
-            
-            ws.onmessage=function(event){
-                writeResponse(event.data);
-            };
-        }
-        
-        function send(){
-        	console.log("send function");
-            
-            
-        }
-        
-        function closeSocket(){
-            ws.close();
-        }
-        
-        function writeResponse(text){
-            messages.innerHTML+="<br/>"+text;
-        }
-  </script>
+<body> 
+
+	<video id="my-video"
+			class="video-js vjs-theme-forest"
+			controls
+			preload="auto"
+			width="640"
+			height="264"
+			poster="MY_VIDEO_POSTER.jpg"
+			data-setup="{}">
+		
+		<source src="http://172.18.229.187/contents/4/0035260454/playlist.m3u8" type="application/x-mpegURL">
+	</video>
+
+	<script src="https://unpkg.com/video.js/dist/video.js"></script>
+	<script src="https://unpkg.com/videojs-flash/dist/videojs-flash.js"></script>
+	<script src="https://unpkg.com/videojs-contrib-hls/dist/videojs-contrib-hls.js"></script>
+	
 </body>
 </html>

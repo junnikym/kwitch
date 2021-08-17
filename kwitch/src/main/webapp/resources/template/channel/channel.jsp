@@ -100,6 +100,13 @@
 	
 				<div class="channel_video">
 					<h1> Video </h1>
+					
+					<a v-if="this.$store.state.member.id == member.id" 
+						class="video_upload_icon">
+					</a>
+					
+					<channel-video-thumb-item-component>
+					
 				</div>
 	
 				<div class="channel_community">
@@ -147,7 +154,7 @@
 		</div>
 		
 	</div>
-	
+	<!-- 
 	<channel-chat-component></channel-chat-component>
-
+	 -->
 </div>

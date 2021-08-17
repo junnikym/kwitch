@@ -34,8 +34,8 @@ public class ChannelDAOImpl extends AbstractMapper implements ChannelDAO {
 	}
 	
 	@Override
-	public void giveRole(ChannelRoleVO vo) throws Exception {
-		insert("ChannelDAO.giveRole", vo);
+	public void grantRole(ChannelRoleVO vo) throws Exception {
+		insert("ChannelDAO.grantRole", vo);
 	}
 
 	@Override
@@ -46,6 +46,11 @@ public class ChannelDAOImpl extends AbstractMapper implements ChannelDAO {
 	@Override
 	public String getDefaultRole(String channelId) throws Exception {
 		return selectOne("ChannelDAO.getDefaultRole", channelId);
+	}
+
+	@Override
+	public int revokeRole(ChannelRoleVO vo) throws Exception {
+		return delete("ChannelDAO.revokeRole", vo);
 	}
 	
 	/**
@@ -65,6 +70,11 @@ public class ChannelDAOImpl extends AbstractMapper implements ChannelDAO {
 	@Override
 	public Boolean isSubscribed(SubscribeVO vo) throws Exception {
 		return selectOne("ChannelDAO.isSubscribed", vo);
+	}
+	
+	@Override
+	public Integer nSubscribe(String channelId) throws Exception {
+		return selectOne("ChannelDAO.nSubscribe", channelId);
 	}
 	
 	/**

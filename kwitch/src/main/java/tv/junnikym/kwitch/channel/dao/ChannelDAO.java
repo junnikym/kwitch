@@ -16,12 +16,13 @@ public interface ChannelDAO {
 	
 	String setDefaultRole(String id) throws Exception;
 	
-	void giveRole(ChannelRoleVO vo) throws Exception;
+	void grantRole(ChannelRoleVO vo) throws Exception;
 	
 	ChannelRoleVO getRole(ChannelRoleVO vo) throws Exception;
 	
 	String getDefaultRole(String channelId) throws Exception;
-	
+
+	int revokeRole(ChannelRoleVO vo) throws Exception;
 	
 	
 	int subscribe(SubscribeVO vo) throws Exception;
@@ -29,6 +30,8 @@ public interface ChannelDAO {
 	int unsubscribe(SubscribeVO vo) throws Exception;
 	
 	Boolean isSubscribed(SubscribeVO vo) throws Exception;
+	
+	Integer nSubscribe(String channelId) throws Exception;
 	
 	
 	

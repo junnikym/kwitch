@@ -61,7 +61,7 @@ public class ChannelAPIController {
 	 * Subscribe
 	 */
 	
-	@RequestMapping(value = "/{channelId}/subscribe", method = RequestMethod.POST)
+	@RequestMapping(value = "/{channelId}/subscribe")
 	public void subscribe (
 			@PathVariable("channelId") String channelId, 
 			HttpServletRequest request, 
@@ -76,37 +76,15 @@ public class ChannelAPIController {
 				.build();
 		
 		try {
-			
-			int result = channelService.subscribe(vo);
-			if(result > 0) {
-				response.setStatus(200);
-				return;
-			}
-			
-		} catch(Exception e) {
-			e.printStackTrace();
-		}
-		
-		response.sendError(400, "Can Not Subscribe");
-	}
-	
-	@RequestMapping(value = "/{channelId}/unsubscribe", method = RequestMethod.POST)
-	public void unsubscribe (
-			@PathVariable("channelId") String channelId, 
-			HttpServletRequest request, 
-			HttpServletResponse response, 
-			HttpSession session
-	) throws Exception {
 
-		SubscribeVO vo = SubscribeVO.builder()
-				.channelId(channelId)
-//				.subscriberId((String) session.getAttribute("member_id"))
-				.subscriberId("ca9a58c1-659c-4e0f-a42d-6afed2dae916")
-				.build();
-		
-		try {
-			
-			int result = channelService.unsubscribe(vo);
+			int result = 0;
+			if(request.getMethod().equals("POST")) {
+				result = channelService.subscribe(vo);
+			}
+			else if (request.getMethod().equals("DELETE")) {
+				result = channelService.unsubscribe(vo);
+			}
+
 			if(result > 0) {
 				response.setStatus(200);
 				return;
@@ -116,11 +94,11 @@ public class ChannelAPIController {
 			e.printStackTrace();
 		}
 		
-		response.sendError(400, "Can Not Unsubscribe");
+		response.sendError(400, "Can Not (Un)Subscribe");
 	}
 	
 	@ResponseBody
-	@RequestMapping(value = "/{channelId}/is_subscribed", method = RequestMethod.POST)
+	@RequestMapping(value = "/{channelId}/subscribe", method = RequestMethod.GET)
 	public Boolean isSubscribed (
 			@PathVariable("channelId") String channelId, 
 			HttpServletRequest request, 
