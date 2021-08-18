@@ -1,13 +1,22 @@
 
 <div id="search" class="app">
-
-	<div class="community_home_menu">
 	
-		<h2> Search </h2>
+		<h2 class="search_title"> Search </h2>
 		
 		<div class="horizontal_rule"></div>
 		
-		<a class="more_btn" v-on:click=""> more </a>
+	<div class="search_contents">
+		<h3> User </h3>
+		
+		<div class="sub_horizontal_rule"> </div>
+		
+		<div class="grid">
+			<channel-simple-item-component v-for="item in memberList" v-bind:channel="item"></channel-simple-item-component>			
+		</div>
+
+		<h3> Community Post </h3>
+		
+		<div class="sub_horizontal_rule"> </div>
 
 		<ul>
 

@@ -32,7 +32,7 @@ const LoginComponent = {
     	stageSwitch: function() {
             document.getElementsByClassName(this.stage+"_stage")[0].style.display = "none";
             this.stage=(this.stage=='login')?'captcha':'login';
-            document.getElementsByClassName(this.stage+"_stage")[0].style.display = "flex";
+            document.getElementsByClassName(this.stage+"_stage")[0].style.display = "table-cell";
     	},
     	
         checkAndLogin: function() {
@@ -125,7 +125,7 @@ const LoginComponent = {
 	    }
     },
 	mounted: function() {
-		this.resizeIframe();
+		
 	}
 };
 

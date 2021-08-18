@@ -6,6 +6,8 @@
     <insert id="upload" parameterType="VideoVO" useGeneratedKeys="true" keyProperty="id">
     
     	INSERT INTO video (
+    		video_title,
+    		video_text,
     		uploader_id,
     		video_name,
     		video_md5,
@@ -13,6 +15,8 @@
     		video_type,
     		video_size
     	) VALUES (
+    		#{title},
+    		#{text},
     		#{uploaderId}::UUID,
     		#{name},
     		#{md5},
@@ -28,6 +32,15 @@
     	SELECT VIDEO 
     
     -->
+    
+    <select id="getNewVideo">
+    	
+    	SELECT 
+    		video_id	AS id
+    		video_path	AS path;
+    	FROM 
+    	
+    </select>
     
     <delete id="deleteVideo" parameterType="String">
     

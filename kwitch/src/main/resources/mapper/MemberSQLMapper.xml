@@ -127,6 +127,37 @@
         </where>
 
     </select>
+    
+    
+    
+    
+    
+    <select id="getMemberBySearch" parameterType="String" resultType="MemberVO" >
+
+		SELECT 
+			m.member_id 		AS id,
+			
+			CASE WHEN m.member_alias IS NULL OR m.member_alias = ''
+				THEN m.member_name
+				ELSE m.member_alias
+			END AS alias,
+			
+			i.image_path 		AS profileImagePath,
+        	i.image_extension 	AS profileImageExt,
+        	
+        	ch.channel_id 		AS ownChannelId 
+		
+		FROM 
+			member AS m
+			
+		LEFT JOIN image 	AS i 	ON m.member_profile_image 	= i.image_id 
+		LEFT JOIN channel 	AS ch 	ON m.member_id 				= ch.owner_id
+		
+		WHERE
+			m.member_name 	LIKE CONCAT('%', #{value}, '%')
+		OR 	m.member_alias 	LIKE CONCAT('%', #{value}, '%')
+    
+    </select>
 
 
 

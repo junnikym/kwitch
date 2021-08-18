@@ -1,5 +1,22 @@
 #search {
-	width : 50%;
+	width : 90%;
 	min-width: 650px;
+	max-width: 800px;
 	margin-top: 2em;
+}
+
+.search_contents {
+	display: flex;
+	flex-direction: column;
+	width: 90%;
+}
+
+.search_title {
+	width: 100%;
+	padding : 1em;
+	text-align: center;
+	margin : 0 auto;
+	background: #373737;
+	color: white;
+	
 }

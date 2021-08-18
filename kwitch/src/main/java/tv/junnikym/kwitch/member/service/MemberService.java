@@ -1,5 +1,7 @@
 package tv.junnikym.kwitch.member.service;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -17,6 +19,8 @@ public interface MemberService {
 	int regist(MemberVO vo) throws Exception;
 	
 	MemberVO getDetail(String id) throws Exception;
+	
+	List<MemberVO> getMemberBySearch(String query) throws Exception;
 	
 	void logout(HttpSession session) throws Exception;
 	

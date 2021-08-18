@@ -1,6 +1,7 @@
 package tv.junnikym.kwitch.member.service;
 
 import java.io.File;
+import java.util.List;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
@@ -53,6 +54,11 @@ public class MemberServiceImpl implements MemberService {
 	@Override
 	public MemberVO getDetail(String id) throws Exception {
 		return memberDAO.getDetail(id);
+	}
+	
+	@Override
+	public List<MemberVO> getMemberBySearch(String query) throws Exception {
+		return memberDAO.getMemberBySearch(query);
 	}
 	
 	@Override

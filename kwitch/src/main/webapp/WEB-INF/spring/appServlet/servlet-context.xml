@@ -39,9 +39,12 @@
 			</interceptor>
 	</interceptors>	
 	
-	<beans:bean id="chatHandler" class="tv.junnikym.kwitch.chat.handler.ChatHandler"/>
+	<beans:bean id="chatHandler" class="tv.junnikym.kwitch.chat.ws.ChatHandler"/>
 	<websocket:handlers>
 		<websocket:mapping handler="chatHandler" path="/ws/chat"/>
+		<websocket:handshake-interceptors>
+	       <beans:bean class="tv.junnikym.kwitch.chat.ws.ChatHandshakeInterceptor"/>
+		</websocket:handshake-interceptors>
 	</websocket:handlers>
 	
 </beans:beans>

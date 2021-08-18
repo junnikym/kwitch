@@ -96,6 +96,8 @@
 			<div class="channel_info_content">
 				<div class="channel_home">
 					<h1> Home </h1>
+					
+					<h1 class="channel_alias"> About {{member.alias}} </h1>
 				</div>
 	
 				<div class="channel_video">
@@ -105,7 +107,9 @@
 						class="video_upload_icon">
 					</a>
 					
-					<channel-video-thumb-item-component>
+					<div class="grid">
+						<channel-video-thumb-item-component></channel-video-thumb-item-component>
+					</div>
 					
 				</div>
 	
@@ -154,7 +158,7 @@
 		</div>
 		
 	</div>
-	<!-- 
-	<channel-chat-component></channel-chat-component>
-	 -->
+
+	<channel-chat-component v-bind:channelId="member?.ownChannelId"></channel-chat-component>
+
 </div>

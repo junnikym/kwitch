@@ -1,9 +1,8 @@
 package tv.junnikym.kwitch.member.dao;
 
 import java.util.HashMap;
-import java.util.Map;
+import java.util.List;
 
-import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
 import tv.junnikym.kwitch.member.vo.LoginVO;
@@ -33,6 +32,11 @@ public class MemberDAOImpl extends AbstractMapper implements MemberDAO {
 		return selectOne("MemberDAO.getDetail", id);
 	}
 
+	@Override
+	public List<MemberVO> getMemberBySearch(String query) throws Exception {
+		return selectList("MemberDAO.getMemberBySearch",query);
+	}
+	
 	@Override
 	public int setProfileImage(
 			String memberId, 

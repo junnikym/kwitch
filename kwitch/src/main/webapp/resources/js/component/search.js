@@ -3,6 +3,7 @@ const searchComponent = {
     store: gStore,
     props: ['searchQuery'],
     data() { return {
+    	memberList: [],
         postList: [],
     }},
     methods: {
@@ -17,7 +18,8 @@ const searchComponent = {
     		})
           	.then(res=>res.json())
           	.then(json => {
-    			this.postList = json;
+    			this.memberList = json["member"];
+    			this.postList = json["community"];
           	})
           	.catch(err => console.log(err))
     	}

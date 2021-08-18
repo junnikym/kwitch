@@ -7,6 +7,6 @@
         <img v-else src="/resources/image/kwitch_background_icon.png" class="user_profile_img" />
     </div>
 
-    <h3 v-on:click="$router.push('/channel/'+channel.ownerId)"> {{channel.title}} </h3>
+    <h3 v-on:click="$router.push('/channel/'+channel.ownerId)"> {{channel.alias}} </h3>
 
 </div>

@@ -2,7 +2,7 @@ const ChannelComponent = {
     template: channelTemplate,
 	store: gStore,
     data() { return {
-        navCursor: 'about',
+        navCursor: 'video',
         profileImageSetter: false,
 	    profileImageURL: '/resources/image/user_icon.png',
 	    member: {},
@@ -87,9 +87,6 @@ const ChannelComponent = {
     },
 
     mounted() {
-        document.getElementsByClassName("channel_"+this.navCursor)[0].style.display = "flex";
-        document.getElementById(this.navCursor+'_btn').className += ' active';
-
 	    fetch('/api/user/' + this.$route.params.id, {
 		    method: 'GET',
 		    headers: {
@@ -119,6 +116,10 @@ const ChannelComponent = {
 	    })
 	    .then(() => {
 	    	initMenu("#myMenu");
+	    	
+	    	document.getElementsByClassName("channel_"+this.navCursor)[0].style.display = "flex";
+	        document.getElementById(this.navCursor+'_btn').className += ' active';
+	        
 		    videojs(this.$refs.streamingVideo);
 	    })
 	    .catch(err => console.log(err));

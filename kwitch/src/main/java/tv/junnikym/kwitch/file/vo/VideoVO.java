@@ -19,6 +19,10 @@ public class VideoVO {
 
 	private String id;
 	
+	private String title;
+	
+	private String text;
+	
 	private String name;
 	
 	private String md5;

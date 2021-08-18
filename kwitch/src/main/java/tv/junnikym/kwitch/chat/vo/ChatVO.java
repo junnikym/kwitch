@@ -15,9 +15,23 @@ import lombok.NoArgsConstructor;
 @JsonAutoDetect(fieldVisibility = JsonAutoDetect.Visibility.ANY)
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class ChatVO {
-
-	private String sender;
 	
-	private String message;
+	private String id;
+
+	private String writerId;
+	
+	private String channelId;
+	
+	private String text;
+	
+	
+	
+	private String createdAt;
+	
+	private Boolean is_deleted;
+	
+	
+	
+	private String error;
 	
 }

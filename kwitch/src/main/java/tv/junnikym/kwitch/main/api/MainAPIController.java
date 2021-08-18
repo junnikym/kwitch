@@ -1,6 +1,7 @@
-package tv.junnikym.kwitch.api;
+package tv.junnikym.kwitch.main.api;
 
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
@@ -13,38 +14,26 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import tv.junnikym.kwitch.channel.service.ChannelService;
-import tv.junnikym.kwitch.community.service.CommunityService;
 import tv.junnikym.kwitch.community.vo.CommunityPostVO;
+import tv.junnikym.kwitch.main.service.MainService;
 
 @Controller
 @RequestMapping(value = "/api")
 public class MainAPIController {
 	
-	@Resource(name = "CommunityService")
-	CommunityService communityService;
-	
-	@Resource(name = "ChannelService")
-	ChannelService channelService;
-	
-
+	@Resource(name = "MainService")
+	MainService mainService;
 	
 	@ResponseBody
 	@RequestMapping(value = "/q/{searchQuery}", method = RequestMethod.GET)
-	public List<CommunityPostVO> getPostBySearch (
+	public Map<String, List<?>> getPostBySearch (
 			@PathVariable("searchQuery") String query,
 			HttpServletRequest request, 
 			HttpServletResponse response, 
 			HttpSession session
 	) throws Exception {
 		
-		CommunityPostVO vo = CommunityPostVO.builder()
-											.title(query)
-											.menuId( (String) request.getParameter("menu") )
-											.communityId( (String) request.getParameter("community") )
-											.build();
-
-		return communityService.getPostListBySearch(vo);
+		return mainService.search(query, request);
 	}
 	
 }

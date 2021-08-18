@@ -199,7 +199,7 @@
 		WHERE
 		   	cm.menu_id = #{value}::UUID
 		   	
-		ORDER BY cp.created_at ASC
+		ORDER BY cp.created_at DESC
     
     	</if>
     
@@ -264,7 +264,7 @@
 		   	AND cp.community_id = #{communityId}::UUID
 		   	</if>
 		   	
-		ORDER BY cp.created_at ASC;
+		ORDER BY cp.created_at DESC;
     
     	</if>
     
@@ -498,7 +498,7 @@
 		WHERE
 		   	ch.community_id = #{value}::UUID
 
-		ORDER BY ch.priority ASC, cp.created_at ASC
+		ORDER BY ch.priority ASC, cp.created_at DESC
 		
 		</if>
     	
@@ -525,7 +525,7 @@
 		WHERE
 			ch.community_id = #{value}::UUID
 			
-		ORDER BY ch.priority ASC
+		ORDER BY ch.priority DESC
 		
 		</if>
 

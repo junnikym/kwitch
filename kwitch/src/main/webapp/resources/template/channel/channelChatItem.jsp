@@ -1,3 +1,3 @@
 <div class="channel_chat_item">
-	-> {{item.message}}
+	-> {{item.text}}
 </div>

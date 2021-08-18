@@ -270,8 +270,12 @@
 #channelVideoThumbItem {
 	display:flex;
 	flex-direction: column;
-	width: 220px;
+	width: 210px;
 	justify-content: center;
+}
+
+.channel_info_content .grid {
+	grid-template-columns: repeat(auto-fit, 210px);	
 }
 
 .channel_video_thumb_item_thumb {
@@ -290,15 +294,20 @@
 }
 
 .channel_video_thumb_item_sub_info {
-	width : 150px;
+	width : 100%;
 }
 
 .channel_video_thumb_item_sub_info div {
 	width : 100%;
 }
 
-.channel_video_thumb_item_sub_info .clock, 
-.channel_video_thumb_item_sub_info .view {
-	left : 0;
-	width : 30px; height: 30px;
+.channel_video_thumb_item_title {
+	margin: 0;
+	padding: 5px 0 5px 0;
+}
+
+.channel_video_thumb_item_sub_info .clock_icon, 
+.channel_video_thumb_item_sub_info .view_icon {
+	width: 20px;
+	height: 20px;
 }

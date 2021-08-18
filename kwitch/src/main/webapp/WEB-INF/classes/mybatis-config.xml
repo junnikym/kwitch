@@ -15,6 +15,8 @@
 		<typeAlias alias="ChannelRoleVO" type="tv.junnikym.kwitch.channel.vo.ChannelRoleVO" />
 		<typeAlias alias="SubscribeVO" type="tv.junnikym.kwitch.channel.vo.SubscribeVO" />
 		
+		<typeAlias alias="ChatVO" type="tv.junnikym.kwitch.channel.vo.SubscribeVO" />
+		
 		<typeAlias alias="CommunityVO" type="tv.junnikym.kwitch.community.vo.CommunityVO" />
 		<typeAlias alias="CommunityMenuVO" type="tv.junnikym.kwitch.community.vo.CommunityMenuVO" />
 		<typeAlias alias="CommunityPostVO" type="tv.junnikym.kwitch.community.vo.CommunityPostVO" />
