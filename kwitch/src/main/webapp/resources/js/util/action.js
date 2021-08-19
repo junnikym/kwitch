@@ -1,25 +1,27 @@
-const Modals = document.querySelectorAll("[data-modal]");
+function update_modal() {
+    const Modals = document.querySelectorAll("[data-modal]");
 
-Modals.forEach(function (trigger) {
-	console.log("trigger is ", trigger);
-	
-  trigger.addEventListener("click", function (event) {
-    event.preventDefault();
-    
-    const modal = document.getElementById(trigger.dataset.modal);
-    modal.classList.add("open");
-    
-    const exits = modal.querySelectorAll(".modal-exit");
-    exits.forEach(function (exit) {
-      exit.addEventListener("click", function (event) {
-        event.preventDefault();
-        modal.classList.remove("open");
-      });
+    Modals.forEach(function (trigger) {
+        console.log("trigger is ", trigger);
+
+        trigger.addEventListener("click", function (event) {
+            event.preventDefault();
+
+            const modal = document.getElementById(trigger.dataset.modal);
+            modal.classList.add("open");
+
+            const exits = modal.querySelectorAll(".modal-exit");
+            exits.forEach(function (exit) {
+                exit.addEventListener("click", function (event) {
+                    event.preventDefault();
+                    modal.classList.remove("open");
+                });
+            });
+
+        });
+
     });
-    
-  });
-  
-});
+}
 
 function dp_menu(){
     let click = document.getElementById("drop-content");

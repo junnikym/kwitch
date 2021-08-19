@@ -1,5 +1,6 @@
 
 <div id="channel">
+	<channel-video-upload-component></channel-video-upload-component>
 	
 	<div id="live_streaming">
 		<div class="live_stream_bg chat_switched_elem">
@@ -56,7 +57,7 @@
 						</div>
 					</div>
 				</td>
-	
+
 				<!--  Profile Letter Infomation In Header  -->
 	
 				<td class="channel_header__letter" colspan="2">
@@ -108,18 +109,12 @@
 	
 				<div class="channel_video">
 					<h1> Video </h1>
-					
-					<a v-if="this.$store.state.member.id == member.id" 
-						class="video_upload_icon">
-					</a>
+
+					<a v-if="this.$store.state.member.id == member.id"
+					   class="video_upload_icon"
+					   data-modal="modal-video-upload"></a>
 					
 					<div class="grid">
-						<channel-video-thumb-item-component></channel-video-thumb-item-component>
-						<channel-video-thumb-item-component></channel-video-thumb-item-component>
-						<channel-video-thumb-item-component></channel-video-thumb-item-component>
-						<channel-video-thumb-item-component></channel-video-thumb-item-component>
-						<channel-video-thumb-item-component></channel-video-thumb-item-component>
-						<channel-video-thumb-item-component></channel-video-thumb-item-component>
 						<channel-video-thumb-item-component></channel-video-thumb-item-component>
 					</div>
 					

@@ -87,6 +87,8 @@ const homeVue = new Vue({
         .then(json => {
         	if(json)
         		this.$store.commit('setMember', {member: json})
+
+	        update_modal();
         })
         .catch(err => console.log(err))
 		

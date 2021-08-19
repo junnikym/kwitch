@@ -247,7 +247,7 @@
 	margin: 2em;
 	top: 65px + 2em;
 	right: -35px;
-	z-index: 99999;
+	z-index: 999;
 	animation: chat_switch_slide_chat_to_origin 0.25s forwards;
 }
 
@@ -487,4 +487,9 @@
 	    margin-top: 1060px;
 	    max-width: 100%;
 	}
+}
+
+#channelVideoUpload .cloud_upload_icon {
+	width: 400px;
+	height: 300px;
 }

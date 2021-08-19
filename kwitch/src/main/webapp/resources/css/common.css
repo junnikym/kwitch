@@ -161,11 +161,11 @@ button:hover {
 	 align-items: center;
 	 justify-content: center;
 }
- .modal.open, #login {
+ .modal.open, #login, #channelVideoUpload {
 	 visibility: visible;
 	 opacity: 1;
 	 transition-delay: 0s;
-	 z-index: 999;
+	 z-index: 999999999;
 }
  .modal-bg {
 	 position: absolute;
@@ -211,6 +211,9 @@ button:hover {
 .page_move_icon {
 	background: center / contain no-repeat url("/resources/image/page_move_icon.png");
 }
+.cloud_upload_icon {
+    background: center / contain no-repeat url("/resources/image/cloud_upload_icon.png");
+}
 
 .grid {
 	display: grid;
@@ -220,4 +223,51 @@ button:hover {
     grid-auto-rows: minmax(150px, auto);
     grid-gap: 8px;
     justify-content: center;
+}
+
+
+.drag-area{
+    border: 2px dashed #fff;
+    height: 500px;
+    width: 700px;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+.drag-area.active{
+    border: 2px solid #fff;
+}
+.drag-area .icon{
+    font-size: 100px;
+    color: #fff;
+}
+.drag-area header{
+    font-size: 30px;
+    font-weight: 500;
+    color: #fff;
+}
+.drag-area span{
+    font-size: 25px;
+    font-weight: 500;
+    color: #fff;
+    margin: 10px 0 15px 0;
+}
+.drag-area button{
+    padding: 10px 25px;
+    font-size: 20px;
+    font-weight: 500;
+    border: none;
+    outline: none;
+    background: #fff;
+    color: #5256ad;
+    border-radius: 5px;
+    cursor: pointer;
+}
+.drag-area img{
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+    border-radius: 5px;
 }

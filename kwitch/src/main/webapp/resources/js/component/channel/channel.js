@@ -170,6 +170,9 @@ const ChannelComponent = {
 		    videojs(this.$refs.streamingVideo);
 		    
 		    this.setChatMode(this.isChatMode);
+	    }).then(() => {
+		    console.log("asdfasdf ----- ")
+		    update_modal();
 	    })
 	    .catch(err => console.log(err));
     },
