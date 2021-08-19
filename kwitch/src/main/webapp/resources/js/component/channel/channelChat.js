@@ -24,7 +24,7 @@ const channelChatComponent = {
     			if(this.ws!==undefined && this.ws?.readyState!==WebSocket?.CLOSED) 
     				this.ws.close();
     			
-    	        this.ws=new WebSocket("ws://localhost:8080/ws/chat?channel="+this.channelId);
+    	        this.ws=new WebSocket("ws://192.168.0.37:8080/ws/chat?channel="+this.channelId);
     	        
     	        this.ws.onopen=function(event){
     	            if(event.data===undefined) return;

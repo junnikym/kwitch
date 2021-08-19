@@ -6,6 +6,8 @@ const ChannelComponent = {
         profileImageSetter: false,
 	    profileImageURL: '/resources/image/user_icon.png',
 	    member: {},
+	    isChatMode: true,
+	    preChatModeMenu: null,
     }},
     methods: {
     	
@@ -83,10 +85,55 @@ const ChannelComponent = {
 		
 		goToCommunity: function() {
 			this.$router.push("/c/"+this.member.ownCommunityId);
-		}
+		},
+		
+		setChatMode: function(io) {
+			this.isChatMode = io;
+			
+			if(this.isChatMode) {
+				this.preChatModeMenu = this.navCursor;
+				this.changeNav("home");
+				
+				document.querySelectorAll("#channel .chat_switched_elem").forEach(elem => {
+					elem.classList.add("chat_mode")
+				});
+				
+				document.querySelector(".m-active").classList.add("hidden");
+				
+				document.querySelector(".channel_info").classList.add("chat_switch_slide");
+				document.querySelector(".video-js").classList.add("chat_switch_video_slide");
+				document.querySelector("#channelChat").classList.add("chat_switch_chat_slide");
+			}
+			else {
+				console.log(this.preChatModeMenu)
+				
+				if(this.preChatModeMenu != null) 
+					this.changeNav(this.preChatModeMenu);
+				
+				this.changeNav(this.navCursor);
+				
+				document.querySelectorAll("#channel .chat_switched_elem").forEach(elem => {
+					elem.classList.remove("chat_mode")
+				});
+				
+				document.querySelector(".m-active").classList.remove("hidden");
+				
+				document.querySelector(".channel_info").classList.remove("chat_switch_slide");
+				document.querySelector(".video-js").classList.remove("chat_switch_video_slide");
+				document.querySelector("#channelChat").classList.remove("chat_switch_chat_slide");
+				
+				initMenu("#myMenu");
+			}
+		},
+		
+		chatModeToggle: function() {
+			this.setChatMode(this.isChatMode?false:true);
+		},
+		
     },
 
     mounted() {
+    	
 	    fetch('/api/user/' + this.$route.params.id, {
 		    method: 'GET',
 		    headers: {
@@ -121,6 +168,8 @@ const ChannelComponent = {
 	        document.getElementById(this.navCursor+'_btn').className += ' active';
 	        
 		    videojs(this.$refs.streamingVideo);
+		    
+		    this.setChatMode(this.isChatMode);
 	    })
 	    .catch(err => console.log(err));
     },
@@ -129,6 +178,10 @@ const ChannelComponent = {
 		if (this.$refs.streamingVideo) {
 			this.$refs.streamingVideo.dispose()
 		}
+		
+		document.querySelectorAll("#channel .chat_switched_elem").forEach(elem => {
+			elem.classList.remove("chat_mode");
+		})
 	}
     
 };

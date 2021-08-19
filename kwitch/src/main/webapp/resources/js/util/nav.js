@@ -1,4 +1,7 @@
 function initMenu(elem, isH){
+	
+	elemObj = document.querySelector(elem);
+	console.log(elem, " -> ", elemObj);
 
     // function that returns m-active element on active link
     returnToActiveElement();
@@ -16,7 +19,7 @@ function initMenu(elem, isH){
             }
             else {
             	size = e.offsetWidth;
-                length = e.offsetLeft;
+                length = e.getBoundingClientRect().left-elemObj.getBoundingClientRect().left;
             }
              // find m-active element and give him width and left offset of active link
             var active_menu_slider = document.querySelectorAll(elem + " .m-active");
@@ -48,7 +51,7 @@ function initMenu(elem, isH){
             }
             else {
             	size = e.offsetWidth;
-                length = e.offsetLeft;
+                length = e.getBoundingClientRect().left-elemObj.getBoundingClientRect().left;
             }
 
             // find m-active element and give him width and left offset of hover link

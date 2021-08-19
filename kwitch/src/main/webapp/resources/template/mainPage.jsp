@@ -30,13 +30,29 @@
 		<div class="main_page_hot_post_list">
 		</div>
 
-		<div>adsfasdfasdfasdfsa</div>
+		<div class="grid main_page_video">
+			<channel-video-thumb-item-component></channel-video-thumb-item-component>
+			<channel-video-thumb-item-component></channel-video-thumb-item-component>
+			<channel-video-thumb-item-component></channel-video-thumb-item-component>
+			<channel-video-thumb-item-component></channel-video-thumb-item-component>
+			<channel-video-thumb-item-component></channel-video-thumb-item-component>
+			<channel-video-thumb-item-component></channel-video-thumb-item-component>
+			<channel-video-thumb-item-component></channel-video-thumb-item-component>
+		</div>
 		
 		<h1 class="main_page_header"> New Video </h1>
 		<div class="main_page_hot_post_list">
 		</div>
 
-		<div>adsfasdfasdfasdfsa</div>
+		<div class="grid main_page_video">
+			<channel-video-thumb-item-component></channel-video-thumb-item-component>
+			<channel-video-thumb-item-component></channel-video-thumb-item-component>
+			<channel-video-thumb-item-component></channel-video-thumb-item-component>
+			<channel-video-thumb-item-component></channel-video-thumb-item-component>
+			<channel-video-thumb-item-component></channel-video-thumb-item-component>
+			<channel-video-thumb-item-component></channel-video-thumb-item-component>
+			<channel-video-thumb-item-component></channel-video-thumb-item-component>
+		</div>
 	</div>
 
 </div>

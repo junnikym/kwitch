@@ -27,7 +27,8 @@
  .menu ul li {
 	 z-index: 100;
 }
- .menu ul li a {
+ .menu ul li a, 
+ .menu_sub_btn {
 	 display: block;
 	 text-decoration: none;
 	 padding: 15px 20px;

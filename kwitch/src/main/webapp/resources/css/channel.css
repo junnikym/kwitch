@@ -22,20 +22,20 @@
 }
 
 .channel_info {
-	position: relative; margin : 0;
+	position: absolute; margin : 0;
 	width : 100%;
 	margin-top: 520px;
 	align-items: start;
     justify-content: center;
     min-width : var(--channel-header-min);
 	max-width : var(--channel-header-max);
-	width: 100%;
-    
+	width: 100%; 
+	padding: 2em;
+	animation: chat_switch_slide_to_origin 0.25s forwards;
 }
 
 .channel_header {
-	min-width : var(--channel-header-min);
-	max-width : var(--channel-header-max);
+	width: 100%
 }
 
 .user_profile_img_wapper__channel {
@@ -221,6 +221,23 @@
 	height: 100px;
 }
 
+#chat_btn {
+	position: absolute;
+	display: flex;
+	flex-direction: row;
+	right: 0;
+	
+	align-items: center;
+	justify-content: center;
+	
+	width: 120px;
+}
+
+#chat_btn .page_move_icon {
+	height: 40px; width: 40px; 
+	filter: invert(100%);
+}
+
 #channelChat {
 	position: fixed;
 	display:flex;
@@ -229,8 +246,9 @@
 	width: 350px;
 	margin: 2em;
 	top: 65px + 2em;
-	right: 0;
+	right: -35px;
 	z-index: 99999;
+	animation: chat_switch_slide_chat_to_origin 0.25s forwards;
 }
 
 #channel_chat_viewer {
@@ -250,6 +268,10 @@
 .channel_chat_input {
 	height: 120px;
 	width: 100%;
+}
+
+#chat_btn {
+	color: white;
 }
 
 .channel_chat_input input {
@@ -275,6 +297,7 @@
 }
 
 .channel_info_content .grid {
+	margin: 1em;
 	grid-template-columns: repeat(auto-fit, 210px);	
 }
 
@@ -310,4 +333,158 @@
 .channel_video_thumb_item_sub_info .view_icon {
 	width: 20px;
 	height: 20px;
+}
+
+.channel_info .chat_switched_elem {
+	transform-origin: 0 0;
+	transform:scale(1.0);
+	animation: fadein 0.25s forwards;
+	overflow:hidden;
+}
+.channel_info .chat_mode {
+	transform-origin: 0 0;
+	animation: fadeout 0.25s forwards;
+}
+
+@keyframes fadeout {
+    from {
+        opacity: 1;
+        transform:scale(0);
+    }
+    to {
+        opacity: 0;
+        transform:scale(1.0);
+        height: 0;
+    }
+}
+
+@keyframes fadein {
+    from {
+        opacity: 0;
+        transform:scale(0);
+    }
+    to {
+        opacity: 1;
+        transform:scale(1.0);
+    }
+}
+
+.live_stream_bg {
+    position:absolute;
+    top: -50px; left: -10%;
+    width: 120%;
+    height: 570px;
+    background-color: black;
+    overflow: hidden;
+    transform: rotate(-2.5deg);
+    transform-origin: 50% 50%;
+    transition-duration: 0.25s;
+}
+.live_stream_bg #streamingVideo,
+.video-js {
+    position:absolute;
+    transform: rotate(2.5deg);
+    transform-origin: 50% 50%;
+    bottom: -20px;
+    transition-duration: 0.25s;
+}
+#live_streaming .chat_mode,
+.chat_mode .video-js {
+	transform: rotate(0deg);
+	left: 50%;
+	transform: translateX(-50%);
+	transition-duration: 0.25s;
+	transition-timing-function: ease-in;
+}
+.live_stream_bg .live_stream_wapper {
+    position:relative;
+    height: 100%;
+    width: 100%;
+    display:flex;
+    align-items: center;
+    justify-content: center
+}
+
+.chat_switch_slide {
+    position:absolute;
+    animation: chat_switch_slide 0.25s forwards;
+}  
+@keyframes chat_switch_slide {
+    from{
+    	left: 50%;
+		transform: translateX(-50%);
+    }
+   	to{
+   		left: 0;
+		transform: translateX(0);
+   	}
+}
+
+@keyframes chat_switch_slide_to_origin {
+    from{
+   		left: 0;
+		transform: translateX(0);
+   	}
+    to{
+    	left: 50%;
+		transform: translateX(-50%);
+    }
+}
+
+#channel .chat_switch_video_slide {
+	position:absolute;
+    animation: chat_switch_slide_video 0.25s forwards;
+}
+@keyframes chat_switch_slide_video {
+    from{
+    	left: 50%;
+		transform: translateX(-50%);
+    }
+   	to{
+   		left: 10%;
+		transform: translateX(0);
+   	}
+}
+
+#channel .chat_switch_chat_slide {
+	position: fixed;
+    animation: chat_switch_slide_chat 0.25s forwards;
+    display: flex;
+}
+
+@keyframes chat_switch_slide_chat {
+    from{
+    	right: -35px;
+		transform: translateX(100%);
+    }
+   	to{
+   		right: 0;
+		transform: translateX(0);
+   	}
+}
+@keyframes chat_switch_slide_chat_to_origin {
+    from{
+    	right: 0;
+		transform: translateX(0);
+    }
+   	to{
+   		right: -35px;
+		transform: translateX(100%);
+   	}
+}
+
+@media (max-width: 1250px) {
+	#channel .chat_switch_chat_slide {
+		margin-top: 540px;
+		position: relative;
+		animation: chat_switch_slide_chat 0.25s forwards;
+		display: flex;
+		height: 500px; width: 100%;
+	}
+	
+	.chat_switch_slide {
+		position: absolute;
+	    margin-top: 1060px;
+	    max-width: 100%;
+	}
 }

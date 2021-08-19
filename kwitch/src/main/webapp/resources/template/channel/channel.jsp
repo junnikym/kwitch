@@ -1,18 +1,22 @@
 
 <div id="channel">
 	
-	<div class="live_stream_bg">
-		<div class="live_stream_wapper">
-			<video id="streamingVideo" ref="streamingVideo" width=960 height=540 class="video-js vjs-theme-forest" controls preload="auto">
-			  <source
-					 src="https://trainee-rdb-uomfa.run.goorm.io/hls/stream.m3u8"
-					 type="application/x-mpegURL"
-					 crossorigin="use-credentials">
-			</video>
+	<div id="live_streaming">
+		<div class="live_stream_bg chat_switched_elem">
+			<div class="live_stream_wapper">
+				<video id="streamingVideo" ref="streamingVideo" width=960 height=540 class="video-js vjs-theme-forest chat_switched_elem" controls preload="auto">
+				  <source
+						 src="https://trainee-rdb-uomfa.run.goorm.io/hls/stream.m3u8"
+						 type="application/x-mpegURL"
+						 crossorigin="use-credentials">
+				</video>
+			</div>
 		</div>
 	</div>
+	
+	<channel-chat-component v-bind:channelId="member?.ownChannelId"></channel-chat-component>
 
-	<div class="channel_info" >
+	<div class="channel_info " >
 	
 		<!--------------------------------------------------------------
 				[ Profile Header ]
@@ -75,7 +79,7 @@
 				[ Profile Detail Infomation ]
 		 -------------------------------------------------------------->
 	
-		<div class="channel_info_content_wapper">
+		<div class="channel_info_content_wapper chat_switch_none_slide">
 	
 			<!--  Slider Navigation Menu  -->
 	
@@ -84,12 +88,14 @@
 					<div class="m-active"></div>
 	
 					<li v-if="member.ownChannelId"><a v-on:click="changeNav('home')" id="home_btn">Home</a></li>
-					<li v-if="member.ownChannelId"><a v-on:click="changeNav('video')" id="video_btn">Video</a></li>
+					<li class="chat_switched_elem" v-if="member.ownChannelId"><a v-on:click="changeNav('video')" id="video_btn">Video</a></li>
 	
-					<li v-if="member.ownCommunityId"><a v-on:click="changeNav('community')" id="community_btn">Community</a></li>
+					<li class="chat_switched_elem" v-if="member.ownCommunityId"><a v-on:click="changeNav('community')" id="community_btn">Community</a></li>
 	
-					<li><a v-on:click="changeNav('about')" id="about_btn">About</a></li>
-					<li><a v-on:click="changeNav('contact')" id="contact_btn" >Contact</a></li>
+					<li class="chat_switched_elem"><a v-on:click="changeNav('about')" id="about_btn">About</a></li>
+					<li class="chat_switched_elem"><a v-on:click="changeNav('contact')" id="contact_btn" >Contact</a></li>
+					
+					<li v-on:click="chatModeToggle" class="menu_sub_btn" id="chat_btn">Chat <div class="page_move_icon"></div> </li>
 				</ul>
 			</nav>
 	
@@ -108,6 +114,12 @@
 					</a>
 					
 					<div class="grid">
+						<channel-video-thumb-item-component></channel-video-thumb-item-component>
+						<channel-video-thumb-item-component></channel-video-thumb-item-component>
+						<channel-video-thumb-item-component></channel-video-thumb-item-component>
+						<channel-video-thumb-item-component></channel-video-thumb-item-component>
+						<channel-video-thumb-item-component></channel-video-thumb-item-component>
+						<channel-video-thumb-item-component></channel-video-thumb-item-component>
 						<channel-video-thumb-item-component></channel-video-thumb-item-component>
 					</div>
 					
@@ -158,7 +170,5 @@
 		</div>
 		
 	</div>
-
-	<channel-chat-component v-bind:channelId="member?.ownChannelId"></channel-chat-component>
 
 </div>

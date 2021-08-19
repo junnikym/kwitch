@@ -39,6 +39,9 @@ li {
     height: calc(100vh - 65px);
 }
 
+.hidden {
+	display: none;
+}
 
 #header {
 	height: 65px;
@@ -205,29 +208,8 @@ button:hover {
 	background: center / contain no-repeat url("/resources/image/video_upload_icon.png");
 }
 
-.live_stream_bg {
-    position:absolute;
-    top: -50px; left: -10%;
-    width: 120%;
-    height: 570px;
-    background-color: black;
-    overflow: hidden;
-    transform: rotate(-2.5deg);
-    transform-origin: 50% 50%;
-}
-.live_stream_bg .live_stream_wapper {
-    position:relative;
-    height: 100%;
-    width: 100%;
-    display:flex;
-    align-items: center;
-    justify-content: center
-}
-.live_stream_bg #streamingVideo {
-    position:absolute;
-    transform: rotate(2.5deg);
-    transform-origin: 50% 50%;
-    bottom: -20px;
+.page_move_icon {
+	background: center / contain no-repeat url("/resources/image/page_move_icon.png");
 }
 
 .grid {
