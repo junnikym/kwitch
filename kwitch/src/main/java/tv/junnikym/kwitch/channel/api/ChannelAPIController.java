@@ -61,6 +61,18 @@ public class ChannelAPIController {
 	 * Subscribe
 	 */
 	
+	@ResponseBody
+	@RequestMapping(value = "/{channelId}/subscribe", method = RequestMethod.GET)
+	public Integer nSubscribe (
+			@PathVariable("channelId") String channelId, 
+			HttpServletRequest request, 
+			HttpServletResponse response, 
+			HttpSession session
+	) throws Exception {
+		
+		return channelService.nSubscribe(channelId);
+	}
+	
 	@RequestMapping(value = "/{channelId}/subscribe")
 	public void subscribe (
 			@PathVariable("channelId") String channelId, 
@@ -71,8 +83,7 @@ public class ChannelAPIController {
 
 		SubscribeVO vo = SubscribeVO.builder()
 				.channelId(channelId)
-//				.subscriberId((String) session.getAttribute("member_id"))
-				.subscriberId("ca9a58c1-659c-4e0f-a42d-6afed2dae916")
+				.subscriberId((String) session.getAttribute("member_id"))
 				.build();
 		
 		try {
@@ -98,7 +109,7 @@ public class ChannelAPIController {
 	}
 	
 	@ResponseBody
-	@RequestMapping(value = "/{channelId}/subscribe", method = RequestMethod.GET)
+	@RequestMapping(value = "/{channelId}/is_subscribe", method = RequestMethod.GET)
 	public Boolean isSubscribed (
 			@PathVariable("channelId") String channelId, 
 			HttpServletRequest request, 
@@ -108,8 +119,7 @@ public class ChannelAPIController {
 
 		SubscribeVO vo = SubscribeVO.builder()
 				.channelId(channelId)
-//				.subscriberId((String) session.getAttribute("member_id"))
-				.subscriberId("ca9a58c1-659c-4e0f-a42d-6afed2dae916")
+				.subscriberId((String) session.getAttribute("member_id"))
 				.build();
 		
 		return channelService.isSubscribed(vo);

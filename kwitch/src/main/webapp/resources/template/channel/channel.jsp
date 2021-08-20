@@ -69,9 +69,25 @@
 					<td class="channel_header__letter"> subscriber </td>
 					<td><button class="btn" type="button" v-on:click="createChannel">Create Channel</button></td>
 			</tr>
-			<tr v-else>
-					<td colspan="2" class="channel_header__letter"> subscriber </td>
-					<td><button class="btn" type="button" v-on:click="goToCommunity">Go Community</button></td>
+			<tr v-else-if="member?.ownChannelId">
+			
+					<td colspan="2" class="channel_header__letter"> {{member.nsubscribe}} subscriber 
+						<button v-if="this.$store.state.member.id  
+										&& this.$store.state.member.id != member.id
+										&& isSubscribed == false" 
+								class="btn" type="button" 
+								v-on:click="subscribe">
+								Subscribe</button>
+								
+						<button v-if="this.$store.state.member.id 
+										&& this.$store.state.member.id != member.id 
+										&& isSubscribed == true" 
+								class="btn" 
+								type="button" 
+								v-on:click="unsubscribe">
+								Unsubscribe</button>
+					</td>
+					<td><button v-if="(member?.ownChannelId)" class="btn" type="button" v-on:click="goToCommunity">Go Community</button></td>
 			</tr>
 	
 		</table>

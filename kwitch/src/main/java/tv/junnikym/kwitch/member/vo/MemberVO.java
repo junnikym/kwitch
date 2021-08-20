@@ -42,6 +42,6 @@ public class MemberVO implements Serializable {
 	private String ownCommunityId;
 
 	
-	
+	private Integer nSubscribe;
 	
 }

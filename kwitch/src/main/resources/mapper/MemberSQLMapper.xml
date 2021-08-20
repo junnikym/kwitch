@@ -92,7 +92,8 @@
 
 
     <select id="getDetail" parameterType="String" resultType="MemberVO">
-
+		<if test='value != null and value != ""'>
+		
         SELECT
         	member_id			 AS id,
         	member_email		 AS email,
@@ -112,7 +113,9 @@
 
         	ch.channel_id		 AS ownChannelId,
 
-        	co.community_id		 AS ownCommunityId
+        	co.community_id		 AS ownCommunityId,
+        	
+        	( SELECT COUNT(*) FROM channel_subscribe AS cs WHERE cs.channel_id = ch.channel_id ) AS nSubscribe
 
         FROM member AS m
 
@@ -121,10 +124,10 @@
        	LEFT JOIN community AS co	ON ch.channel_id			= co.channel_id
 
         <where>
-        	<if test='value != null and value != ""'>
-        		AND member_id = #{value}::uuid
-        	</if>
+        	AND member_id = #{value}::uuid
         </where>
+        
+        </if>
 
     </select>
     

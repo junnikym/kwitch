@@ -1,4 +1,5 @@
 function update_modal() {
+	
     const Modals = document.querySelectorAll("[data-modal]");
 
     Modals.forEach(function (trigger) {

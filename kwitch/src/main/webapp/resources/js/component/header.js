@@ -16,5 +16,8 @@ const HeaderComponent = {
             })
             .catch(err => console.log(err))
         }
+    },
+    mounted() {
+    	update_modal();
     }
 };

@@ -8,6 +8,7 @@ const ChannelComponent = {
 	    member: {},
 	    isChatMode: true,
 	    preChatModeMenu: null,
+	    isSubscribed: false,
     }},
     methods: {
     	
@@ -123,12 +124,46 @@ const ChannelComponent = {
 				document.querySelector("#channelChat").classList.remove("chat_switch_chat_slide");
 				
 				initMenu("#myMenu");
+				update_modal();
 			}
 		},
 		
 		chatModeToggle: function() {
 			this.setChatMode(this.isChatMode?false:true);
 		},
+		
+		updateSubscribeNumber: function() {
+			fetch(`/api/channel/${this.member.ownChannelId}/subscribe/`, { method: 'GET' })
+	  		.then( res => res.json() )
+	  		.then( json => {
+	  			this.member.nsubscribe = json;
+	  		})
+			.catch(err => console.log(err))
+		},
+		
+		subscribe: function() {
+			fetch(`/api/channel/${this.member.ownChannelId}/subscribe/`, { method: 'POST' })
+	  		.then( res => {
+				if(res.status == 200) {
+					this.isSubscribed = true;
+					
+					this.updateSubscribeNumber();
+				}
+			})
+			.catch(err => console.log(err))
+		},
+		
+		unsubscribe: function() {
+			fetch(`/api/channel/${this.member.ownChannelId}/subscribe/`, { method: 'DELETE' })
+	  		.then( res => {
+				if(res.status == 200) {
+					this.isSubscribed = false;
+					
+					this.updateSubscribeNumber();
+				}
+			})
+			.catch(err => console.log(err))
+		}
 		
     },
 
@@ -143,6 +178,7 @@ const ChannelComponent = {
 	    .then(res=>res.json())
 	    .then(json => {
 		    this.member = json;
+		    console.log(this.member);
 
 		    if(this.member?.profileImagePath != null && this.member?.profileImageExt)
 		        this.profileImageURL = '/api/profile/image/'+this.member.profileImagePath+'/'+this.ember.profileImageExt;
@@ -160,6 +196,13 @@ const ChannelComponent = {
 		    	target.parentNode.removeChild(target);
 	        }
 		    
+		    if(this.$store.state.member.id != this.member.id) {
+		    	fetch(`/api/channel/${this.member.ownChannelId}/is_subscribe/`, { method: 'GET' })
+		  		.then( res => res.json())
+		  		.then( json => this.isSubscribed = json )
+				.catch(err => console.log(err))
+		    }
+		    
 	    })
 	    .then(() => {
 	    	initMenu("#myMenu");
@@ -170,9 +213,6 @@ const ChannelComponent = {
 		    videojs(this.$refs.streamingVideo);
 		    
 		    this.setChatMode(this.isChatMode);
-	    }).then(() => {
-		    console.log("asdfasdf ----- ")
-		    update_modal();
 	    })
 	    .catch(err => console.log(err));
     },

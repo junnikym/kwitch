@@ -23,6 +23,8 @@
 	
 	<link href="https://vjs.zencdn.net/7.11.4/video-js.css" rel="stylesheet" />
 	<link href="https://unpkg.com/@videojs/themes@1/dist/forest/index.css" rel="stylesheet">
+	
+	<script type="text/javascript" src="/resources/js/util/action.js"></script>
 
 </head>
 <body>
