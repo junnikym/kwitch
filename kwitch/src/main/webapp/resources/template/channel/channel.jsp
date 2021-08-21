@@ -131,7 +131,7 @@
 					   data-modal="modal-video-upload"></a>
 					
 					<div class="grid">
-						<channel-video-thumb-item-component></channel-video-thumb-item-component>
+						<channel-video-thumb-item-component v-for="item in videoList" v-bind:item="item" ></channel-video-thumb-item-component>
 					</div>
 					
 				</div>

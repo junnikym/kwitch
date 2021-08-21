@@ -16,10 +16,19 @@ const channelVideoUploadComponent = {
 	    },
 	    
 	    upload: function() {
-	    	console.log("file --> ", this.file);
-	    	
+			if(!this.file) {
+				alert("need to select video file");
+				return;
+			}
+			else if(!this.videoTitle) {
+				alert("empty video title");
+				return;
+			}
+
 	    	const formData = new FormData();
 	    	formData.append('video', this.file);
+		    formData.append('title', this.videoTitle);
+		    formData.append('videoText', this.videoText);
         	
 	    	fetch('/api/video/upload', {
 				method: 'POST',
@@ -28,6 +37,8 @@ const channelVideoUploadComponent = {
             .then(res=>{
             })
             .catch(err => console.log(err))
+
+		    this.modalClose();
 	    },
 
 		showFile: function(){

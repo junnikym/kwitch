@@ -7,6 +7,8 @@ import org.springframework.stereotype.Service;
 import tv.junnikym.kwitch.file.dao.VideoDAO;
 import tv.junnikym.kwitch.file.vo.VideoVO;
 
+import java.util.List;
+
 @Service("VideoService")
 public class VideoServiceImpl implements VideoService {
 
@@ -18,6 +20,11 @@ public class VideoServiceImpl implements VideoService {
 	@Override
 	public String uploadVideo(VideoVO vo) throws Exception {
 		return videoDAO.uploadVideo(vo);
+}
+
+	@Override
+	public List<VideoVO> getOwnVideoList (String uploaderId) throws Exception {
+		return videoDAO.getOwnVideoList(uploaderId);
 	}
 
 	@Override

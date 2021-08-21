@@ -5,7 +5,7 @@
 </head>
 <body>
 <h2>Select files to upload</h2>
-<form name="upload" method="POST" enctype="multipart/form-data" action="http://172.18.235.107/upload">
+<form name="upload" method="POST" enctype="multipart/form-data" action="http://localhost/upload">
 	<input type="file" name="file1"><br>
 	<input type="file" name="file2"><br>
 	<input type="file" name="file3"><br>

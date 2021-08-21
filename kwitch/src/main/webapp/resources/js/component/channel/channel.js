@@ -9,19 +9,33 @@ const ChannelComponent = {
 	    isChatMode: true,
 	    preChatModeMenu: null,
 	    isSubscribed: false,
+	    videoList:[],
     }},
     methods: {
     	
     	
         changeNav: function(cursor) {
 
-            if(this.navCursor == cursor) return;
+            if(this.navCursor == cursor)
+            	return;
+
+			if(cursor == "video" && ! this.videoList.length)
+				this.videoLoad();
 
             document.getElementsByClassName("channel_"+this.navCursor)[0].style.display = "none";
             this.navCursor=cursor;
             document.getElementsByClassName("channel_"+this.navCursor)[0].style.display = "flex";
         },
-        
+
+	    videoLoad: function () {
+		    fetch(`/api/${this.$route.params.id}/video`, { method: 'GET' })
+		    .then( res => res.json() )
+		    .then( json => {
+		    	this.videoList = json;
+		    	console.log(this.videoList)
+		    })
+		    .catch(err => console.log(err))
+	    },
         
         toggleProfileImageSetter: function() {
         	if(this.profileImageSetter) 

@@ -12,12 +12,17 @@ import java.io.PrintWriter;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLConnection;
+import java.util.Enumeration;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.apache.commons.io.IOUtils;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -51,7 +56,7 @@ public class FileAPIController {
 
 	private static final String viewName = "../resources/api/memberProc";
 	
-	private static final String nginxURL = "http://172.18.235.107/";
+	private static final String nginxURL = "http://localhost/";
 	
 	private static final Integer nginxConnectTimeout = 100000;
 	private static final Integer nginxReadTimeout 	 = 100000;
@@ -62,7 +67,7 @@ public class FileAPIController {
 	@RequestMapping(value = "/video/upload", method = RequestMethod.POST)
 	public void videoUpload (
 			MultipartHttpServletRequest multipartRequest,
-			HttpServletResponse response, 
+			HttpServletResponse response,
 			HttpSession session
 	) {
 		
@@ -109,9 +114,34 @@ public class FileAPIController {
 			
 			int responseCode = conn.getResponseCode();
             if (responseCode == HttpURLConnection.HTTP_OK || responseCode == HttpURLConnection.HTTP_CREATED) {
-                System.out.println("OK ====== " + Integer.toString(responseCode));
+
+				BufferedReader resInput = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+				StringBuilder resStrBuilder = new StringBuilder();
+				String resInputBuf;
+				while ((resInputBuf = resInput.readLine()) != null) {
+					if (resStrBuilder.length() > 0) {
+						resStrBuilder.append("\n");
+					}
+					resStrBuilder.append(resInputBuf);
+				}
+
+				ObjectMapper mapper = new ObjectMapper();
+				Map<String, String> fileInfo = mapper.readValue(resStrBuilder.toString(), Map.class);
+
+				VideoVO vo = VideoVO.builder()
+						.title(multipartRequest.getParameter("title"))
+						.text(multipartRequest.getParameter("text"))
+						.uploaderId((String) session.getAttribute("member_id"))
+						.name( fileInfo.get("uploaded_file.name") )
+						.md5 ( fileInfo.get("uploaded_file.md5") )
+						.path( fileInfo.get("uploaded_file.path") )
+						.type( fileInfo.get("uploaded_file.content_type") )
+						.size( Integer.parseInt( fileInfo.get("uploaded_file.size") ) )
+						.build();
+
+				videoService.uploadVideo(vo);
             } else {
-                System.out.println("NOT OK == " + Integer.toString(responseCode));
+                System.out.println("Video upload request is NOT OK => " + Integer.toString(responseCode));
             }
             
             conn.disconnect(); 
@@ -124,32 +154,33 @@ public class FileAPIController {
 	
 	@ResponseBody
 	@RequestMapping(value = "/upload/complete", method = RequestMethod.POST)
-	public void nginxUploadComplete (
+	public Map<String, String> nginxUploadComplete (
 			HttpServletRequest request, 
 			HttpServletResponse response, 
 			HttpSession session
-	) {
-		
-		System.out.println("asdf : "+ request.getParameter("uploaded_file.name"));
-		
-		try {
-			VideoVO vo = VideoVO.builder()
-					.uploaderId((String) session.getAttribute("member_id"))
-//					.uploaderId("0cb6b1c2-0cda-4809-84c7-3752aa58043a")
-					.name(request.getParameter("uploaded_file.name"))
-					.md5(request.getParameter ("uploaded_file.md5"))
-					.path(request.getParameter("uploaded_file.path"))
-					.type(request.getParameter("uploaded_file.content_type"))
-					.size( Integer.parseInt( request.getParameter("uploaded_file.size") ) )
-					.build();
-			
-			videoService.uploadVideo(vo);
-		} catch (Exception e) {
-			
-			e.printStackTrace();
+	) throws IOException {
+
+		Map<String, String> result = new HashMap<>();
+
+		Enumeration<String> paramKeys = request.getParameterNames();
+		while (paramKeys.hasMoreElements()) {
+			String key = paramKeys.nextElement();
+			result.put(key, request.getParameter(key));
 		}
-		
+
 		response.setStatus(200);
+		return result;
+	}
+
+	@ResponseBody
+	@RequestMapping(value = "{uploaderId}/video", method = RequestMethod.GET)
+	public List<VideoVO> videoUpload (
+			@PathVariable("uploaderId") String uploaderId,
+			HttpServletResponse response,
+			HttpSession session
+	) throws Exception {
+
+		return videoService.getOwnVideoList(uploaderId);
 	}
 	
 	@ResponseBody
