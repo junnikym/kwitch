@@ -1,19 +1,15 @@
-
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
-	<title>Test upload</title>
+	<meta charset="UTF-8">
+	<title>Title</title>
 </head>
 <body>
-<h2>Select files to upload</h2>
-<form name="upload" method="POST" enctype="multipart/form-data" action="http://localhost/upload">
-	<input type="file" name="file1"><br>
-	<input type="file" name="file2"><br>
-	<input type="file" name="file3"><br>
-	<input type="file" name="file4"><br>
-	<input type="file" name="file5"><br>
-	<input type="file" name="file6"><br>
-	<input type="submit" name="submit" value="Upload">
-	<input type="hidden" name="test" value="value">
-</form>
+<input id="input"/>
+<button id="send">send</button>
+<pre id="messages"></pre>
+<script>
+
+</script>
 </body>
 </html>

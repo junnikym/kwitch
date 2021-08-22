@@ -245,6 +245,40 @@
     	SELECT count(*) FROM channel_subscribe WHERE channel_id = #{value}::UUID
     
     </select>
+
+	<select id="getSubscriberList" parameterType="String" resultType="String">
+
+		<if test='value != null and value != ""'>
+
+		SELECT subscriber_id FROM channel_subscribe WHERE channel_id = #{value}::UUID
+
+		</if>
+
+	</select>
+
+	<select id="getSubscribeChannelList" parameterType="String" resultType="ChannelVO">
+
+		<if test='value != null and value != ""'>
+
+		SELECT
+			c.channel_id		AS id,
+			c.owner_id			AS ownerId,
+		    c.title				AS title,
+
+			i.image_extension          AS senderProfileImageExt,
+			i.image_path               AS senderProfileImagePath
+
+		FROM
+		     channel AS c
+
+		LEFT JOIN member 	AS m ON c.owner_id = m.member_id
+		LEFT JOIN image 	AS i ON m.member_profile_image = i.image_id
+
+		WHERE
+			c.channel_id = #{value}::UUID
+		</if>
+
+	</select>
     
 
 

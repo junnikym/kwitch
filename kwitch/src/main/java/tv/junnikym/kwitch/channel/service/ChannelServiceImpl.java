@@ -13,6 +13,7 @@ import tv.junnikym.kwitch.channel.vo.ChannelVO;
 import tv.junnikym.kwitch.channel.vo.SubscribeVO;
 import tv.junnikym.kwitch.community.dao.CommunityDAO;
 import tv.junnikym.kwitch.community.service.CommunityService;
+import tv.junnikym.kwitch.notification.service.NotificationService;
 
 @Service("ChannelService")
 public class ChannelServiceImpl implements ChannelService {
@@ -25,6 +26,8 @@ public class ChannelServiceImpl implements ChannelService {
 	
 	@Resource(name="CommunityService")
 	CommunityService communityService;
+
+
 	
 	@Override
 	public void regist(ChannelVO vo) throws Exception {

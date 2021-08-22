@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="NotificationDAO">
+
+    <insert id="regist" parameterType="NotificationVO" useGeneratedKeys="true" keyProperty="id">
+
+        INSERT INTO notification (
+            notification_href,
+            notification_text,
+            sender_id,
+            receiver_id
+        ) VALUES (
+            #{href},
+            #{text},
+            #{senderId}::UUID,
+            #{receiverId}::UUID
+        )
+
+    </insert>
+
+    <select id="getOwnNotification" parameterType="String" resultType="NotificationVO" >
+
+        SELECT
+            notification_id             AS id,
+            notification_href           AS href,
+            notification_text           AS text,
+            notification_is_checked     AS isChecked,
+
+            sender_id                  AS senderId,
+            i.image_extension          AS senderProfileImageExt,
+            i.image_path               AS senderProfileImagePath,
+
+            CASE WHEN m.member_alias IS NULL OR m.member_alias = ''
+                THEN m.member_name
+                ELSE m.member_alias
+            END AS receiverAlias
+
+        FROM
+            notification AS n
+
+        LEFT JOIN member AS m ON m.member_id = n.sender_id
+        LEFT JOIN image  AS i ON i.uploader_id = m.member_id
+
+        WHERE
+            receiver_id = #{value}::UUID
+
+    </select>
+
+    <delete id="deleteOne" parameterType="String">
+        DELETE FROM notification WHERE notification_id = #{value}::UUID
+    </delete>
+
+    <delete id="deleteAll" parameterType="String">
+        DELETE FROM notifications WHERE receiver_id = #{value}::UUID
+    </delete>
+
+</mapper>

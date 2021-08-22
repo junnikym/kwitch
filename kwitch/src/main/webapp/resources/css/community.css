@@ -29,6 +29,7 @@
 .community_upload_post {
 	position: absolute;
 	top: 1em; right: 1em;
+	z-index: 1;
 }
 
 .community_title {

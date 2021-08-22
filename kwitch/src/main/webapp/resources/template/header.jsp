@@ -26,12 +26,35 @@
 	<div v-if="this.$store.state.member.id"
 		 class="dropdown">
 
+		<div class="notification_icon"></div>
+
+		<div class="notification_content">
+
+			<div v-for="item in notificationList"
+				class="notification_content_item"
+				v-on:click="checkNotification(item)">
+
+				<div>
+					<div class="user_profile_img_wapper">
+						<img v-if="item.senderProfileImagePath && item.senderProfileImageExt"
+							 v-bind:src="'/api/profile/image/' + item.senderProfileImagePath + '/' + item.senderProfileImageExt"
+							 class="default_user_profile_img" />
+						<img v-else src="/resources/image/user_icon.png" class="user_profile_img invert" />
+					</div>
+				</div>
+
+				{{item.text}}
+
+			</div>
+
+		</div>
+
 		<button onclick="dp_menu()" class="button">
 			<div class="user_profile_img_wapper">
 				<img v-if="this.$store.state.member.profileImagePath && this.$store.state.member.profileImageExt"
 					 v-bind:src="'/api/profile/image/' + member_profile_image + '/' + member_profile_image_ext"
 					 class="default_user_profile_img" />
-				<img v-else src="/resources/image/user_icon.png" class="user_profile_img" />
+				<img v-else src="/resources/image/user_icon.png" class="user_profile_img invert" />
 			</div>
 		</button>
 

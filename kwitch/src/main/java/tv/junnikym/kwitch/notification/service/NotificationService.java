@@ -1,32 +1,29 @@
 package tv.junnikym.kwitch.notification.service;
 
-import java.io.IOException;
-import java.util.Map;
-import java.util.concurrent.ConcurrentHashMap;
-
-import org.springframework.stereotype.Service;
 import org.springframework.web.servlet.mvc.method.annotation.SseEmitter;
+import tv.junnikym.kwitch.notification.vo.NotificationVO;
 
-@Service("NotificationService")
-public class NotificationService {
+import java.io.IOException;
+import java.util.List;
 
-	private Map<String, SseEmitter> datas = new ConcurrentHashMap<String, SseEmitter>();
+public interface NotificationService {
 
-	public void setEmitter(String key, SseEmitter emitter) {
-		this.datas.put(key, emitter);
-	}
+	String regist(NotificationVO vo) throws Exception;
 
-	public void sendEmitter(String key) throws IOException {
-		for (Map.Entry<String, SseEmitter> data : this.datas.entrySet()) {
-			if (data.getKey().equals(key)) {
-				data.getValue().send(key + " is sended");
-			}
-		}
+	List<NotificationVO> getOwnNotification (String receiverId) throws Exception;
 
-	}
+	int deleteOwn (String notificationId) throws Exception;
 
-	public void remove(String key) {
-		this.datas.remove(key);
-	}
+	int deleteAll (String receiverId) throws Exception;
+
+
+
+	void setEmitter(String key, SseEmitter emitter);
+
+	void remove(String key);
+
+
+
+	void sendNotification (NotificationVO vo) throws Exception;
 
 }

@@ -32,6 +32,10 @@ public interface ChannelDAO {
 	Boolean isSubscribed(SubscribeVO vo) throws Exception;
 	
 	Integer nSubscribe(String channelId) throws Exception;
+
+	List<String> getSubscriberList(String channelId) throws Exception;
+
+	List<ChannelVO> getSubscribeChannelList(String subscriberId) throws Exception;
 	
 	
 	

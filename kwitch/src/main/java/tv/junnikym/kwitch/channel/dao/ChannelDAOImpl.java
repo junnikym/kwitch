@@ -55,6 +55,7 @@ public class ChannelDAOImpl extends AbstractMapper implements ChannelDAO {
 	
 	/**
 	 * Subscribe
+	 * --------------------------------------------------
 	 */
 	
 	@Override
@@ -75,6 +76,16 @@ public class ChannelDAOImpl extends AbstractMapper implements ChannelDAO {
 	@Override
 	public Integer nSubscribe(String channelId) throws Exception {
 		return selectOne("ChannelDAO.nSubscribe", channelId);
+	}
+
+	@Override
+	public List<String> getSubscriberList(String channelId) throws Exception {
+		return selectList("ChannelDAO.getSubscriberList", channelId);
+	}
+
+	@Override
+	public List<ChannelVO> getSubscribeChannelList(String subscriberId) throws Exception {
+		return selectList("ChannelDAO.getSubscribeChannelList", subscriberId);
 	}
 	
 	/**

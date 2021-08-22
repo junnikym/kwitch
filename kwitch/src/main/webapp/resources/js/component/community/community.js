@@ -44,7 +44,7 @@ const CommunityComponent = {
 			})
 	      	.then(res=>res.json())
 	      	.then(json => {
-	      		this.$store.commit('setCommunityRole', json)
+	      		this.$store.commit('setCommunityRole', json)k
 	      	})
 	      	.catch(err => console.log(err))
 		}
