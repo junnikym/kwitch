@@ -19,29 +19,17 @@ const communityPostEditorComponent = {
     	
         uploadPost: function() {
 			const editorData = this.editor.getData();
-			
-			if( ! this.postContent.title) {
-				alert("title is empty");
-				return
-			}
-			
-			if( ! editorData) {
-				alert("content is empty");
-				return
-			}
-			
-			if( ! this.selectedMenuId) {
-				alert("not select menu");
-				return
-			}
-			
-			
 				
 			if(this.postId) {
-				if(this.prePostContent == this.postContent) {
+				if( this.prePostContent.title === this.postContent.title
+					&& this.prePostContent.menuId === this.postContent.menuId
+					&& this.prePostContent.content === editorData
+				) {
 					alert("not changed content");
 					return
 				}
+
+				console.log(editorData);
 				
 				fetch('/api/community/post/' + this.postId, {
           		  	method: 'PUT',
@@ -74,6 +62,22 @@ const communityPostEditorComponent = {
 			
 			
 			if(this.communityId) {
+
+				if( ! this.postContent.title) {
+					alert("title is empty");
+					return
+				}
+
+				if( ! editorData) {
+					alert("content is empty");
+					return
+				}
+
+				if( ! this.selectedMenuId) {
+					alert("not select menu");
+					return
+				}
+
 				fetch('/api/community/post/', {
           		  	method: 'POST',
 	          		headers: {
@@ -132,7 +136,7 @@ const communityPostEditorComponent = {
         	this.editor.config.resize_enabled = false;
         	
         }
-        
+
     },
     
     mounted(){
@@ -155,7 +159,8 @@ const communityPostEditorComponent = {
           		this.$store.commit('connectCommunity', json.communityId);
           		
 				this.postContent = json;
-				this.prePostContent = this.postContent;
+				this.prePostContent = copyObj(this.postContent);
+				console.log(this.prePostContent);
 				
 				if(json.writerId != this.$store.state.member.id) {
 					throw "게시글 작성자가 아닙니다."

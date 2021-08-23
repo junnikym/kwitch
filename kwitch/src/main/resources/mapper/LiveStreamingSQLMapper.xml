@@ -9,17 +9,17 @@
 		    channel_id, 
 		    channel_owner_id, 
 		    streaming_password,
+		    <if test='isPrivate != null'> is_private, </if>
 		    start_at,
-		    end_at,
-		    is_private
+		    end_at
 		)
 		SELECT
 			c.channel_id, 
 			c.owner_id, 
 			#{password},
+			<if test='isPrivate != null'> #{isPrivate}, </if>
 			NULL,
-			NULL,
-			#{isPrivate}
+			NULL
 		FROM 
 			channel AS c
 		WHERE 

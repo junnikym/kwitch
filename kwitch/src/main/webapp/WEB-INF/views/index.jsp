@@ -20,6 +20,7 @@
 	<link rel="stylesheet" type="text/css" href="/resources/css/channel.css" />
 	<link rel="stylesheet" type="text/css" href="/resources/css/community.css" />
 	<link rel="stylesheet" type="text/css" href="/resources/css/mainPage.css" />
+	<link rel="stylesheet" type="text/css" href="/resources/css/liveGuide.css" />
 	
 	<link href="https://vjs.zencdn.net/7.11.4/video-js.css" rel="stylesheet" />
 	<link href="https://unpkg.com/@videojs/themes@1/dist/forest/index.css" rel="stylesheet">
@@ -60,11 +61,13 @@
 		const loginTemplate		= `<%@ include file="/resources/template/login.jsp" %>`;
 		const searchTemplate 	= `<%@ include file="/resources/template/search.jsp" %>`;
 		const mainPageTemplate	= `<%@ include file="/resources/template/mainPage.jsp" %>`;
+		const liveGuideTemplate	= `<%@ include file="/resources/template/liveGuide.jsp" %>`;
 		
 		const channelTemplate 				= `<%@ include file="/resources/template/channel/channel.jsp" %>`;
 		const channelChatTemplate 			= `<%@ include file="/resources/template/channel/channelChat.jsp" %>`;
 		const channelChatItemTemplate 		= `<%@ include file="/resources/template/channel/channelChatItem.jsp" %>`;
 		const channelSimpleItemTemplate 	= `<%@ include file="/resources/template/channel/channelSimpleItem.jsp" %>`;
+		const channelVideoTemplate 			= `<%@ include file="/resources/template/channel/channelVideo.jsp" %>`;
 		const channelVideoThumbItemTemplate = `<%@ include file="/resources/template/channel/channelVideoThumbItem.jsp" %>`;
 		const channelVideoUploadTemplate 	= `<%@ include file="/resources/template/channel/channelVideoUpload.jsp" %>`;
 		
@@ -82,11 +85,13 @@
 	<script type="text/javascript" src="/resources/js/component/header.js"></script>
 	<script type="text/javascript" src="/resources/js/component/mainPage.js"></script>
 	<script type="text/javascript" src="/resources/js/component/search.js"></script>
+	<script type="text/javascript" src="/resources/js/component/liveGuide.js"></script>
 
 	<script type="text/javascript" src="/resources/js/component/channel/channel.js"></script>
 	<script type="text/javascript" src="/resources/js/component/channel/channelChat.js"></script>
 	<script type="text/javascript" src="/resources/js/component/channel/channelChatItem.js"></script>
 	<script type="text/javascript" src="/resources/js/component/channel/channelSimpleItem.js"></script>
+	<script type="text/javascript" src="/resources/js/component/channel/channelVideo.js"></script>
 	<script type="text/javascript" src="/resources/js/component/channel/channelVideoThumbItem.js"></script>
 	<script type="text/javascript" src="/resources/js/component/channel/channelVideoUploada.js"></script>
 	
@@ -107,6 +112,7 @@
 		Vue.component('channel-simple-item-component', channelSimpleItemComponent);
 		Vue.component('channel-chat-item-component', channelChatItemComponent);
 		Vue.component('channel-chat-component', channelChatComponent);
+		Vue.component('channel-video-component', channelVideoComponent);
 		Vue.component('channel-video-thumb-item-component', channelVideoThumbItemComponent);
 		Vue.component('channel-video-upload-component', channelVideoUploadComponent)
 	</script>

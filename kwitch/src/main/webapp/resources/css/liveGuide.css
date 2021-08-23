@@ -1,0 +1,94 @@
+#LiveGuide {
+	display:flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	width: 100%;
+}
+
+.guide_step {
+	position:relative;
+	display: flex;
+	flex-direction: row;
+	align-items: start;
+    justify-content: start;
+	width : 90%;
+	
+	background:white;
+	border-radius: 1em;
+	margin: 1em 0 1em 0;
+}
+.guide_num {
+	position: absolute;
+	display: flex;
+	align-items: center;
+    justify-content: center;
+	width: 50px; height: 50px;
+	left: -25px; top: -25px;
+	border-radius: 25px;
+	background: #373737;
+	
+	font-size: 18px;
+	font-weight: bold;
+	color: white;
+	
+}
+
+.guide_img {
+	display: flex;
+	align-items: center;
+    justify-content: center;
+	width: 300px;
+	height: 300px;
+	border-radius: 1em 0 0 1em ;
+	overflow: hidden;
+}
+.guide_img img {
+	height: 100%;
+}
+
+.guide_text {
+	margin: 0 1em 1em 1em;
+}
+
+.guide_stream_key {
+	position: relative;
+	display:flex;
+	flex-direction: row;
+	width: 450px;
+	height: 30px;
+	border-radius: 5px;
+	background: #4fc08d;
+	
+	font-size: 18px;
+	font-weight: bold;
+	color: white;
+}
+
+.guid_stream_key_item_head {
+	display:flex;
+	align-items: center;
+	justify-content: center;
+	padding : 0 5px 0 5px;
+	border-right: 1px solid white;
+	width: 40px;
+}
+.guid_stream_key_item_content {
+	display:flex;
+	align-items: center;
+	justify-content: center;
+	width: calc(100% - 40px - 40px);
+}
+.guid_stream_key_item_btn {
+	position:absolute;
+	display:flex;
+	align-items: center;
+	justify-content: center;
+	right: 0;
+	padding : 0 5px 0 5px;
+	border-left: 1px solid white; 
+	width: 40px; height:100%;
+}
+.half_size img {
+	height: 75%;
+}

@@ -10,6 +10,7 @@ const ChannelComponent = {
 	    preChatModeMenu: null,
 	    isSubscribed: false,
 	    videoList:[],
+	    channelLiveStream: null,
     }},
     methods: {
     	
@@ -102,6 +103,10 @@ const ChannelComponent = {
 			this.$router.push("/c/"+this.member.ownCommunityId);
 		},
 		
+		goToLiveStreaming: function() {
+			this.$router.push("/live/guide");
+		},
+		
 		setChatMode: function(io) {
 			this.isChatMode = io;
 			
@@ -177,6 +182,35 @@ const ChannelComponent = {
 				}
 			})
 			.catch(err => console.log(err))
+		},
+		
+		getChannelLive: function() {
+			fetch(`/api/live/${this.member.ownChannelId}`, { method: 'GET' })
+	  		.then( res => {
+	  			if(res.status == 200)
+	  				return res.json();
+	  			
+	  			return null;
+	  		})
+	  		.then( json => {
+	  			const stream_wapper = document.querySelector(".live_stream_wapper");
+	  			const no_live_stream = document.querySelector(".no_live_stream");
+	  			if(json == null) {
+	  				stream_wapper.style.display="none";
+	  				no_live_stream.style.display="flex";
+	  			}
+	  			else {
+	  				stream_wapper.style.display="flex";
+	  				no_live_stream.style.display="none";
+	  			}
+
+	  			this.channelLiveStream = json;
+	  			
+	  			const url = this.$store.state.streamServer + this.$store.state.streamURL + '/'+ json.id + '.m3u8';
+	  			document.querySelector('#streamingVideo source').setAttribute('src', url); 
+	  		})
+	  		.then(()=>videojs(this.$refs.streamingVideo))
+			.catch(err => console.log(err))
 		}
 		
     },
@@ -217,14 +251,14 @@ const ChannelComponent = {
 				.catch(err => console.log(err))
 		    }
 		    
+		    this.getChannelLive();
+		    
 	    })
 	    .then(() => {
 	    	initMenu("#myMenu");
 	    	
 	    	document.getElementsByClassName("channel_"+this.navCursor)[0].style.display = "flex";
 	        document.getElementById(this.navCursor+'_btn').className += ' active';
-	        
-		    videojs(this.$refs.streamingVideo);
 		    
 		    this.setChatMode(this.isChatMode);
 	    })

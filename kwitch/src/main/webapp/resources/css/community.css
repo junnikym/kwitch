@@ -297,6 +297,18 @@
 	padding: 0.5em;
 }
 
+.community_post_update_info {
+	position: relative;
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: start;
+	width: 100%;
+	background: #373737;
+	color: #fcfcfc;
+	padding: 0.5em;
+}
+
 .community_post_sub_info .sharp_icon,
 .community_post_sub_info .clock_icon,
 .community_post_sub_info .view_icon{

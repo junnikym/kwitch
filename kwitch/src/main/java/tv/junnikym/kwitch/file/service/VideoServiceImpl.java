@@ -54,6 +54,11 @@ public class VideoServiceImpl implements VideoService {
 	}
 
 	@Override
+	public VideoVO getVideo(String videoId) throws Exception {
+		return videoDAO.getVideo(videoId);
+	}
+
+	@Override
 	public List<VideoVO> getOwnVideoList (String uploaderId) throws Exception {
 		return videoDAO.getOwnVideoList(uploaderId);
 	}

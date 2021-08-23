@@ -1,17 +1,26 @@
 
 <div id="channel">
+	<channel-video-component></channel-video-component>
+
 	<channel-video-upload-component></channel-video-upload-component>
 	
 	<div id="live_streaming">
 		<div class="live_stream_bg chat_switched_elem">
 			<div class="live_stream_wapper">
-				<video id="streamingVideo" ref="streamingVideo" width=960 height=540 class="video-js vjs-theme-forest chat_switched_elem" controls preload="auto">
-				  <source
-						 src="https://trainee-rdb-uomfa.run.goorm.io/hls/stream.m3u8"
-						 type="application/x-mpegURL"
-						 crossorigin="use-credentials">
+			
+				<video  id="streamingVideo" 
+						ref="streamingVideo" 
+						width=960 height=540 
+						class="video-js vjs-theme-forest chat_switched_elem" 
+						controls preload="auto">
+						
+					<source type="application/x-mpegURL"
+					  		crossorigin="use-credentials">
 				</video>
 			</div>
+			<h2 class="no_live_stream">
+				NO LIVE STREAMING
+			</h2>
 		</div>
 	</div>
 	
@@ -87,7 +96,10 @@
 								v-on:click="unsubscribe">
 								Unsubscribe</button>
 					</td>
-					<td><button v-if="(member?.ownChannelId)" class="btn" type="button" v-on:click="goToCommunity">Go Community</button></td>
+					<td>
+						<button v-if="(member?.ownChannelId)" class="btn" type="button" v-on:click="goToCommunity">Go Community</button>
+						<button v-if="(member?.ownChannelId)" class="btn" type="button" v-on:click="goToLiveStreaming">Live Streaming</button>
+					</td>
 			</tr>
 	
 		</table>
@@ -129,9 +141,15 @@
 					<a v-if="this.$store.state.member.id == member.id"
 					   class="video_upload_icon"
 					   data-modal="modal-video-upload"></a>
+					   
+					<a data-modal="modal-video">aaaa</a>
 					
 					<div class="grid">
-						<channel-video-thumb-item-component v-for="item in videoList" v-bind:item="item" ></channel-video-thumb-item-component>
+						<channel-video-thumb-item-component 
+							v-for="item in videoList" 
+							v-bind:item="item" >
+							
+						</channel-video-thumb-item-component>
 					</div>
 					
 				</div>

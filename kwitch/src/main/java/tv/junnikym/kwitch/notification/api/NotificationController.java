@@ -33,7 +33,7 @@ public class NotificationController {
 
 		if(memberId == null) {
 			response.setStatus(403);
-			throw new Exception();
+			return null;
 		}
 
 		notificationService.setEmitter(memberId, emitter);

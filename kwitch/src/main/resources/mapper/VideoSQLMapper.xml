@@ -27,6 +27,19 @@
 
     </insert>
     
+    <select id="getVideo" parameterType="String" resultType="VideoVO">
+		SELECT
+		    video_id		AS id,
+			video_title 	AS title,
+			video_text		AS text,
+		    video_path 		AS path,
+		    created_at		AS createdAt
+		FROM
+		     video
+		WHERE
+		      uploader_id = #{value}::UUID;
+	</select>
+    
     <select id="getOwnVideoList" parameterType="String" resultType="VideoVO">
 		SELECT
 		    video_id		AS id,

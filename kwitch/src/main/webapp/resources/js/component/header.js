@@ -3,6 +3,7 @@ const HeaderComponent = {
     data() { return {
         searchInput: '',
         notificationList: [],
+        isNotificationOn: false,
     }},
     methods: {
         channel: function() {
@@ -30,7 +31,10 @@ const HeaderComponent = {
         },
         checkNotification: function(item) {
             this.$router.push({ path: item.href });
-        }
+        },
+        notificationToggle: function() {
+        	this.isNotificationOn = this.isNotificationOn ? false : true;
+        },
 
     },
     mounted() {

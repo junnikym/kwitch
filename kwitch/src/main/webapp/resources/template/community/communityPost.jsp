@@ -12,7 +12,7 @@
 
 	<div class="community_post_writer">
 		<div class="user_profile_img_wapper">
-			<img src="/resources/image/user_icon.png" class="default_user_profile_img" />
+			<img src="/resources/image/user_icon.png" class="default_user_profile_img invert" />
 		</div>
 		<h4 class="community_post_writer_alias">{{postContent.writerAlias}}</h4>
 	</div>
@@ -20,7 +20,6 @@
 	<div class="horizontal_rule"></div>
 	<div class="community_post_sub_info">
 		<div class="clock_icon" v-if="postContent.createdAt"></div> &nbsp; {{ calcTime( postContent.createdAt ) }} &nbsp;&nbsp;
-		<div class="clock_icon" v-if="postContent.updatedAt"></div> &nbsp; {{ calcTime( postContent.updatedAt ) }} &nbsp;&nbsp;
 		<div class="view_icon"></div> &nbsp; {{ postContent.nView }} &nbsp;&nbsp;
 		
 		<button v-if="hasRoleUpdate()"
@@ -40,6 +39,9 @@
 				v-on:click="deleteOthersPost">
 			Delete
 		</button>
+	</div>
+	<div v-if="postContent?.updatedAt" class="community_post_update_info">
+		<div class="clock_icon" v-if="postContent.updatedAt"></div> &nbsp; Updated at {{ calcTime( postContent.updatedAt ) }} &nbsp;&nbsp;
 	</div>
 	
 	<div class="community_post_content" v-html="postContent.isBlock ? '<p>This post blocked by admin.</p>' : postContent.content"></div>

@@ -285,7 +285,7 @@
 			END AS title,
 
 			CASE WHEN cp.post_block IS TRUE
-			THEN '' ELSE SUBSTR(cp.post_content, 0, 20)
+			THEN '' ELSE cp.post_content
 			END AS content,
 
 			cp.post_comment_block 	AS isCommentBlock,

@@ -23,8 +23,7 @@ public class VideoDAOImpl extends AbstractMapper implements VideoDAO {
 
 	@Override
 	public VideoVO getVideo (String videoId) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
+		return selectOne("getVideo", videoId);
 	}
 
 	@Override

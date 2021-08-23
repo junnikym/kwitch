@@ -20,6 +20,10 @@ const routes = [
 		component: ChannelComponent
 	},
 	{
+		path: '/live/guide',
+		component: liveGuideComponent
+	},
+	{
 		/**
 		 *  Community Related Routes
 		 */

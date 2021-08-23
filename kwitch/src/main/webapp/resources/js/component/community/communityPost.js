@@ -112,6 +112,7 @@ const communityPostComponent = {
 		.then(json => {
 
 			this.postContent = json;
+			console.log(this.postContent);
 			
 			if(this.$store.state.connectedCommunity != this.postContent.communityId) {
 				this.$store.commit('connectCommunity', this.postContent.communityId)

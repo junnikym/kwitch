@@ -173,8 +173,19 @@ public class FileAPIController {
 	}
 
 	@ResponseBody
+	@RequestMapping(value = "/video/{videoId}", method = RequestMethod.GET)
+	public VideoVO getVideo (
+			@PathVariable("videoId") String videoId,
+			HttpServletResponse response,
+			HttpSession session
+	) throws Exception {
+
+		return videoService.getVideo(videoId);
+	}
+	
+	@ResponseBody
 	@RequestMapping(value = "{uploaderId}/video", method = RequestMethod.GET)
-	public List<VideoVO> videoUpload (
+	public List<VideoVO> getVideoList (
 			@PathVariable("uploaderId") String uploaderId,
 			HttpServletResponse response,
 			HttpSession session

@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -35,6 +36,11 @@ public class LiveStreamingAPIController {
 	) throws Exception {
 		try {
 			String memberId = (String) session.getAttribute("member_id");
+			if(memberId == null || memberId == "") {
+				response.sendError(403, "Need to login");
+				return null;
+			}
+			
 			vo.setChannelOwnerId(memberId);
 			
 			LiveStreamingVO result = liveStreamingService.regist(vo);
@@ -56,7 +62,7 @@ public class LiveStreamingAPIController {
 	
 	
 	
-	@RequestMapping(value = "/start", method = RequestMethod.POST)
+	@RequestMapping(value = "/start", method = RequestMethod.GET)
 	public void start(
 			HttpServletRequest request, 
 			HttpServletResponse response, 
@@ -80,7 +86,7 @@ public class LiveStreamingAPIController {
 		response.sendError(400, "Can not start streaming");
 	}
 	
-	@RequestMapping(value = "/stop", method = RequestMethod.POST)
+	@RequestMapping(value = "/stop", method = RequestMethod.GET)
 	public void stop(
 			HttpServletRequest request, 
 			HttpServletResponse response, 
@@ -102,6 +108,39 @@ public class LiveStreamingAPIController {
 		}
 		
 		response.sendError(400, "Can not start streaming");
+	}
+	
+	@ResponseBody
+	@RequestMapping(method = RequestMethod.GET)
+	public LiveStreamingVO getOwnStreaming (
+			HttpServletRequest request, 
+			HttpServletResponse response, 
+			HttpSession session
+	) throws Exception {
+		String memberId = (String) session.getAttribute("member_id");
+		if(memberId == null || memberId == "") { 
+			response.sendError(403, "Need to login");
+			return null;
+		}
+		
+		return liveStreamingService.getOwnStreaming(memberId);
+	}
+	
+	@ResponseBody
+	@RequestMapping(value = "/{communityId}", method = RequestMethod.GET)
+	public LiveStreamingVO getChannelStreaming (
+			@PathVariable("communityId") String id,
+			HttpServletRequest request, 
+			HttpServletResponse response, 
+			HttpSession session
+	) throws Exception {
+
+		LiveStreamingVO result = liveStreamingService.getChannelStreaming(id);
+		if(result == null) {
+			response.sendError(404, "Not found");
+		}
+		
+		return result;
 	}
 	
 	

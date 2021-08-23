@@ -381,7 +381,7 @@
     transition-duration: 0.25s;
 }
 .live_stream_bg #streamingVideo,
-.video-js {
+.live_stream_wapper .video-js {
     position:absolute;
     transform: rotate(2.5deg);
     transform-origin: 50% 50%;
@@ -403,6 +403,15 @@
     display:flex;
     align-items: center;
     justify-content: center
+}
+.live_stream_bg .no_live_stream {
+	position:absolute;
+    transform: rotate(2.5deg);
+    transform-origin: 50% 50%;
+    left: 50%; top: 50%;
+    transform: translate(-50%, -50%);
+    -webkit-transform: translate(-50%, -50%);
+    color: white;
 }
 
 .chat_switch_slide {
@@ -508,4 +517,36 @@
 	height: 120px;
 	border: 1px solid;
 	margin: 1em 0 1em 0;
+}
+
+#channelVideo {
+	position: relative;
+	width: 80%;
+	min-width: 700px;
+	height: 80%;
+}
+.channel_video_info {
+	padding : 0 1em 0 1em;
+}
+.channel_video_contents {
+	display: flex;
+	flex-direction: column;
+	width: 60%;
+	height: 100%;
+}
+.channel_video_comment {
+	width: 40%;
+	height: 100%;
+	background: green;
+}
+#channelVideo > .app {
+	flex-direction: row;
+	padding: 0;
+	border: 5px solid white;
+	width: 100%; height: 100%;
+	justify-content: start;
+}
+
+.channel_video_wrapper {
+	width: 100%;
 }
