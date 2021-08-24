@@ -3,7 +3,8 @@ const communityPostComponent = {
 	template: communityPostTemplate,
 	store: gStore,
 	data() { return {
-		postContent: {}
+		postContent: {},
+		isLike: null,
 	}},
 	methods: {
 
@@ -98,6 +99,46 @@ const communityPostComponent = {
 			if ((this.$store.state.member.id == this.postContent.writerId) && (userFlag & checkFlag))
 				return true;
 		},
+		
+		likeToggle: function(isUnlike=false) {
+			const reqBody = JSON.stringify({
+				usage	 : 'LIKE_USAGE_POST',
+				targetId : this.$route.params.postId,
+				isUnliked: isUnlike,
+			});
+			
+			fetch('/api/like', {
+				method: 'POST',
+				headers: {
+					"Content-Type": "application/json"
+				},
+				body: reqBody
+			})
+			.then(res=>{})
+			.catch(err => console.log(err))
+			
+			
+		},
+		
+		likeInit() {
+			const reqBody = JSON.stringify({
+				usage	 : 'LIKE_USAGE_POST',
+				targetId : this.$route.params.postId,
+			});
+			
+			fetch('/api/like/is', {
+				method: 'POST',
+				headers: {
+					"Content-Type": "application/json"
+				},
+				body: reqBody
+			})
+			.then(res=>json()) 
+			.then(json=> {
+				console.log("like!!!!!!!!!!!! ", json);
+			})
+			.catch(err => console.log(err))
+		}
 
 	},
 
@@ -121,6 +162,8 @@ const communityPostComponent = {
 			if(this.$store.state.connectedMenu != this.postContent.communityMenu) {
 				this.$store.commit('connectMenu', this.postContent.communityMenu);
 			}
+			
+			this.likeInit();
 
 		})
 		.catch(err => console.log(err))

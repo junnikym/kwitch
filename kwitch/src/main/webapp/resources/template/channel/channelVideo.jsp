@@ -1,5 +1,5 @@
 <div class="modal channel_video_modal" id="modal-video">
-    <div class="modal-bg modal-exit" v-on:click="reset"></div>
+    <div class="modal-bg modal-exit" v-on:click="pauseVideo"></div>
 
     <div class="h_center" id="channelVideo">
 
@@ -13,13 +13,13 @@
 							class="video-js vjs-theme-forest chat_switched_elem vjs-16-9" 
 							controls preload="auto">
 							
-						<source src="http://172.18.235.107/contents/5/0038275005/playlist.m3u8" type="application/x-mpegURL">
+						<source src="" type="application/x-mpegURL">
 					</video>
 				</div>
 				
 				<div class="channel_video_info">
-					<h2> Title </h2>
-					<p>말 말 말 말 말 말 말 말 말 말 말 말 말 말 말 말 말 </p>
+					<h2>{{video?.title}}</h2>
+					<p>{{video?.text}}</p>
 				</div>
 			</div>
 			

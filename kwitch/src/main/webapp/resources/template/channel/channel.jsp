@@ -1,6 +1,6 @@
 
 <div id="channel">
-	<channel-video-component></channel-video-component>
+	<channel-video-component v-bind:id="cursoredVideoId"></channel-video-component>
 
 	<channel-video-upload-component></channel-video-upload-component>
 	
@@ -97,8 +97,14 @@
 								Unsubscribe</button>
 					</td>
 					<td>
-						<button v-if="(member?.ownChannelId)" class="btn" type="button" v-on:click="goToCommunity">Go Community</button>
-						<button v-if="(member?.ownChannelId)" class="btn" type="button" v-on:click="goToLiveStreaming">Live Streaming</button>
+						<button v-if="this.$store.state.member.id  
+										&& this.$store.state.member.id == member.id
+										&& (member?.ownChannelId)" 
+								class="btn" type="button" 
+								v-on:click="goToLiveStreaming">
+								
+								Live Streaming
+						</button>
 					</td>
 			</tr>
 	
@@ -119,11 +125,10 @@
 					<li v-if="member.ownChannelId"><a v-on:click="changeNav('home')" id="home_btn">Home</a></li>
 					<li class="chat_switched_elem" v-if="member.ownChannelId"><a v-on:click="changeNav('video')" id="video_btn">Video</a></li>
 	
-					<li class="chat_switched_elem" v-if="member.ownCommunityId"><a v-on:click="changeNav('community')" id="community_btn">Community</a></li>
-	
 					<li class="chat_switched_elem"><a v-on:click="changeNav('about')" id="about_btn">About</a></li>
 					<li class="chat_switched_elem"><a v-on:click="changeNav('contact')" id="contact_btn" >Contact</a></li>
 					
+					<li v-on:click="goToCommunity"  class="menu_sub_btn" id="community_btn" v-if="(member?.ownChannelId)"> Community </li>
 					<li v-on:click="chatModeToggle" class="menu_sub_btn" id="chat_btn">Chat <div class="page_move_icon"></div> </li>
 				</ul>
 			</nav>
@@ -142,16 +147,16 @@
 					   class="video_upload_icon"
 					   data-modal="modal-video-upload"></a>
 					   
-					<a data-modal="modal-video">aaaa</a>
+					<a data-modal="modal-video" id="videoModal" style="display:none">video modal</a>
 					
 					<div class="grid">
-						<channel-video-thumb-item-component 
-							v-for="item in videoList" 
-							v-bind:item="item" >
-							
-						</channel-video-thumb-item-component>
+						<div v-for="item in videoList"   
+							 v-on:click="videoModal(item.id)">
+							 
+							<channel-video-thumb-item-component v-bind:item="item""></channel-video-thumb-item-component>
+						</div>
 					</div>
-					
+						
 				</div>
 	
 				<div class="channel_community">

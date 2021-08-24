@@ -28,6 +28,8 @@
 		<typeAlias alias="LiveStreamingVO" type="tv.junnikym.kwitch.liveStreaming.vo.LiveStreamingVO" />
 
 		<typeAlias alias="NotificationVO" type="tv.junnikym.kwitch.notification.vo.NotificationVO" />
+		
+		<typeAlias alias="LikedVO" type="tv.junnikym.kwitch.liked.vo.LikedVO" />
 
 	</typeAliases>
 

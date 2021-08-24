@@ -7,6 +7,8 @@ function update_modal() {
 
         trigger.addEventListener("click", function (event) {
             event.preventDefault();
+            
+            console.log(trigger.dataset);
 
             const modal = document.getElementById(trigger.dataset.modal);
             modal.classList.add("open");

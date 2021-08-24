@@ -22,7 +22,7 @@ const gStore = new Vuex.Store({
 	    connectedCommunity: undefined,
 	    connectedMenu: undefined,
 	    
-	    streamServer: 'http://172.18.235.107',
+	    streamServer: 'http://172.18.228.225',
 	    streamURL: '/hls',
         videoURL: '/contents'
     },

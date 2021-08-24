@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="LikedDAO">
+
+    <insert id="regist" parameterType="LikedVO">
+
+        INSERT INTO notification (
+            usage,
+            <if test='isUnliked != null and isUnliked != ""'>
+            	is_unliked, </if>
+            giver_id,
+            target_id
+        ) VALUES (
+            #{usage},
+            <if test='isUnliked != null and isUnliked != ""'>
+            	#{isUnliked}, </if>
+            #{giverId}::UUID,
+            #{targetId}::UUID
+        )
+
+    </insert>
+
+    <select id="isLiked" parameterType="LikedVO" resultType="Boolean" >
+		SELECT 
+			CASE WHEN is_unliked IS TRUE THEN false 
+				 ELSE true
+			END AS isUnliked
+		FROM liked
+		WHERE
+			giver_id 	= #{giverId}
+		AND target_id 	= #{targetId}
+    </select>
+    
+    <select id="nLiked" parameterType="String" resultType="Integer" >
+		SELECT COUNT(*) FROM liked WHERE target_id = #{value} AND is_unliked = false;
+    </select>
+    
+    <select id="nUnliked" parameterType="String" resultType="Integer" >
+		SELECT COUNT(*) FROM liked WHERE target_id = #{value} AND is_unliked = true;
+	</select>
+
+	<update id="updateLike" parameterType="likedVO">
+		UPDATE 	liked 
+		SET 	is_unliked = #{isUnliked}
+		WHERE
+			giver_id 	= #{giverId}
+		AND target_id 	= #{targetId}
+	</update>
+
+    <delete id="deleteLike" parameterType="LikedVO">
+        DELETE FROM liked WHERE giver_id = #{giverId} AND target_id = #{target_id}
+    </delete>
+
+</mapper>

@@ -221,6 +221,17 @@
 	height: 100px;
 }
 
+#community_btn {
+	position: absolute;
+	display: flex;
+	flex-direction: row;
+	right: 120px;
+	
+	align-items: center;
+	justify-content: center;
+	
+	width: 120px;
+}
 #chat_btn {
 	position: absolute;
 	display: flex;
@@ -231,6 +242,12 @@
 	justify-content: center;
 	
 	width: 120px;
+	height: 100%;
+	border-radius: 0 1em 0 0;
+}
+#chat_btn:hover, #chat_btn:focus, #community_btn:hover, #community_btn:focus {
+	background: #4fc08d;
+	transition-duration: 0.25s;
 }
 
 #chat_btn .page_move_icon {

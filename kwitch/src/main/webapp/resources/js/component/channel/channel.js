@@ -11,6 +11,7 @@ const ChannelComponent = {
 	    isSubscribed: false,
 	    videoList:[],
 	    channelLiveStream: null,
+	    cursoredVideoId: null,
     }},
     methods: {
     	
@@ -207,10 +208,15 @@ const ChannelComponent = {
 	  			this.channelLiveStream = json;
 	  			
 	  			const url = this.$store.state.streamServer + this.$store.state.streamURL + '/'+ json.id + '.m3u8';
-	  			document.querySelector('#streamingVideo source').setAttribute('src', url); 
+	  			document.querySelector('.live_stream_wapper source').setAttribute('src', url); 
 	  		})
 	  		.then(()=>videojs(this.$refs.streamingVideo))
 			.catch(err => console.log(err))
+		},
+		
+		videoModal: function(id) {
+			this.cursoredVideoId=id;
+			document.querySelector('#videoModal').click();
 		}
 		
     },
@@ -225,6 +231,7 @@ const ChannelComponent = {
 	    })
 	    .then(res=>res.json())
 	    .then(json => {
+	    	
 		    this.member = json;
 		    console.log(this.member);
 

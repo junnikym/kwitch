@@ -35,9 +35,9 @@
 		    video_path 		AS path,
 		    created_at		AS createdAt
 		FROM
-		     video
+			video
 		WHERE
-		      uploader_id = #{value}::UUID;
+			video_id = #{value}::UUID;
 	</select>
     
     <select id="getOwnVideoList" parameterType="String" resultType="VideoVO">
