@@ -5,7 +5,7 @@
 
     <insert id="regist" parameterType="LikedVO">
 
-        INSERT INTO notification (
+        INSERT INTO liked (
             usage,
             <if test='isUnliked != null and isUnliked != ""'>
             	is_unliked, </if>
@@ -28,8 +28,8 @@
 			END AS isUnliked
 		FROM liked
 		WHERE
-			giver_id 	= #{giverId}
-		AND target_id 	= #{targetId}
+			giver_id 	= #{giverId}::UUID
+		AND target_id 	= #{targetId}::UUID
     </select>
     
     <select id="nLiked" parameterType="String" resultType="Integer" >
@@ -40,16 +40,16 @@
 		SELECT COUNT(*) FROM liked WHERE target_id = #{value} AND is_unliked = true;
 	</select>
 
-	<update id="updateLike" parameterType="likedVO">
+	<update id="updateLike" parameterType="LikedVO">
 		UPDATE 	liked 
 		SET 	is_unliked = #{isUnliked}
 		WHERE
-			giver_id 	= #{giverId}
-		AND target_id 	= #{targetId}
+			giver_id 	= #{giverId}::UUID
+		AND target_id 	= #{targetId}::UUID
 	</update>
 
     <delete id="deleteLike" parameterType="LikedVO">
-        DELETE FROM liked WHERE giver_id = #{giverId} AND target_id = #{target_id}
+        DELETE FROM liked WHERE giver_id = #{giverId}::UUID AND target_id = #{targetId}::UUID
     </delete>
 
 </mapper>

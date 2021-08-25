@@ -55,7 +55,7 @@ public class LikedAPIController {
 		
 		Boolean result = likedService.isLiked(vo);
 		if(result == null)
-			response.setStatus(404);
+			response.setStatus(204);
 		
 		return result;
 	}
@@ -84,8 +84,12 @@ public class LikedAPIController {
 		vo.setGiverId((String) session.getAttribute("member_id"));
 		
 		int result = likedService.deleteLike(vo);
-		if(result <= 0)
+		if(result <= 0) {
 			response.setStatus(400);
+			return;
+		}
+
+		response.setStatus(200);
 	}
 	
 }

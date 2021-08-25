@@ -331,7 +331,6 @@
 .community_post_content {
 	padding: 1em;
 	width: 100%;
-	border-radius: 0 0 0.5em 0.5em ;
 	background: #efefef;
 }
 .community_post_edit {
@@ -445,4 +444,17 @@
 	height: 200px;
 	background: #373737;
 	border-radius: 0.25em;
+}
+
+#communityPost .horizontal_rule {
+	margin: 0; padding: 0;
+}
+
+#communityPost .liked_wrapper {
+	background: #373737;
+	padding 0.25em 0 0.25em 0;
+}
+
+#communityPost .liked_item {
+	filter: invert(100%);
 }

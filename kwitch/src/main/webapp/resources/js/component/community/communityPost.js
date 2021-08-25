@@ -100,24 +100,55 @@ const communityPostComponent = {
 				return true;
 		},
 		
-		likeToggle: function(isUnlike=false) {
+		likeToggle: function(isUnlike) {
+			if(!this.$store.state.member.id) {
+				alert("Need to login");
+				return;
+			}
+
+			console.log("it running !!!!!!!!");
+
 			const reqBody = JSON.stringify({
 				usage	 : 'LIKE_USAGE_POST',
 				targetId : this.$route.params.postId,
 				isUnliked: isUnlike,
 			});
-			
-			fetch('/api/like', {
-				method: 'POST',
-				headers: {
-					"Content-Type": "application/json"
-				},
-				body: reqBody
-			})
-			.then(res=>{})
-			.catch(err => console.log(err))
-			
-			
+
+			// User wanna delete like(or unlike)
+			if(this.isLike == !isUnlike) {
+				console.log("it running !!!!!!!! 111111111111111");
+
+				fetch('/api/like', {
+					method: 'PUT',
+					headers: {
+						"Content-Type": "application/json"
+					},
+					body: reqBody
+				})
+				.then(res => {
+					if(res.status == 200) {
+						this.likeInit();
+					}
+				})
+				.catch(err => console.log(err))
+			}
+			else {
+				console.log("it running !!!!!!!! 22222222222222");
+
+				fetch('/api/like', {
+					method: 'POST',
+					headers: {
+						"Content-Type": "application/json"
+					},
+					body: reqBody
+				})
+				.then(res => {
+					if(res.status == 200) {
+						this.likeInit();
+					}
+				})
+				.catch(err => console.log(err))
+			}
 		},
 		
 		likeInit() {
@@ -133,9 +164,48 @@ const communityPostComponent = {
 				},
 				body: reqBody
 			})
-			.then(res=>json()) 
+			.then(res=> {
+				if(res.status == 204)
+					return null;
+				else if(res.status == 200)
+					return res.json();
+			})
 			.then(json=> {
-				console.log("like!!!!!!!!!!!! ", json);
+				if(json == null)
+					this.isLike = null;
+				else
+					this.isLike = json;
+
+				if(this.isLike == true) {       // LIKE
+					if(!document.querySelector("#communityPost .like_icon").classList.contains("hidden"))
+						document.querySelector("#communityPost .like_icon").classList.add("hidden");
+					if(document.querySelector("#communityPost .liked_color_item").classList.contains("hidden"))
+						document.querySelector("#communityPost .liked_color_item").classList.remove("hidden");
+					if(document.querySelector("#communityPost .unlike_icon").classList.contains("hidden"))
+						document.querySelector("#communityPost .unlike_icon").classList.remove("hidden");
+					if(!document.querySelector("#communityPost .unlike_color_icon").classList.contains("hidden"))
+						document.querySelector("#communityPost .unlike_color_icon").classList.add("hidden");
+				}
+				else if(this.isLike == false) { // UNLIKE
+					if(document.querySelector("#communityPost .like_icon").classList.contains("hidden"))
+						document.querySelector("#communityPost .like_icon").classList.remove("hidden");
+					if(!document.querySelector("#communityPost .liked_color_item").classList.contains("hidden"))
+						document.querySelector("#communityPost .liked_color_item").classList.add("hidden");
+					if(!document.querySelector("#communityPost .unlike_icon").classList.contains("hidden"))
+						document.querySelector("#communityPost .unlike_icon").classList.add("hidden");
+					if(document.querySelector("#communityPost .unlike_color_icon").classList.contains("hidden"))
+						document.querySelector("#communityPost .unlike_color_icon").classList.remove("hidden");
+				}
+				else {                  // NOT EXIST BOTH
+					if(document.querySelector("#communityPost .like_icon").classList.contains("hidden"))
+						document.querySelector("#communityPost .like_icon").classList.remove("hidden");
+					if(!document.querySelector("#communityPost .liked_color_item").classList.contains("hidden"))
+						document.querySelector("#communityPost .liked_color_item").classList.add("hidden");
+					if(document.querySelector("#communityPost .unlike_icon").classList.contains("hidden"))
+						document.querySelector("#communityPost .unlike_icon").classList.remove("hidden");
+					if(!document.querySelector("#communityPost .unlike_color_icon").classList.contains("hidden"))
+						document.querySelector("#communityPost .unlike_color_icon").classList.add("hidden");
+				}
 			})
 			.catch(err => console.log(err))
 		}

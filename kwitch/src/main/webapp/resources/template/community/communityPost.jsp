@@ -17,7 +17,7 @@
 		<h4 class="community_post_writer_alias">{{postContent.writerAlias}}</h4>
 	</div>
 
-	<div class="horizontal_rule"></div>
+	<div class="horizontal_rule" style="margin-top: 1em;"></div>
 	<div class="community_post_sub_info">
 		<div class="clock_icon" v-if="postContent.createdAt"></div> &nbsp; {{ calcTime( postContent.createdAt ) }} &nbsp;&nbsp;
 		<div class="view_icon"></div> &nbsp; {{ postContent.nView }} &nbsp;&nbsp;
@@ -47,17 +47,19 @@
 	<div class="community_post_content" v-html="postContent.isBlock ? '<p>This post blocked by admin.</p>' : postContent.content"></div>
 
 	<div class="horizontal_rule"></div>
-	
+
 	<div class="liked_wrapper">
-		<div class="liked_item_wrapper">
+		<div class="liked_item_wrapper" v-on:click="likeToggle(false)">
 			<div class="like_icon liked_item"></div>
-			<div class="like_color_icon liked_color_item .hidden"></div>
+			<div class="like_color_icon liked_color_item"></div>
 		</div>
-		
-		<div class="liked_item_wrapper">
+
+		<div class="liked_item_wrapper" v-on:click="likeToggle(true)">
 			<div class="unlike_icon liked_item"></div>
-			<div class="unlike_color_icon liked_color_item .hidden"></div>
+			<div class="unlike_color_icon liked_color_item"></div>
 		</div>
 	</div>
+
+	<div class="horizontal_rule"></div>
 
 </div>

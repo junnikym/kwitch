@@ -20,7 +20,9 @@ public class LikedServiceImpl implements LikedService {
 	
 	@Override
 	public int regist(LikedVO vo) throws Exception {
+
 		Boolean like = likedDAO.isLiked(vo);
+
 		if(like == null)
 			return likedDAO.regist(vo);
 		else {
