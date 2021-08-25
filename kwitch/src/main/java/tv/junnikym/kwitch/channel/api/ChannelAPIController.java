@@ -56,6 +56,8 @@ public class ChannelAPIController {
 		
 		return channelService.getNewChannel();
 	}
+
+
 	
 	/**
 	 * Subscribe
@@ -123,6 +125,14 @@ public class ChannelAPIController {
 				.build();
 		
 		return channelService.isSubscribed(vo);
+	}
+
+	@ResponseBody
+	@RequestMapping(value = {"/subscribe"}, method = RequestMethod.GET)
+	public List<ChannelVO> getSubscribeChannelList( HttpSession session ) throws Exception {
+		String memberId = (String) session.getAttribute("member_id");
+
+		return channelService.getSubscribeChannelList(memberId);
 	}
 	
 }

@@ -18,12 +18,22 @@ public class VideoDAOImpl extends AbstractMapper implements VideoDAO {
 
 	@Override
 	public List<VideoVO> getOwnVideoList (String uploaderId) throws Exception {
-		return selectList("getOwnVideoList", uploaderId);
+		return selectList("VideoDAO.getOwnVideoList", uploaderId);
 	}
 
 	@Override
 	public VideoVO getVideo (String videoId) throws Exception {
-		return selectOne("getVideo", videoId);
+		return selectOne("VideoDAO.getVideo", videoId);
+	}
+
+	@Override
+	public List<VideoVO> getNewVideo () throws Exception {
+		return selectList("VideoDAO.getNewVideo");
+	}
+
+	@Override
+	public List<VideoVO> getHotVideo () throws Exception {
+		return selectList("VideoDAO.getHotVideo");
 	}
 
 	@Override

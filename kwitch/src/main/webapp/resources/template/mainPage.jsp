@@ -27,32 +27,27 @@
 		</div>
 
 		<h1 class="main_page_header"> Hot Clip </h1>
-		<div class="main_page_hot_post_list">
-		</div>
-
 		<div class="grid main_page_video">
-			<channel-video-thumb-item-component></channel-video-thumb-item-component>
-			<channel-video-thumb-item-component></channel-video-thumb-item-component>
-			<channel-video-thumb-item-component></channel-video-thumb-item-component>
-			<channel-video-thumb-item-component></channel-video-thumb-item-component>
-			<channel-video-thumb-item-component></channel-video-thumb-item-component>
-			<channel-video-thumb-item-component></channel-video-thumb-item-component>
-			<channel-video-thumb-item-component></channel-video-thumb-item-component>
+			<div v-for="item in hotVideoList"
+				 v-on:click="videoModal(item.id)">
+
+				<channel-video-thumb-item-component v-bind:item="item"></channel-video-thumb-item-component>
+			</div>
 		</div>
 		
 		<h1 class="main_page_header"> New Video </h1>
+		<div class="grid main_page_video">
+			<div v-for="item in newVideoList"
+				 v-on:click="videoModal(item.id)">
+
+				<channel-video-thumb-item-component v-bind:item="item"></channel-video-thumb-item-component>
+			</div>
+		</div>
+
+		<h1 class="main_page_header"> Community Hot Post </h1>
 		<div class="main_page_hot_post_list">
 		</div>
 
-		<div class="grid main_page_video">
-			<channel-video-thumb-item-component></channel-video-thumb-item-component>
-			<channel-video-thumb-item-component></channel-video-thumb-item-component>
-			<channel-video-thumb-item-component></channel-video-thumb-item-component>
-			<channel-video-thumb-item-component></channel-video-thumb-item-component>
-			<channel-video-thumb-item-component></channel-video-thumb-item-component>
-			<channel-video-thumb-item-component></channel-video-thumb-item-component>
-			<channel-video-thumb-item-component></channel-video-thumb-item-component>
-		</div>
 	</div>
 
 </div>

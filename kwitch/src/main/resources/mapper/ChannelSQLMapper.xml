@@ -263,19 +263,20 @@
 		SELECT
 			c.channel_id		AS id,
 			c.owner_id			AS ownerId,
-		    c.title				AS title,
+		    c.channel_title		AS title,
 
 			i.image_extension          AS senderProfileImageExt,
 			i.image_path               AS senderProfileImagePath
 
 		FROM
-		     channel AS c
+			channel_subscribe AS cs
 
-		LEFT JOIN member 	AS m ON c.owner_id = m.member_id
+		LEFT JOIN channel 	AS c ON c.channel_id = cs.channel_id
+		LEFT JOIN member 	AS m ON c.owner_id = cs.subscriber_id
 		LEFT JOIN image 	AS i ON m.member_profile_image = i.image_id
 
 		WHERE
-			c.channel_id = #{value}::UUID
+			cs.subscriber_id = #{value}::UUID
 		</if>
 
 	</select>

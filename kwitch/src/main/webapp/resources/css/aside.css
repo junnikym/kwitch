@@ -1,0 +1,57 @@
+#aside {
+    left: 0;
+    top : 65px;
+    position: fixed;
+    background-color: #fff;
+    overflow: visible;
+    z-index: 1;
+}
+.aside {
+    width: 225px;
+    height: calc(100vh - 65px);
+}
+
+.home_content {
+    margin-left: 225px;
+}
+
+.aside_fold {
+    width: 0;
+}
+.aside_fold_for_home {
+    margin-left: 0;
+}
+
+.aside_header {
+    margin: 0; padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 40px;
+    background-color: #373737;
+    color: #fff;
+}
+
+#aside .page_move_icon {
+    position: absolute;
+    right: 5px; top: 5px;
+    width: 30px; height: 30px;
+    filter: invert(100%);
+    transform: rotate(180deg);
+}
+
+.aside_wapper {
+    overflow: hidden;
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+#aside .aside_open_btn {
+    transform: rotate(0deg);
+    right: -35px; top: 5px;
+    border-radius: 15px;
+    background-color: white;
+    overflow: visible;
+}

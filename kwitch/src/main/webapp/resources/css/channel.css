@@ -567,3 +567,13 @@
 .channel_video_wrapper {
 	width: 100%;
 }
+
+#channelSmallItem {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: start;
+}
+#channelSmallItem .user_profile_img_wapper {
+	width: 40px; height: 40px;
+}

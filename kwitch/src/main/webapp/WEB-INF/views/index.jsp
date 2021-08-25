@@ -15,6 +15,7 @@
 	<!-- CSS -->
 	<link rel="stylesheet" type="text/css" href="/resources/css/common.css" />
 	<link rel="stylesheet" type="text/css" href="/resources/css/header.css" />
+	<link rel="stylesheet" type="text/css" href="/resources/css/aside.css" />
 	<link rel="stylesheet" type="text/css" href="/resources/css/search.css" />
 	<link rel="stylesheet" type="text/css" href="/resources/css/nav.css" />
 	<link rel="stylesheet" type="text/css" href="/resources/css/channel.css" />
@@ -36,7 +37,9 @@
 	
 		<header-component></header-component>
 
-		<div id="home_content">
+		<aside-component></aside-component>
+
+		<div id="home_content" class="home_content">
 			<router-view></router-view>
 		</div>
 	</div>
@@ -58,15 +61,18 @@
 	<!-- templates -->
 	<script>
 		const headerTemplate 	= `<%@ include file="/resources/template/header.jsp" %>`;
+		const asideTemplate 	= `<%@ include file="/resources/template/aside.jsp" %>`;
 		const loginTemplate		= `<%@ include file="/resources/template/login.jsp" %>`;
 		const searchTemplate 	= `<%@ include file="/resources/template/search.jsp" %>`;
 		const mainPageTemplate	= `<%@ include file="/resources/template/mainPage.jsp" %>`;
 		const liveGuideTemplate	= `<%@ include file="/resources/template/liveGuide.jsp" %>`;
+		const likedTemplate	= `<%@ include file="/resources/template/liked.jsp" %>`;
 		
 		const channelTemplate 				= `<%@ include file="/resources/template/channel/channel.jsp" %>`;
 		const channelChatTemplate 			= `<%@ include file="/resources/template/channel/channelChat.jsp" %>`;
 		const channelChatItemTemplate 		= `<%@ include file="/resources/template/channel/channelChatItem.jsp" %>`;
 		const channelSimpleItemTemplate 	= `<%@ include file="/resources/template/channel/channelSimpleItem.jsp" %>`;
+		const channelSmallItemTemplate 		= `<%@ include file="/resources/template/channel/channelSmallItem.jsp" %>`;
 		const channelVideoTemplate 			= `<%@ include file="/resources/template/channel/channelVideo.jsp" %>`;
 		const channelVideoThumbItemTemplate = `<%@ include file="/resources/template/channel/channelVideoThumbItem.jsp" %>`;
 		const channelVideoUploadTemplate 	= `<%@ include file="/resources/template/channel/channelVideoUpload.jsp" %>`;
@@ -83,14 +89,17 @@
 
 	<script type="text/javascript" src="/resources/js/component/login.js"></script>
 	<script type="text/javascript" src="/resources/js/component/header.js"></script>
+	<script type="text/javascript" src="/resources/js/component/aside.js"></script>
 	<script type="text/javascript" src="/resources/js/component/mainPage.js"></script>
 	<script type="text/javascript" src="/resources/js/component/search.js"></script>
 	<script type="text/javascript" src="/resources/js/component/liveGuide.js"></script>
+	<script type="text/javascript" src="/resources/js/component/liked.js"></script>
 
 	<script type="text/javascript" src="/resources/js/component/channel/channel.js"></script>
 	<script type="text/javascript" src="/resources/js/component/channel/channelChat.js"></script>
 	<script type="text/javascript" src="/resources/js/component/channel/channelChatItem.js"></script>
 	<script type="text/javascript" src="/resources/js/component/channel/channelSimpleItem.js"></script>
+	<script type="text/javascript" src="/resources/js/component/channel/channelSmallItem.js"></script>
 	<script type="text/javascript" src="/resources/js/component/channel/channelVideo.js"></script>
 	<script type="text/javascript" src="/resources/js/component/channel/channelVideoThumbItem.js"></script>
 	<script type="text/javascript" src="/resources/js/component/channel/channelVideoUploada.js"></script>
@@ -108,13 +117,16 @@
 		Vue.component('community-menu-component', CommunityMenuComponent);
 		Vue.component('community-post-item-small', communityPostItemSmallComponent);
 		Vue.component('header-component', HeaderComponent);
+		Vue.component('aside-component', asideComponent);
 		Vue.component('login-component', LoginComponent);
+		Vue.component('liked-component', likedComponent);
 		Vue.component('channel-simple-item-component', channelSimpleItemComponent);
+		Vue.component('channel-small-item-component', channelSmallItemComponent);
 		Vue.component('channel-chat-item-component', channelChatItemComponent);
 		Vue.component('channel-chat-component', channelChatComponent);
 		Vue.component('channel-video-component', channelVideoComponent);
 		Vue.component('channel-video-thumb-item-component', channelVideoThumbItemComponent);
-		Vue.component('channel-video-upload-component', channelVideoUploadComponent)
+		Vue.component('channel-video-upload-component', channelVideoUploadComponent);
 	</script>
 
 	<script type="text/javascript" src="/resources/js/index.js"></script>

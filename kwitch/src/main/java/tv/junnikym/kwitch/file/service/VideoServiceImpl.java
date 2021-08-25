@@ -64,6 +64,16 @@ public class VideoServiceImpl implements VideoService {
 	}
 
 	@Override
+	public List<VideoVO> getNewVideo () throws Exception {
+		return videoDAO.getNewVideo();
+	}
+
+	@Override
+	public List<VideoVO> getHotVideo () throws Exception {
+		return videoDAO.getHotVideo();
+	}
+
+	@Override
 	public int deleteVideo(String videoId) throws Exception {
 		return videoDAO.deleteVideo(videoId);
 	}

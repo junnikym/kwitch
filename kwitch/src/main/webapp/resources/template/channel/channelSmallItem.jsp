@@ -1,4 +1,4 @@
-<div id="channelSimpleList">
+<div id="channelSmallItem">
 
     <div class="user_profile_img_wapper" v-on:click="$router.push('/channel/'+channel.ownerId)">
         <img v-if="channel.profileImagePath && channel.profileImageExt"

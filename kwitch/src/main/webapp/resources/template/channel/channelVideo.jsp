@@ -19,8 +19,18 @@
 				
 				<div class="channel_video_info">
 					<h2>{{video?.title}}</h2>
+
+					<div class="horizontal_rule"></div>
+
+					<liked-component v-bind:targetId="this.id"
+									 usage="LIKE_USAGE_VIDEO"
+									 parentElem="#channelVideo"></liked-component>
+
+					<div class="horizontal_rule"></div>
+
 					<p>{{video?.text}}</p>
 				</div>
+
 			</div>
 			
 			<div class="channel_video_comment"></div>

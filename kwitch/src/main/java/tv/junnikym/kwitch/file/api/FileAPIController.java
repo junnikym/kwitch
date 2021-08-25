@@ -191,13 +191,28 @@ public class FileAPIController {
 	@ResponseBody
 	@RequestMapping(value = "{uploaderId}/video", method = RequestMethod.GET)
 	public List<VideoVO> getVideoList (
-			@PathVariable("uploaderId") String uploaderId,
-			HttpServletResponse response,
-			HttpSession session
+			@PathVariable("uploaderId") String uploaderId
 	) throws Exception {
 
 		return videoService.getOwnVideoList(uploaderId);
 	}
+
+	@ResponseBody
+	@RequestMapping(value = "/video/new", method = RequestMethod.GET)
+	public List<VideoVO> getNewVideo () throws Exception {
+		return videoService.getNewVideo();
+	}
+
+	@ResponseBody
+	@RequestMapping(value = "/video/hot", method = RequestMethod.GET)
+	public List<VideoVO> getHotVideo () throws Exception {
+		return videoService.getHotVideo();
+	}
+
+	/**
+	 *  < Image >
+	 * ---------------------------------------------------------------------------
+	 */
 	
 	@ResponseBody
 	@RequestMapping(value = "/profile/image/{image}/{ext}", method = RequestMethod.GET)

@@ -11,6 +11,10 @@ public interface VideoDAO {
 	List<VideoVO> getOwnVideoList (String uploaderId) throws Exception;
 	
 	VideoVO getVideo (String videoId) throws Exception;
+
+	List<VideoVO> getNewVideo() throws Exception;
+
+	List<VideoVO> getHotVideo() throws Exception;
 	
 	int deleteVideo (String videoId) throws Exception;
 	

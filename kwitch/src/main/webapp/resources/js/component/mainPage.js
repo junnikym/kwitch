@@ -3,6 +3,8 @@ const mainPageComponent = {
     store: gStore,
     data() { return {
 	    newChannelList: [],
+	    newVideoList:[],
+	    hotVideoList: [],
     }},
     methods: {
 		
@@ -21,6 +23,30 @@ const mainPageComponent = {
 			videojs(this.$refs.streamingVideo);
 		})
       	.catch(err => console.log(err))
+
+
+
+		fetch('/api/video/new', {
+			method: 'GET',
+			headers: { "Content-Type": "application/json" }
+		})
+		.then(res=>res.json())
+		.then(json => {
+			this.newVideoList = json;
+		})
+		.catch(err => console.log(err))
+
+
+
+		fetch('/api/video/hot', {
+			method: 'GET',
+			headers: { "Content-Type": "application/json" }
+		})
+		.then(res=>res.json())
+		.then(json => {
+			this.hotVideoList = json;
+		})
+		.catch(err => console.log(err))
 	},
 
 	beforeDestroy() {

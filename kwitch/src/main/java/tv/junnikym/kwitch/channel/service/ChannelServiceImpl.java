@@ -123,9 +123,13 @@ public class ChannelServiceImpl implements ChannelService {
 	public Integer nSubscribe(String channelId) throws Exception {
 		return channelDAO.nSubscribe(channelId);
 	}
-	
-	
-	
+
+	@Override
+	public List<ChannelVO> getSubscribeChannelList (String subscriberId) throws Exception {
+		return channelDAO.getSubscribeChannelList(subscriberId);
+	}
+
+
 	/**
 	 * etc
 	 */

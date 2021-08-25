@@ -37,7 +37,7 @@
 		FROM
 			video
 		WHERE
-			video_id = #{value}::UUID;
+			video_id = #{value}::UUID
 	</select>
     
     <select id="getOwnVideoList" parameterType="String" resultType="VideoVO">
@@ -48,17 +48,42 @@
 		FROM
 		     video
 		WHERE
-		      uploader_id = #{value}::UUID;
+		      uploader_id = #{value}::UUID
 	</select>
     
-    <select id="getNewVideo">
+    <select id="getNewVideo" resultType="VideoVO">
     	
-    	SELECT 
-    		video_id	AS id
-    		video_path	AS path;
-    	FROM 
+    	SELECT
+			video_id		AS id,
+			video_title 	AS title,
+			video_path 		AS path
+    	FROM video
+		ORDER BY created_at DESC
     	
     </select>
+
+	<select id="getHotVideo" resultType="VideoVO">
+
+		SELECT
+			video_id		AS id,
+			video_title 	AS title,
+			video_path 		AS path
+		FROM video AS v
+
+		ORDER BY (
+			SELECT COUNT(*)
+			FROM liked AS l
+			WHERE
+				l.target_id = v.video_id
+			AND l.usage = 'LIKE_USAGE_VIDEO'
+		) DESC
+
+-- 		LEFT JOIN liked AS l ON v.video_id = l.target_id AND l.usage = 'LIKE_USAGE_VIDEO'
+
+
+
+	</select>
+
     
     <delete id="deleteVideo" parameterType="String">
     

@@ -12,7 +12,7 @@ html {
     background: linear-gradient(210deg, #9adbbe, #4fc08d);
 }
 
-body, #home, #home_content {
+body, #home, .home_content {
     position: relative; margin : 0;
     overflow-x : hidden; overflow-y : hidden;
     height: 100vh;
@@ -22,7 +22,7 @@ body, #home, #home_content {
     justify-content: center;
     font-family: "Source Sans Pro", sans-serif;
 }
-#home_content {
+.home_content {
     overflow-y: auto;
 }
 
@@ -34,7 +34,7 @@ li {
 	color: #fff
 }
 
-#home_content {
+.home_content {
     margin-top: 65px;
     height: calc(100vh - 65px);
 }

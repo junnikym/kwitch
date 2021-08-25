@@ -129,7 +129,7 @@
 					<li class="chat_switched_elem"><a v-on:click="changeNav('contact')" id="contact_btn" >Contact</a></li>
 					
 					<li v-on:click="goToCommunity"  class="menu_sub_btn" id="community_btn" v-if="(member?.ownChannelId)"> Community </li>
-					<li v-on:click="chatModeToggle" class="menu_sub_btn" id="chat_btn">Chat <div class="page_move_icon"></div> </li>
+					<li v-on:click="chatModeToggle" class="menu_sub_btn" id="chat_btn"> {{isChatMode?"No Chat":"Chat"}} <div class="page_move_icon"></div> </li>
 				</ul>
 			</nav>
 	
@@ -153,7 +153,7 @@
 						<div v-for="item in videoList"   
 							 v-on:click="videoModal(item.id)">
 							 
-							<channel-video-thumb-item-component v-bind:item="item""></channel-video-thumb-item-component>
+							<channel-video-thumb-item-component v-bind:item="item"></channel-video-thumb-item-component>
 						</div>
 					</div>
 						

@@ -26,4 +26,6 @@ public interface ChannelService {
 	Boolean isSubscribed(SubscribeVO vo) throws Exception;
 	
 	Integer nSubscribe(String channelId) throws Exception;
+
+	List<ChannelVO> getSubscribeChannelList(String subscriberId) throws Exception;
 }
