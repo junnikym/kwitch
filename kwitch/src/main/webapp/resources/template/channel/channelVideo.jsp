@@ -33,7 +33,10 @@
 
 			</div>
 			
-			<div class="channel_video_comment"></div>
+			<div class="channel_video_comment">
+
+				<comment-component v-bind:targetId="video?.id" usage="COMMENT_USAGE_VIDEO"></comment-component>
+			</div>
         </div>
 
     </div>

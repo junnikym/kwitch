@@ -25,8 +25,12 @@
 	
 	<link href="https://vjs.zencdn.net/7.11.4/video-js.css" rel="stylesheet" />
 	<link href="https://unpkg.com/@videojs/themes@1/dist/forest/index.css" rel="stylesheet">
-	
+
+	<!-- JS Utils -->
 	<script type="text/javascript" src="/resources/js/util/action.js"></script>
+	<script type="text/javascript" src="/resources/js/util/time.js"></script>
+	<script type="text/javascript" src="/resources/js/util/nav.js"></script>
+	<script type="text/javascript" src="/resources/js/util/pageHandler.js"></script>
 
 </head>
 <body>
@@ -66,7 +70,8 @@
 		const searchTemplate 	= `<%@ include file="/resources/template/search.jsp" %>`;
 		const mainPageTemplate	= `<%@ include file="/resources/template/mainPage.jsp" %>`;
 		const liveGuideTemplate	= `<%@ include file="/resources/template/liveGuide.jsp" %>`;
-		const likedTemplate	= `<%@ include file="/resources/template/liked.jsp" %>`;
+		const likedTemplate		= `<%@ include file="/resources/template/liked.jsp" %>`;
+		const commentTemplate	= `<%@ include file="/resources/template/commnet.jsp" %>`;
 		
 		const channelTemplate 				= `<%@ include file="/resources/template/channel/channel.jsp" %>`;
 		const channelChatTemplate 			= `<%@ include file="/resources/template/channel/channelChat.jsp" %>`;
@@ -94,6 +99,7 @@
 	<script type="text/javascript" src="/resources/js/component/search.js"></script>
 	<script type="text/javascript" src="/resources/js/component/liveGuide.js"></script>
 	<script type="text/javascript" src="/resources/js/component/liked.js"></script>
+	<script type="text/javascript" src="/resources/js/component/comment.js"></script>
 
 	<script type="text/javascript" src="/resources/js/component/channel/channel.js"></script>
 	<script type="text/javascript" src="/resources/js/component/channel/channelChat.js"></script>
@@ -120,6 +126,7 @@
 		Vue.component('aside-component', asideComponent);
 		Vue.component('login-component', LoginComponent);
 		Vue.component('liked-component', likedComponent);
+		Vue.component('comment-component', commentComponent);
 		Vue.component('channel-simple-item-component', channelSimpleItemComponent);
 		Vue.component('channel-small-item-component', channelSmallItemComponent);
 		Vue.component('channel-chat-item-component', channelChatItemComponent);
@@ -130,12 +137,6 @@
 	</script>
 
 	<script type="text/javascript" src="/resources/js/index.js"></script>
-
-	<!-- JS Utils -->
-	<script type="text/javascript" src="/resources/js/util/action.js"></script>
-	<script type="text/javascript" src="/resources/js/util/time.js"></script>
-	<script type="text/javascript" src="/resources/js/util/nav.js"></script>
-	<script type="text/javascript" src="/resources/js/util/pageHandler.js"></script>
 
 </body>
 </html>

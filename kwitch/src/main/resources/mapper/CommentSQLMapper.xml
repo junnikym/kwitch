@@ -5,7 +5,7 @@
     
     <insert id="regist" parameterType="CommentVO" useGeneratedKeys="true" keyProperty="id">
     
-    	INSERT INTO channel_chat (
+    	INSERT INTO comment (
     		writer_id,
     		target_id,
     		usage,
@@ -23,12 +23,12 @@
     	
     	SELECT 	
     		comment_id		AS id,
-    		comment_text 	AS text
+    		comment_text 	AS text,
     		
     		CASE WHEN m.member_alias IS NULL OR m.member_alias = ''
 		        THEN m.member_name
 		        ELSE m.member_alias
-		    END AS writerAlias
+		    END AS writerAlias,
     		
     		i.image_path 		AS profileImagePath,
     		i.image_extension 	AS profileImageExt
@@ -41,7 +41,7 @@
     		
     	WHERE 
     		c.target_id 	= #{targetId}::UUID
-    	AND c.usage 		= #{usage}::UUID
+    	AND c.usage 		= #{usage}
     </select>
     
     <update id="updateComment" parameterType="CommentVO">

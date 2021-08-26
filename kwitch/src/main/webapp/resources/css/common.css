@@ -363,3 +363,28 @@ button:hover {
 	width: 65%;
 	height: 65%;
 }
+
+#communityPost .liked_item {
+    filter: invert(100%);
+}
+
+#comment {
+    position: relative;
+    min-width : 100px;
+    width: 100%;
+}
+
+.comment_btn {
+    position: absolute;
+    top: 0; right: 0;
+    width: 100px; height: 38px;
+    background: rgba(0, 0, 0, 0);
+    border-left-color: rgb(196, 196, 196);
+    border-left-style: solid;
+    border-left-width: 1px;
+    color: #373737;
+}
+
+.comment_btn:hover, .comment_btn:focus {
+    background: #4fc08d;
+}

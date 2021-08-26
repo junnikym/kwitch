@@ -5,9 +5,13 @@ const mainPageComponent = {
 	    newChannelList: [],
 	    newVideoList:[],
 	    hotVideoList: [],
+	    cursoredVideoId: null,
     }},
     methods: {
-		
+	    videoModal: function(id) {
+		    this.cursoredVideoId=id;
+		    document.querySelector('#videoModal').click();
+	    }
     },
 	mounted: function() {
 		

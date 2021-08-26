@@ -54,4 +54,6 @@
 
 	<div class="horizontal_rule"></div>
 
+	<comment-component v-bind:targetId="$route.params.postId" usage="COMMENT_USAGE_POST"></comment-component>
+
 </div>

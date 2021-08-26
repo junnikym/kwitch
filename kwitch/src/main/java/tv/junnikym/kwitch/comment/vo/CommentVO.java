@@ -23,13 +23,14 @@ public class CommentVO {
 	
 	private String targetId;
 	
-	private String usage;
+	private CommentUsage usage;
 	
 	private String text;
 	
 	private String createdAt;
 	
 	private String updatedAt;
+
 	
 	private String writerAlias;
 	

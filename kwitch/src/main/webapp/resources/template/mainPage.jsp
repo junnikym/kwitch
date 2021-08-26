@@ -1,5 +1,7 @@
 <div id="mainPage">
 
+	<channel-video-component v-bind:id="cursoredVideoId"></channel-video-component>
+
 	<div class="live_stream_bg">
 		<div class="live_stream_wapper">
 			<video id="streamingVideo" ref="streamingVideo" width=960 height=540 class="video-js vjs-theme-forest" controls preload="auto">
@@ -26,12 +28,20 @@
 			<h3> Not Found </h3>
 		</div>
 
+		<a data-modal="modal-video" id="videoModal" style="display:none">video modal</a>
+
 		<h1 class="main_page_header"> Hot Clip </h1>
 		<div class="grid main_page_video">
 			<div v-for="item in hotVideoList"
 				 v-on:click="videoModal(item.id)">
 
 				<channel-video-thumb-item-component v-bind:item="item"></channel-video-thumb-item-component>
+			</div>
+
+			<div v-if="hotVideoList.length == 0"
+				 class="main_page_not_found" >
+
+				<h3> Not Found </h3>
 			</div>
 		</div>
 		
@@ -41,11 +51,14 @@
 				 v-on:click="videoModal(item.id)">
 
 				<channel-video-thumb-item-component v-bind:item="item"></channel-video-thumb-item-component>
-			</div>
-		</div>
 
-		<h1 class="main_page_header"> Community Hot Post </h1>
-		<div class="main_page_hot_post_list">
+				<div v-if="newVideoList.length == 0"
+					 class="main_page_not_found" >
+
+					<h3> Not Found </h3>
+				</div>
+
+			</div>
 		</div>
 
 	</div>

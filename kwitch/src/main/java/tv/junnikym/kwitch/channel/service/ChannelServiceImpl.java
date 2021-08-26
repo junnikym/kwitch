@@ -151,7 +151,8 @@ public class ChannelServiceImpl implements ChannelService {
 				
 			case CHANNEL_ID_TYPE_MENU_ID:
 				return channelDAO.getChannelIdByMenuId(id);
-				
+
+			case CHANNEL_ID_TYPE_TARGET_ID:
 			case CHANNEL_ID_TYPE_POST_ID:
 				return channelDAO.getChannelIdByPostId(id);
 				

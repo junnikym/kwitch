@@ -54,7 +54,7 @@ public class ChannelRoleValidInterceptor extends HandlerInterceptorAdapter {
     		ChannelIdBy 	getIdBy		= channelRoleValid.idBy();
     		IdGetMethod 	idGetMethod	= channelRoleValid.idGetMethod();
     		Map<?, ?> pathVariables = (Map<?, ?>) request.getAttribute(HandlerMapping.URI_TEMPLATE_VARIABLES_ATTRIBUTE);
-    		
+
     		if(idGetMethod == IdGetMethod.JUST_ID) {
     			id = (String)pathVariables.get("id");
     		}
@@ -66,7 +66,6 @@ public class ChannelRoleValidInterceptor extends HandlerInterceptorAdapter {
     		}
     		else if(idGetMethod == IdGetMethod.VO) {
     			id = getIdFromVO(request, getIdBy);
-    			System.out.println("id : "+id);
     		}
     		
     		if(id == null || id == "") {
@@ -122,6 +121,9 @@ public class ChannelRoleValidInterceptor extends HandlerInterceptorAdapter {
 				
 			case CHANNEL_ID_TYPE_POST_ID:
 				return (String)body.get("postId");
+
+			case CHANNEL_ID_TYPE_TARGET_ID:
+				return (String)body.get("targetId");
 				
 			default:
 				break;
