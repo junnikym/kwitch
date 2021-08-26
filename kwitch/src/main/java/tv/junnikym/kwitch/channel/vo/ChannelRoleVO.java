@@ -40,6 +40,7 @@ public class ChannelRoleVO {
 		public static final int CH_ROLE_READ_PRIVATE	= 1 << 7;
 		public static final int CH_ROLE_BAN				= 1 << 8;
 		public static final int CH_ROLE_FREEZE 			= 1 << 9;
+		public static final int CH_ROLE_COMMNET_WRITE 	= 1 << 10;
 	}
 	
 	public enum ChannelIdBy {
@@ -48,6 +49,7 @@ public class ChannelRoleVO {
 		CHANNEL_ID_TYPE_OWNER_ID,
 		CHANNEL_ID_TYPE_MENU_ID,
 		CHANNEL_ID_TYPE_POST_ID, 
+		CHANNEL_ID_TYPE_TARGET_ID, 
 	}
 	
 }

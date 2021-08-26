@@ -150,6 +150,9 @@ public class ChannelRoleValidInterceptor extends HandlerInterceptorAdapter {
 			case CHANNEL_ID_TYPE_POST_ID:
 				return (String)pathVariables.get("postId");
 				
+			case CHANNEL_ID_TYPE_TARGET_ID:
+				return (String)pathVariables.get("targetId");
+				
 			default:
 				break;
 		}

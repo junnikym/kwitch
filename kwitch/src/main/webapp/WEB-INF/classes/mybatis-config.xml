@@ -30,6 +30,8 @@
 		<typeAlias alias="NotificationVO" type="tv.junnikym.kwitch.notification.vo.NotificationVO" />
 		
 		<typeAlias alias="LikedVO" type="tv.junnikym.kwitch.liked.vo.LikedVO" />
+		
+		<typeAlias alias="CommentVO" type="tv.junnikym.kwitch.comment.vo.CommentVO" />
 
 	</typeAliases>
 

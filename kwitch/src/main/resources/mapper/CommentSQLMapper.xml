@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="CommentDAO">
+    
+    <insert id="regist" parameterType="CommentVO" useGeneratedKeys="true" keyProperty="id">
+    
+    	INSERT INTO channel_chat (
+    		writer_id,
+    		target_id,
+    		usage,
+    		comment_text
+    	) VALUES (
+    		#{writerId}::UUID,
+    		#{targetId}::UUID,
+    		#{usage},
+    		#{text}
+    	)
+
+    </insert>
+    
+    <select id="getComment" parameterType="CommentVO" resultType="CommentVO">
+    	
+    	SELECT 	
+    		comment_id		AS id,
+    		comment_text 	AS text
+    		
+    		CASE WHEN m.member_alias IS NULL OR m.member_alias = ''
+		        THEN m.member_name
+		        ELSE m.member_alias
+		    END AS writerAlias
+    		
+    		i.image_path 		AS profileImagePath,
+    		i.image_extension 	AS profileImageExt
+    		
+    	FROM 
+    		comment AS c
+    		
+		LEFT JOIN member 	AS m ON c.writer_id 			= m.member_id
+    	LEFT JOIN image 	AS i ON m.member_profile_image 	= i.image_id
+    		
+    	WHERE 
+    		c.target_id 	= #{targetId}::UUID
+    	AND c.usage 		= #{usage}::UUID
+    </select>
+    
+    <update id="updateComment" parameterType="CommentVO">
+
+		UPDATE 	comment
+		SET 	comment_text = #{text}
+		WHERE 	comment_id = #{id}::UUID
+    
+    </update>
+    
+    <delete id="deleteComment" parameterType="String">
+    
+    	DELETE FROM comment WHERE comment_id = #{id}::UUID
+    
+    </delete>
+    
+</mapper>
