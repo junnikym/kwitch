@@ -1,8 +1,12 @@
 package tv.junnikym.kwitch.liveStreaming.service;
 
+import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
+
 import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
+import org.springframework.web.servlet.mvc.method.annotation.SseEmitter;
 
 import tv.junnikym.kwitch.liveStreaming.dao.LiveStreamingDAO;
 import tv.junnikym.kwitch.liveStreaming.vo.LiveStreamingVO;
@@ -13,6 +17,20 @@ public class LiveStreamingServiceImpl implements LiveStreamingService {
 	@Resource(name = "LiveStreamingDAO")
 	LiveStreamingDAO liveStreamingDAO;
 
+	private static Map<String, SseEmitter> datas = new ConcurrentHashMap<String, SseEmitter>();
+	
+	
+	
+	@Override
+	public void setEmitter(String key, SseEmitter emitter) throws {
+		this.datas.put(key, emitter);
+	}
+
+	@Override
+	public void remove(String key) throws {
+		this.datas.remove(key);
+	}
+	
 	@Override
 	public LiveStreamingVO regist(LiveStreamingVO vo) throws Exception {
 		if( liveStreamingDAO.getOwnStreaming (vo.getChannelOwnerId()) == null )

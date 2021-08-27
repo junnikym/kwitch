@@ -51,13 +51,12 @@
 				 v-on:click="videoModal(item.id)">
 
 				<channel-video-thumb-item-component v-bind:item="item"></channel-video-thumb-item-component>
+			</div>
+			
+			<div v-if="newVideoList.length == 0"
+				 class="main_page_not_found" >
 
-				<div v-if="newVideoList.length == 0"
-					 class="main_page_not_found" >
-
-					<h3> Not Found </h3>
-				</div>
-
+				<h3> Not Found </h3>
 			</div>
 		</div>
 

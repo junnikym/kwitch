@@ -76,8 +76,10 @@ public class CommunityServiceImpl implements CommunityService {
 	}
 	
 	@Override
-	public CommunityPostVO getPost(String postId) throws Exception {
-		communityDAO.setPostView(postId);
+	public CommunityPostVO getPost(String postId, boolean incView) throws Exception {
+		if(incView)
+			communityDAO.setPostView(postId);
+		
 		return communityDAO.getPost(postId);
 	}
 

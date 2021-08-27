@@ -1,6 +1,6 @@
-const signupForm = new Vue({
-    el: '#registForm',
-    data: {
+const registComponent = {
+    template: registTemplate,
+    data() { return {
         emailInput: '',
         pwInput: '',
     	nameInput: '',
@@ -16,8 +16,21 @@ const signupForm = new Vue({
     	profileImage: null,
     	
     	stage: 'setting'
-    },
+    }},
     methods: {
+    	getYearRange() {
+    		const now = new Date();
+    		const year = now.getFullYear();
+    		
+    		return [...Array(100).keys()].map(key => year - key)
+    	},
+    	getMonthRange() {
+    		return [...Array(11).keys()].map(key => key + 2);
+    	},
+    	getDayRange() {
+    		return [...Array(29).keys()].map(key => key + 2);
+    	},
+    	
     	stageSwitch: function(stage) {
     		console.log(stage);
     		
@@ -86,4 +99,4 @@ const signupForm = new Vue({
         
         back: function() { back(); }
     }
-});
+};

@@ -9,12 +9,12 @@ public class MemberController {
 	
 	@RequestMapping(value = "/login", method = RequestMethod.GET)
 	public String loginView() {
-		return "/resources/template/login.jsp";
+		return "index";
 	}
 	
 	@RequestMapping(value = "/regist", method = RequestMethod.GET)
 	public String signinView() {
-		return "regist";
+		return "index";
 	}
 	
 }

@@ -23,19 +23,13 @@ public class ChatHandler extends TextWebSocketHandler {
 	@Resource(name="ChatService")
 	private ChatService chatService;
 
-	private Map<String, List<WebSocketSession>> clients = new HashMap<>();
-	
 	@Override
 	public void afterConnectionEstablished(WebSocketSession session) throws Exception {
          
         Map<String, Object> map	= session.getAttributes();
-        
         String channelId = (String) map.get("channelId");
         
-        if( ! clients.containsKey(channelId) ) 
-        	clients.put(channelId, new ArrayList<WebSocketSession>());
-        
-        clients.get(channelId).add(session);
+        chatService.connection(channelId, session);
     }
 
 	 @Override
@@ -63,20 +57,7 @@ public class ChatHandler extends TextWebSocketHandler {
 						.text(payloadMap.get("message"))
 						.build();
 			
-			System.out.println("vo is " + vo.toString());
-			
-			String service_result = chatService.sendMessage(vo);
-			
-			System.out.println("service_result : " + service_result);
-			
-			if(service_result != null) {
-				
-				for (WebSocketSession it : clients.get(channelId)) {
-					it.sendMessage(
-							new TextMessage(mapper.writeValueAsString(vo)));
-				}
-			}
-			
+			chatService.sendMessage(vo);
 		}
 	}
 
@@ -91,11 +72,11 @@ public class ChatHandler extends TextWebSocketHandler {
 
 	@Override
 	public void afterConnectionClosed(WebSocketSession session, CloseStatus status) throws Exception {
+		
 		Map<String, Object> map	= session.getAttributes();
-        
         String channelId = (String) map.get("channelId");
         
-        clients.get(channelId).remove(session);
+        chatService.disconnection(channelId, session);
 	}
 
 }

@@ -3,15 +3,23 @@ const routes = [
 		path: '/',
 		component: mainPageComponent
 	},
+	
 	{
-		path: '/test',
-		component: channelChatComponent
+		path: '/regist',
+		component: registComponent
 	},
+	
+	{
+		path: '/login',
+		component: LoginComponent
+	},
+	
 	{
 		path: '/q/:searchQuery',
 		component: searchComponent,
 		props: true
 	},
+	
 	{
 		/**
 		 * Channel Related Routes
@@ -19,10 +27,12 @@ const routes = [
 		path: '/channel/:id',
 		component: ChannelComponent
 	},
+	
 	{
 		path: '/live/guide',
 		component: liveGuideComponent
 	},
+	
 	{
 		/**
 		 *  Community Related Routes

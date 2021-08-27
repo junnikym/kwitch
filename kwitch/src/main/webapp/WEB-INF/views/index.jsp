@@ -67,6 +67,7 @@
 		const headerTemplate 	= `<%@ include file="/resources/template/header.jsp" %>`;
 		const asideTemplate 	= `<%@ include file="/resources/template/aside.jsp" %>`;
 		const loginTemplate		= `<%@ include file="/resources/template/login.jsp" %>`;
+		const registTemplate		= `<%@ include file="/resources/template/regist.jsp" %>`;
 		const searchTemplate 	= `<%@ include file="/resources/template/search.jsp" %>`;
 		const mainPageTemplate	= `<%@ include file="/resources/template/mainPage.jsp" %>`;
 		const liveGuideTemplate	= `<%@ include file="/resources/template/liveGuide.jsp" %>`;
@@ -93,6 +94,7 @@
 	</script>
 
 	<script type="text/javascript" src="/resources/js/component/login.js"></script>
+	<script type="text/javascript" src="/resources/js/component/regist.js"></script>
 	<script type="text/javascript" src="/resources/js/component/header.js"></script>
 	<script type="text/javascript" src="/resources/js/component/aside.js"></script>
 	<script type="text/javascript" src="/resources/js/component/mainPage.js"></script>

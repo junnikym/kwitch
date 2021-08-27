@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 import javax.annotation.Resource;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -92,7 +93,34 @@ public class CommunityAPIController {
 			HttpSession session
 	) throws Exception {
 		
-		return communityService.getPost(id);
+		Cookie[] cookies 		= request.getCookies();
+		boolean incView 		= false;
+		boolean isCookieExist 	= false;
+		
+		for(Cookie it : cookies) {
+			
+			if(it.getName().equals("post_visit")) {
+				
+				isCookieExist = true;
+				
+				if( ! it.getValue().contains(id) ) {
+					System.out.println("is not exist");
+					
+					it.setValue(it.getValue()+"_"+id);
+					response.addCookie(it);
+					incView = true;
+				}
+				
+				break;
+			}
+		}
+		
+		CommunityPostVO result = communityService.getPost(id, incView);
+		
+		if(isCookieExist == false) 
+			response.addCookie( new Cookie("post_visit", id) );
+		
+		return result;
 	}
 	
 	

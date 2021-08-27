@@ -31,7 +31,7 @@ public interface CommunityService {
 	
 	List<CommunityPostVO> getPostListBySearch(CommunityPostVO vo) throws Exception;
 
-	CommunityPostVO getPost(String postId) throws Exception;
+	CommunityPostVO getPost(String postId, boolean incView) throws Exception;
 
 	void setPost(CommunityPostVO vo) throws Exception;
 

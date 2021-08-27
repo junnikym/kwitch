@@ -27,7 +27,7 @@ public class NotificationServiceImpl implements NotificationService {
 	@Resource(name = "MemberDAO")
 	private MemberDAO memberDAO;
 
-	private Map<String, SseEmitter> datas = new ConcurrentHashMap<String, SseEmitter>();
+	private static Map<String, SseEmitter> datas = new ConcurrentHashMap<String, SseEmitter>();
 
 
 
