@@ -45,6 +45,9 @@ public class ChatHandler extends TextWebSocketHandler {
 		Map<String, Object> map = session.getAttributes();
 		String memberId  = (String) map.get("memberId");
 		String channelId = (String) map.get("channelId");
+		String memberAlias = (String) map.get("member_alias");
+
+		 System.out.println(map.toString());
 		
 		ChatVO vo;
 		
@@ -54,6 +57,7 @@ public class ChatHandler extends TextWebSocketHandler {
 			vo = ChatVO.builder()
 						.channelId(channelId)
 						.writerId(memberId)
+						.writerAlias(memberAlias)
 						.text(payloadMap.get("message"))
 						.build();
 			

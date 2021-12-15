@@ -56,7 +56,7 @@ public class FileAPIController {
 
 	private static final String viewName = "../resources/api/memberProc";
 	
-	private static final String nginxURL = "http://172.18.228.225/";
+	private static final String nginxURL = "http://52.79.141.47";
 	
 	private static final Integer nginxConnectTimeout = 100000;
 	private static final Integer nginxReadTimeout 	 = 100000;

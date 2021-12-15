@@ -1,5 +1,6 @@
 package tv.junnikym.kwitch.liveStreaming.service;
 
+import java.io.IOException;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
@@ -22,12 +23,21 @@ public class LiveStreamingServiceImpl implements LiveStreamingService {
 	
 	
 	@Override
-	public void setEmitter(String key, SseEmitter emitter) throws {
+	public void setEmitter(String key, SseEmitter emitter) throws Exception {
 		this.datas.put(key, emitter);
 	}
 
 	@Override
-	public void remove(String key) throws {
+	public void sendEmitter(String key) throws IOException {
+        for (Map.Entry<String, SseEmitter> data : this.datas.entrySet()) {
+            if (data.getKey().equals(key)) {
+                data.getValue().send(key + " is sended");
+            }
+        }
+    }
+
+	@Override
+	public void remove(String key) throws Exception {
 		this.datas.remove(key);
 	}
 	

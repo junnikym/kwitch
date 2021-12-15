@@ -275,8 +275,10 @@
 	height: calc(100% - 170px);
 	width: 100%;
 	padding: 1em;
+	overflow-y:scroll;
 }
 .channel_chat_header {
+	text-align: center;
 	height: 50px;
 	width: 100%;
 	background: #373737;
@@ -285,6 +287,11 @@
 .channel_chat_input {
 	height: 120px;
 	width: 100%;
+	z-index: 999;
+}
+
+.channel_chat_item {
+	z-index: -1;
 }
 
 #chat_btn {

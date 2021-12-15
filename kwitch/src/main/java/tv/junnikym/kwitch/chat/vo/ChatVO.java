@@ -19,6 +19,7 @@ public class ChatVO {
 	private String id;
 
 	private String writerId;
+	private String writerAlias;
 	
 	private String channelId;
 	

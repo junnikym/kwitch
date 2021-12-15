@@ -35,6 +35,13 @@ import tv.junnikym.kwitch.liveStreaming.vo.LiveStreamingVO;
 
 
 public interface LiveStreamingService {
+
+	void setEmitter(String key, SseEmitter emitter) throws Exception;
+
+	void sendEmitter(String key) throws IOException;
+
+	void remove(String key) throws Exception;
+
 	
 	LiveStreamingVO regist(LiveStreamingVO vo) throws Exception;
 	
